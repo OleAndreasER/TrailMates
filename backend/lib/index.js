@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
-var handlesubmit_1 = require("./handles/handlesubmit");
-(0, handlesubmit_1.default)("Tester kobling");
+//import handleSubmit from './handles/handlesubmit';
+//handleSubmit("Tester kobling")
+//Tester kobling til Firebase. Skal komme opp under FireStore Database
 var cors = require("cors");
 var app = express();
 app.use(cors());
