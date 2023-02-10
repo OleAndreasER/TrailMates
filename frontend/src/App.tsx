@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
+import Searchresults from "./pages/Searchresults/Searchresults";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3001/")
@@ -24,6 +25,7 @@ export const App = () => {
       <Header />
       <main>
         <Routes>
+          <Route path="/search" element={<Searchresults />} />
           <Route path="/" element={<Frontpage />} />
         </Routes>
         <Footer />

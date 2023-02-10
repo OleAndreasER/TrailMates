@@ -1,20 +1,13 @@
 import { NavLink } from "react-router-dom";
 import "./Header.css";
+import Searchbar from "../Searchbar/Searchbar";
 
 export const Header = () => {
   return (
     <header>
-      <form>
-        <input
-          type="text"
-          placeholder="Search.."
-          name="search"
-          className="search-bar"
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </form>
+      <div id="searchbar-container">
+        <Searchbar type="nav" width="70%"/>
+      </div>
       <nav>
         <ul>
           <li>
