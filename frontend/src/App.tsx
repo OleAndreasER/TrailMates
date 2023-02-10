@@ -15,10 +15,6 @@ const fromApi = (set: Dispatch<SetStateAction<any>>) => {
 };
 
 export const App = () => {
-  const [message, setMessage] = useState<String>("");
-
-  useEffect(() => fromApi((data) => setMessage(data.message)), []);
-
   return (
     <BrowserRouter>
       <Header />
