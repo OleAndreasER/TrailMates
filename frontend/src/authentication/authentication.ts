@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   UserCredential,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 // Your web app's Firebase configuration
@@ -31,7 +32,7 @@ export const auth = getAuth(app);
 export const signUp = (email: string, password: string) => {
   return createUserWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
-      console.log(`Signed up with email: {email}`);
+      console.log(`Signed up with email: ${email}`);
     })
     .catch((error) => {
       console.log(error);
@@ -41,9 +42,11 @@ export const signUp = (email: string, password: string) => {
 export const logIn = (email: string, password: string) => {
   return signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
-      console.log(`Logged in with email: {email}`);
+      console.log(`Logged in with email: ${email}`);
     })
     .catch((error) => {
       console.log(error);
     });
 };
+
+export const logOut = () => signOut(auth);
