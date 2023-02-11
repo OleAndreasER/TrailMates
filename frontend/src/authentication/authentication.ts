@@ -27,11 +27,22 @@ const firebaseConfig = {
 const app: FirebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+const logUser = (userUid: string) => {
+  fetch("http://localhost:3001/user/" + userUid)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
+};
+
 export const auth = getAuth(app);
 
 export const signUp = (email: string, password: string) => {
   return createUserWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
+      const userUid = userCredentials.user.uid;
+      logUser(userUid);
+      console.log(userUid);
       console.log(`Signed up with email: ${email}`);
     })
     .catch((error) => {
@@ -42,7 +53,10 @@ export const signUp = (email: string, password: string) => {
 export const logIn = (email: string, password: string) => {
   return signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
+      const userUid = userCredentials.user.uid;
+      logUser(userUid);
       console.log(`Logged in with email: ${email}`);
+      console.log(userUid);
     })
     .catch((error) => {
       console.log(error);
