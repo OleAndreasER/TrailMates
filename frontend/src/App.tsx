@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
-import AuthProvider from "./authentication/AuthProvider";
+import UserProvider from "./authentication/UserProvider";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3001/")
@@ -17,7 +17,7 @@ const fromApi = (set: Dispatch<SetStateAction<any>>) => {
 
 export const App = () => {
   return (
-    <AuthProvider>
+    <UserProvider>
       <BrowserRouter>
         <Header />
         <main>
@@ -27,6 +27,6 @@ export const App = () => {
           <Footer />
         </main>
       </BrowserRouter>
-    </AuthProvider>
+    </UserProvider>
   );
 };

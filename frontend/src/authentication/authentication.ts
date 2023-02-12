@@ -27,8 +27,22 @@ const firebaseConfig = {
 const app: FirebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const logUser = (userUid: string) => {
-  fetch("http://localhost:3001/user/" + userUid)
+const baseUserURI = "http://localhost:3001/user/";
+
+export const getUserData = async (userUid: string) => {
+  const response = await fetch(baseUserURI + userUid);
+  return await response.json();
+};
+
+const addUserData = (userUid: string, name: string, type: string) => {
+  fetch(baseUserURI + userUid, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: name,
+      type: type,
+    }),
+  })
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -37,30 +51,29 @@ const logUser = (userUid: string) => {
 
 export const auth = getAuth(app);
 
-export const signUp = (email: string, password: string) => {
-  return createUserWithEmailAndPassword(auth, email, password)
+export const signUp = async (
+  email: string,
+  password: string,
+  name: string,
+  type = "User",
+) =>
+  await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
       const userUid = userCredentials.user.uid;
-      logUser(userUid);
-      console.log(userUid);
+      addUserData(userUid, name, type);
       console.log(`Signed up with email: ${email}`);
     })
     .catch((error) => {
       console.log(error);
     });
-};
 
-export const logIn = (email: string, password: string) => {
-  return signInWithEmailAndPassword(auth, email, password)
+export const logIn = (email: string, password: string) =>
+  signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
-      const userUid = userCredentials.user.uid;
-      logUser(userUid);
       console.log(`Logged in with email: ${email}`);
-      console.log(userUid);
     })
     .catch((error) => {
       console.log(error);
     });
-};
 
 export const logOut = () => signOut(auth);

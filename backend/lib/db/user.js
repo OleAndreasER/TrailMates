@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserData = void 0;
+exports.putUserData = exports.getUserData = void 0;
 var firestore_1 = require("firebase/firestore");
 var db_1 = require("./db");
 var getUserData = function (userUid) { return __awaiter(void 0, void 0, void 0, function () {
@@ -55,3 +55,7 @@ var getUserData = function (userUid) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 exports.getUserData = getUserData;
+var putUserData = function (userUid) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    return [2 /*return*/];
+}); }); };
+exports.putUserData = putUserData;

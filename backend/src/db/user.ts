@@ -11,3 +11,5 @@ export const getUserData = async (userUid: string) => {
   });
   return userData;
 };
+
+export const putUserData = async (userUid: string) => {};
