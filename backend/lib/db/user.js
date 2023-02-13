@@ -55,7 +55,7 @@ var getUserData = function (userUid) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 exports.getUserData = getUserData;
-var putUserData = function (userUid) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-    return [2 /*return*/];
-}); }); };
+var putUserData = function (userData) {
+    (0, firestore_1.addDoc)((0, firestore_1.collection)(db_1.default, "user"), userData);
+};
 exports.putUserData = putUserData;

@@ -13,5 +13,14 @@ var startUserRoutes = function (app) {
             res.status(500).send("Error");
         });
     });
+    app.put("/user/:userUid/", function (req, res) {
+        var userUid = req.params.userUid;
+        (0, user_1.putUserData)({
+            userUid: userUid,
+            name: req.body.name,
+            type: req.body.type,
+        });
+        res.send("OK!");
+    });
 };
 exports.startUserRoutes = startUserRoutes;

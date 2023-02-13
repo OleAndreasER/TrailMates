@@ -1,4 +1,5 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
+import UserData from "../model/UserData";
 import db from "./db";
 
 export const getUserData = async (userUid: string) => {
@@ -12,4 +13,6 @@ export const getUserData = async (userUid: string) => {
   return userData;
 };
 
-export const putUserData = async (userUid: string) => {};
+export const putUserData = (userData: UserData) => {
+  addDoc(collection(db, "user"), userData);
+};

@@ -26,6 +26,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app: FirebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+export const auth = getAuth(app);
 
 const baseUserURI = "http://localhost:3001/user/";
 
@@ -42,14 +43,10 @@ const addUserData = (userUid: string, name: string, type: string) => {
       name: name,
       type: type,
     }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
+  }).catch((error) => {
+    console.error(error);
+  });
 };
-
-export const auth = getAuth(app);
 
 export const signUp = async (
   email: string,
@@ -64,7 +61,8 @@ export const signUp = async (
       console.log(`Signed up with email: ${email}`);
     })
     .catch((error) => {
-      console.log(error);
+      console.error("In signUp");
+      console.error(error);
     });
 
 export const logIn = (email: string, password: string) =>
@@ -73,7 +71,7 @@ export const logIn = (email: string, password: string) =>
       console.log(`Logged in with email: ${email}`);
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 
 export const logOut = () => signOut(auth);
