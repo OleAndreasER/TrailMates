@@ -22,6 +22,9 @@ export const Header = () => {
           </li>
         </ul>
       </nav>
+      <div className="button-container">
+        <Button styling="secondary-outline" text="Logg inn" width="150px" />
+      </div>
     </header>
   );
 };
