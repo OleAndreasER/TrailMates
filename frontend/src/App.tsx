@@ -5,11 +5,11 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
-import { Cover } from "./components/Cover/Cover";
 import { SplitSection } from "./components/SplitSection/SplitSection";
+import { Navbar } from "./components/Navbar/Navbar";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
-  fetch("http://localhost:3001/")
+  fetch("http://localhost:3000/")
     .then((res) => res.json())
     .then((data) => {
       set(data);
@@ -23,8 +23,8 @@ export const App = () => {
 
   return (
     <BrowserRouter>
+      <Navbar></Navbar>
       <Header />
-      <Cover />
       <SplitSection />
       <main>
         <Routes>

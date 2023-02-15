@@ -1,42 +1,21 @@
-import { NavLink } from "react-router-dom";
 import "./Header.css";
-import logo from "../assets/logo.svg";
+import img from"../assets/cover.svg"
 
 export const Header = () => {
   return (
-    <header>
-      <nav>
-        <img src={logo} alt="Trailmates Logo" className="logo"/>
-        <form className="search-div">
-          <input
-            type="text"
-            placeholder="Mine neste reise går til.."
-            name="search"
-            className="search-bar"
-          />
-          <button type="submit" className="search-button">
-            Search
-          </button>
-        </form>
-        <ul>
-          <li>
-            <NavLink to="/users" className="nav-link">
-              Utforsk
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/" className="nav-link">
-              Mine Reiser
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/" className="nav-link">
-              Favoritter
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-
+    <header className="cover" style={{ backgroundImage: `url(${img})` }}>
+      <h1>Hva er ditt<br/> neste reisemål?</h1>
+      <form className="search-cover">
+        <input
+          type="text"
+          placeholder="Mitt neste reisemål er..."
+          name="search"
+          className="search-bar-cover"
+        />
+        <button type="submit" className="search-button">
+          Search
+        </button>
+      </form>
     </header>
   );
 };
