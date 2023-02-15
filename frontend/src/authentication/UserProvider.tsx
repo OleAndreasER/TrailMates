@@ -19,7 +19,11 @@ export default ({ children }: UserProviderProps) => {
 
   useEffect(() => {
     auth.onAuthStateChanged((firebaseUser) => {
-      if (firebaseUser === null) return;
+      if (firebaseUser === null || firebaseUser.email === null) {
+        setCurrentUser(null);
+        return;
+      }
+
       getUserData(firebaseUser.uid).then((userData) => {
         if (firebaseUser.email === null) return;
         setCurrentUser({

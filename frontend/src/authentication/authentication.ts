@@ -74,4 +74,7 @@ export const logIn = (email: string, password: string) =>
       console.error(error);
     });
 
-export const logOut = () => signOut(auth);
+export const logOut = () => {
+  console.log("Logging out");
+  signOut(auth);
+};
