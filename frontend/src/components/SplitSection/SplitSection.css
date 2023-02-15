@@ -43,4 +43,25 @@
     .split-img{
         width: 100vw;
     }
+
+    .container h2{
+        font-weight: 700;
+        font-size: 5vw;
+        text-align: center;
+    }
+
+    .container p{
+        font-weight: 300;
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .seperator{
+        width: 70%;
+        height: 5%;
+        background-color: #ea712f;
+        border-radius: 100px;
+        margin: 6% auto 6%;
+    }
+
   }

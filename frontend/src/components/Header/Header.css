@@ -63,13 +63,13 @@ input:focus{
     bottom: 0;
     color:#ea712f;
     display: inline-block;
-    left: 50%;
+    left: 47.8vw;
     position: absolute;
     text-align: center;
-    width: 5rem;
+    width: 3vw;
     font-size: 2rem;
     font-weight: 700;
-    height: 5rem;
+    height: 3rem;
     
 }
   
