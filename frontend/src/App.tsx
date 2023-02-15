@@ -5,6 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
+import { Cover } from "./components/Cover/Cover";
+import { SplitSection } from "./components/SplitSection/SplitSection";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3001/")
@@ -22,6 +24,8 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Header />
+      <Cover />
+      <SplitSection />
       <main>
         <Routes>
           <Route path="/" element={<Frontpage />} />
@@ -29,5 +33,4 @@ export const App = () => {
         <Footer />
       </main>
     </BrowserRouter>
-  );
-};
+  )};
