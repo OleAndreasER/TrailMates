@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 :root {
-    --primary: #161616;
-    --secondary: #E7793C;
-    --accent: #63A6E3;
-    --dark-font: #333;
-    --white-font: #FFF;
+  --primary: #161616;
+  --secondary: #e7793c;
+  --accent: #63a6e3;
+  --dark-font: #333;
+  --white-font: #fff;
 
-    --header-height: 70px;
+  --header-height: 70px;
 }
 
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,6 +23,6 @@ main {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

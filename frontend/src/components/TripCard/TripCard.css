@@ -1,0 +1,75 @@
+h3,
+h4,
+h5 {
+  all: unset;
+  display: block;
+  margin: 3px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+h5 {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.card-container {
+  width: 320px;
+  height: auto;
+  overflow: hidden;
+  margin: 0;
+  padding: 10px;
+  display: inline-block;
+}
+
+.card-image {
+  width: 100%;
+  height: 320px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  border-radius: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.heart {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  height: 50px;
+  width: 50px;
+  fill-rule: initial;
+  fill: rgba(0, 0, 0, 0);
+  stroke: var(--secondary);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: miter;
+}
+
+.heart:hover {
+  fill: var(--secondary);
+  fill-opacity: 0.5;
+}
+
+.heart:active {
+  fill: var(--secondary);
+  fill-opacity: 1;
+}
+
+.filled {
+  fill: var(--secondary);
+  fill-opacity: 1;
+}
+
+.filled:active {
+  fill: rgba(0, 0, 0, 0);
+}
