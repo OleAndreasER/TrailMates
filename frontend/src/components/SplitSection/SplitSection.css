@@ -9,7 +9,7 @@
 
 .container h2{
     font-weight: 700;
-    font-size: 2.2vw;
+    font-size: 2.5vw;
     text-align: center;
 }
 
@@ -18,9 +18,9 @@
 }
 
 .seperator{
-    width: 60%;
+    width: 70%;
     height: 1%;
-    background-color: #E7793C;
+    background-color: #ea712f;
     border-radius: 100px;
     margin: 6% auto 6%;
 }
@@ -33,5 +33,14 @@
 .splitsec-right p{
     margin-left: 4%;
 
-    font-size: 1.2vw;
+    font-size: 1.35vw;
 }
+
+@media only screen and (max-width: 768px) { 
+    .container {
+      flex-direction: column;
+    }
+    .split-img{
+        width: 100vw;
+    }
+  }

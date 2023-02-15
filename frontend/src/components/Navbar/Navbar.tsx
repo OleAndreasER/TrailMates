@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import "./Navbar.css";
 import logo from "../assets/logo.svg";
 import { ReactComponent as SearchIcon } from '../assets/search_icon.svg';
+import NavLinks from "../NavLinks/NavLinks";
 
 export const Navbar = () => {
 
@@ -41,23 +42,7 @@ export const Navbar = () => {
                 <SearchIcon/>
             </button>
         </form>
-        <ul>
-            <li>
-            <NavLink to="/users" className="nav-link">
-                Utforsk
-            </NavLink>
-            </li>
-            <li>
-            <NavLink to="/" className="nav-link">
-                Mine Reiser
-            </NavLink>
-            </li>
-            <li>
-            <NavLink to="/" className="nav-link">
-                Favoritter
-            </NavLink>
-            </li>
-        </ul>
+        <NavLinks/>
     </nav>
   );
 };

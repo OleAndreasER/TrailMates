@@ -14,10 +14,11 @@ export const Header = () => {
           name="search"
           className="search-bar-cover"
         />
-        <button type="submit" className="search-button">
+        <button type="submit" className="search-button-cover">
           <SearchIcon/>
         </button>
       </form>
+      <div className="scrolldown-indicator">╲╱</div>
     </header>
   );
 };
