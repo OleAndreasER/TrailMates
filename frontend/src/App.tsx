@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router";
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
 import { SplitSection } from "./components/SplitSection/SplitSection";
-import { Navbar } from "./components/Navbar/Navbar";
+import { Navbar } from "./components/Navbar/Navbar";;
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3000/")
@@ -22,15 +22,15 @@ export const App = () => {
   useEffect(() => fromApi((data) => setMessage(data.message)), []);
 
   return (
-    <BrowserRouter>
-      <Navbar></Navbar>
-      <Header />
-      <SplitSection />
-      <main>
-        <Routes>
-          <Route path="/" element={<Frontpage />} />
-        </Routes>
-        <Footer />
-      </main>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Navbar></Navbar>
+        <Header />
+        <SplitSection />
+        <main>
+          <Routes>
+            <Route path="/" element={<Frontpage />} />
+          </Routes>
+          <Footer />
+        </main>
+      </BrowserRouter>
   )};

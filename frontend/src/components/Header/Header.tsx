@@ -1,5 +1,7 @@
 import "./Header.css";
 import img from"../assets/cover.svg"
+import { ReactComponent as SearchIcon } from '../assets/search_icon.svg';
+
 
 export const Header = () => {
   return (
@@ -13,7 +15,7 @@ export const Header = () => {
           className="search-bar-cover"
         />
         <button type="submit" className="search-button">
-          Search
+          <SearchIcon/>
         </button>
       </form>
     </header>
