@@ -1,6 +1,7 @@
 .slider-container {
   width: 95%;
-  height: auto;
+  height: 60vh;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

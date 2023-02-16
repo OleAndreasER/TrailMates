@@ -12,7 +12,7 @@ export const Slider = ({ items, numItems }: Props) => {
   const { width } = useWindowDimensions();
   const [startIdx, setStartIdx] = useState(0);
 
-  const availableSpots = Math.round((width - 650) / 320) || 1;
+  const availableSpots = Math.round((width - 500) / 320) || 1;
   const endIdx = startIdx + (numItems || availableSpots);
 
   const handleNext = () => {
