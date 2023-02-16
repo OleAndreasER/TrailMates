@@ -1,10 +1,11 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import "./App.css";
 import { Header } from "./components/Header/Header";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
+import UserProvider from "./authentication/UserProvider";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3001/")
@@ -15,19 +16,17 @@ const fromApi = (set: Dispatch<SetStateAction<any>>) => {
 };
 
 export const App = () => {
-  const [message, setMessage] = useState<String>("");
-
-  useEffect(() => fromApi((data) => setMessage(data.message)), []);
-
   return (
-    <BrowserRouter>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Frontpage />} />
-        </Routes>
-        <Footer />
-      </main>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Frontpage />} />
+          </Routes>
+          <Footer />
+        </main>
+      </BrowserRouter>
+    </UserProvider>
   );
 };
