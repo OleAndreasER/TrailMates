@@ -35,16 +35,20 @@ export const signUp = async (
   name: string,
   userType = "User",
 ) =>
-  await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredentials: UserCredential) => {
+  await createUserWithEmailAndPassword(auth, email, password).then(
+    (userCredentials: UserCredential) => {
       const userUid = userCredentials.user.uid;
-      addUserData(userUid, {name: name, userType: userType});
-      console.log(`Signed up with email: ${email}`);
-    })
-    .catch((error) => {
-      console.error("In signUp");
-      console.error(error);
-    });
+      addUserData(userUid, { name: name, userType: userType })
+        .then(() => {
+          console.log(`Signed up with email: ${email}`);
+        })
+        .catch((error) => {
+          auth.currentUser?.delete().then(() => {
+            console.log("Server is down probably..");
+          });
+        });
+    },
+  );
 
 export const logIn = (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password)
