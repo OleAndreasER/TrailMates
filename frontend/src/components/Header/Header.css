@@ -16,22 +16,9 @@
   margin: 5% 0 0 8%;
 }
 
-.search-bar-cover {
-  background-color: rgb(0, 0, 0, 0);
-  border: none;
-  font-size: 1.5vw;
-}
-
-.search-cover {
-  font-family: "Montserrat", sans-serif;
-  background-color: rgb(0, 0, 0, 0);
-  border-bottom: var(--secondary) 3px solid;
-  width: 35vw;
-  height: 5vh;
-  margin: 4% 0 0 8%;
-  padding: 0 0 0.5% 0;
-  display: flex;
-  justify-content: space-between;
+.search-bar-container {
+  margin-left: 7%;
+  margin-top: 2%;
 }
 
 .search-button-cover {
@@ -69,6 +56,8 @@ input:focus {
   font-size: 2rem;
   font-weight: 700;
   height: 3rem;
+  position: relative;
+  top: 16vw;
 }
 
 @keyframes bounce {

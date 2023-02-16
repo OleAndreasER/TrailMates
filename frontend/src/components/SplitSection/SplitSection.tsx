@@ -13,7 +13,7 @@ export const SplitSection = () => {
       />
       <div className="splitsec-right">
         <h2>
-          Vurderer du backpaking som <br /> ditt neste eventyr?
+          Vurderer du backpacking som <br /> ditt neste eventyr?
         </h2>
         <TitleSeperator width="70%" height="1%" color="secondary" />
         <p>
