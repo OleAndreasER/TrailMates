@@ -39,7 +39,10 @@ export const signUp = async (
     (userCredentials: UserCredential) => {
       const userUid = userCredentials.user.uid;
       addUserData(userUid, { name: name, userType: userType })
-        .then(() => {
+        .then((res: Response) => {
+          if (res.status == 500) {
+            throw new Error("Something went wrong");
+          }
           console.log(`Signed up with email: ${email}`);
         })
         .catch((error) => {

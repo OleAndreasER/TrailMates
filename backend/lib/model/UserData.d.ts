@@ -7,3 +7,4 @@ export default interface UserData {
     age?: number;
     phoneNumber?: string;
 }
+export declare const isValidUserType: (userType: string) => boolean;

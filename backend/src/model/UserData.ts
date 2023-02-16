@@ -7,3 +7,6 @@ export default interface UserData {
   age?: number;
   phoneNumber?: string;
 }
+
+export const isValidUserType = (userType: string) =>
+  ["User", "Admin", "Advertiser"].includes(userType);

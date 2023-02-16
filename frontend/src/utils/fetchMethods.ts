@@ -5,7 +5,7 @@ export const get: (path: string) => Promise<any> = async (path) => {
   return await response.json();
 };
 
-export const put: (path: string, data: {}) => Promise<Response | void> = (
+export const put: (path: string, data: {}) => Promise<Response> = (
   path,
   data,
 ) => {
@@ -16,7 +16,7 @@ export const put: (path: string, data: {}) => Promise<Response | void> = (
   });
 };
 
-export const post: (path: string, data: {}) => Promise<Response | void> = (
+export const post: (path: string, data: {}) => Promise<Response> = (
   path,
   data,
 ) => {

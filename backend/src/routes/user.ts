@@ -1,5 +1,6 @@
 import { Express, Request, Response } from "express";
 import { getUserData, putUserData } from "../db/user";
+import { isValidUserType } from "../model/UserData";
 
 export const startUserRoutes = (app: Express) => {
   app.get("/user/:userUid/", (req: Request, res: Response) => {
@@ -15,10 +16,16 @@ export const startUserRoutes = (app: Express) => {
 
   app.put("/user/:userUid/", (req: Request, res: Response) => {
     const userUid = req.params.userUid;
-    putUserData({
-      userUid: userUid,
-      ...req.body,
-    });
-    res.send("OK!");
+    if (isValidUserType(req.body.userType)) {
+      console.log("Adding user data");
+      putUserData({
+        userUid: userUid,
+        ...req.body,
+      });
+      res.send("OK!");
+    } else {
+      console.log("Rejecting because invalid userType: " + req.body.userType);
+      res.status(500).send("Invalid userType.");
+    }
   });
 };
