@@ -17,8 +17,7 @@ export const startUserRoutes = (app: Express) => {
     const userUid = req.params.userUid;
     putUserData({
       userUid: userUid,
-      name: req.body.name,
-      type: req.body.type,
+      ...req.body,
     });
     res.send("OK!");
   });
