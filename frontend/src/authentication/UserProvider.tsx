@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth } from "./authentication";
-import { UserData } from "./firestore";
+import { getUserData, UserData } from "./firestore";
 
 export interface User {
   userUid: string;
