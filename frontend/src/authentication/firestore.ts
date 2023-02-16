@@ -7,6 +7,7 @@ export interface UserData {
   nationality?: string;
   aboutUser?: string;
   age?: number;
+  phoneNumber?: string;
 }
 
 export const getUserData: (userUid: string) => Promise<UserData> = async (

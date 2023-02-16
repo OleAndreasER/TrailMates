@@ -5,4 +5,5 @@ export default interface UserData {
     nationality?: string;
     aboutUser?: string;
     age?: number;
+    phoneNumber?: string;
 }
