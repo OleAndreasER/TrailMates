@@ -1,8 +1,12 @@
+import { User } from "firebase/auth";
 import { get, put } from "../utils/fetchMethods";
 
 export interface UserData {
   name: string;
-  type: string;
+  userType: string;
+  nationality?: string;
+  aboutUser?: string;
+  age?: number;
 }
 
 export const getUserData: (userUid: string) => Promise<UserData> = async (
@@ -11,6 +15,6 @@ export const getUserData: (userUid: string) => Promise<UserData> = async (
   return await get(userUid);
 };
 
-export const addUserData = (userUid: string, name: string, type: string) => {
-  return put(userUid, { name: name, type: type });
+export const addUserData = (userUid: string, userData: UserData) => {
+  return put(userUid, userData);
 };

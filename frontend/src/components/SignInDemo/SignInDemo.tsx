@@ -33,7 +33,7 @@ export default () => {
         <>
           <p>{`Email: ${user.email}`}</p>
           <p>{`Name: ${user.name}`}</p>
-          <p>{`Type: ${user.type}`}</p>
+          <p>{`Type: ${user.userType}`}</p>
         </>
       ) : (
         <></>

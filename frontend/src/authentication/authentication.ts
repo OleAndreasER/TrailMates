@@ -33,12 +33,12 @@ export const signUp = async (
   email: string,
   password: string,
   name: string,
-  type = "User",
+  userType = "User",
 ) =>
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
       const userUid = userCredentials.user.uid;
-      addUserData(userUid, name, type);
+      addUserData(userUid, {name: name, userType: userType});
       console.log(`Signed up with email: ${email}`);
     })
     .catch((error) => {

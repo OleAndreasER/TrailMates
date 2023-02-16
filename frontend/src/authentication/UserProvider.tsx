@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
+import internal from "stream";
 import { auth } from "./authentication";
 import { getUserData, UserData } from "./firestore";
 
-export interface User {
+export interface User extends UserData{
   userUid: string;
   email: string;
-  name: string;
-  type: string;
 }
 
 export const UserContext = React.createContext<User | null>(null);
@@ -30,8 +29,7 @@ export default ({ children }: UserProviderProps) => {
         setCurrentUser({
           userUid: firebaseUser.uid,
           email: firebaseUser.email,
-          name: userData.name,
-          type: userData.type,
+          ...userData,
         });
       });
     });
