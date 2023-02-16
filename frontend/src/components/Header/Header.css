@@ -25,7 +25,7 @@
 .search-cover {
   font-family: "Montserrat", sans-serif;
   background-color: rgb(0, 0, 0, 0);
-  border-bottom: #ea712f 3px solid;
+  border-bottom: var(--accent-color) 3px solid;
   width: 35vw;
   height: 5vh;
   margin: 4% 0 0 8%;
@@ -59,7 +59,7 @@ input:focus {
 .scrolldown-indicator {
   animation: bounce 2s ease infinite;
   bottom: 0;
-  color: #ea712f;
+  color: var(--accent-color);
   display: inline-block;
   margin: 0 0 1% 0;
   left: 47.8vw;

@@ -4,9 +4,7 @@ import "./Navbar.css";
 import logo from "../assets/logo.svg";
 import { ReactComponent as SearchIcon } from "../assets/search_icon.svg";
 import NavLinks from "../NavLinks/NavLinks";
-import { Searchbar } from "../Searchbar/Searchbar";
 import { Button } from "../Button/Button";
-
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

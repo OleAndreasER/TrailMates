@@ -8,7 +8,11 @@ interface ButtonProps {
   height?: string;
   text: string;
   onClick?: () => void;
-  styling: "secondary-outline" | "accent-outline" | "accent-fill";
+  styling:
+    | "secondary-outline"
+    | "accent-outline"
+    | "accent-fill"
+    | "secondary-fill";
   icon?: "heart" | "comment" | "images";
   className?: string;
   style?: React.CSSProperties;

@@ -1,0 +1,118 @@
+.container-privateprofile {
+  margin: 8% auto;
+  margin-bottom: 20%;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+}
+
+.container-aboutme {
+  width: 40%;
+}
+
+.container-userinfo {
+  width: 60%;
+}
+
+.container-infoboxes {
+  margin-left: 5%;
+  justify-content: space-around;
+}
+
+.infobox-cta-section {
+  width: 80%;
+  margin: 5% 0 0 3%;
+  justify-content: space-around;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-privateprofile h1 {
+  text-align: left;
+  font-size: 3vw;
+  font-weight: 500;
+}
+
+.container-privateprofile h2 {
+  text-align: left;
+  font-size: 2vw;
+  font-weight: 500;
+  margin: 2vh 0;
+}
+
+.title-decoration-1 {
+  height: 3px;
+  width: 65%;
+  background-color: var(--accent);
+  align-self: center;
+  margin: 0 0 0 3%;
+}
+
+.title-decoration-2 {
+  height: 4px;
+  width: 65%;
+  background-color: var(--accent);
+  align-self: center;
+  margin: 0 0 0 3%;
+}
+
+.private-profile-img {
+  background-size: contain;
+  border: var(--secondary) 0.5vw solid;
+  width: 19vw;
+  height: 19vw;
+  border-radius: 1000px;
+  align-self: center;
+  margin: 2vh auto;
+}
+
+.aboutme-text {
+  font-size: 1.2vw;
+}
+
+@media only screen and (max-width: 768px) {
+  .container-privateprofile {
+    flex-direction: column;
+  }
+
+  .private-profile-img {
+    width: 50vw;
+    height: 50vw;
+  }
+
+  .container-privateprofile h1 {
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .container-privateprofile h2 {
+    text-align: left;
+    font-size: 3rem;
+    font-weight: 500;
+    margin: 2vh 0;
+  }
+
+  .container-privateprofile p {
+    font-size: 1rem;
+  }
+
+  .container-userinfo,
+  .container-aboutme {
+    width: 90%;
+    margin: auto;
+  }
+
+  .container-infoboxes,
+  .infobox-cta-section {
+    margin-left: 0%;
+  }
+}

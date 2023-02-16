@@ -9,12 +9,12 @@ const NavLinks: React.FC = () => {
   return (
     <ul className="nav-links">
       <li>
-        <NavLink className={activeStyle} end to="/">
+        <NavLink className={activeStyle} end to="/Frontpage">
           Utforsk
         </NavLink>
       </li>
       <li>
-        <NavLink className={activeStyle} end to="/minereiser">
+        <NavLink className={activeStyle} end to="/PrivateProfile">
           Mine Reiser
         </NavLink>
       </li>

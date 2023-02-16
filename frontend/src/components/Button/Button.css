@@ -4,10 +4,6 @@
   border-radius: 10000px;
   padding: 8px;
   color: white;
-  min-width: 100px;
-  min-height: 15px;
-  width: 150px;
-  height: 25px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -31,17 +27,28 @@
 
 .button.secondary-outline {
   border-color: var(--secondary);
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 1.2vw;
 }
 
 .button.accent-outline {
   border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1.2vw;
 }
 
 .button.accent-fill {
   background-color: var(--accent);
-  font-size: 1rem;
+  font-size: 1vw;
   font-weight: 500;
-  height: 20px !important;
+}
+
+.button.secondary-fill {
+  background-color: var(--secondary);
+  font-size: 1vw;
+  font-weight: 500;
 }
 
 svg {
