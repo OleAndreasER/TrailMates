@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { auth, getUserData } from "./authentication";
+import { auth } from "./authentication";
+import { UserData } from "./firestore";
 
 export interface User {
   userUid: string;
@@ -24,7 +25,7 @@ export default ({ children }: UserProviderProps) => {
         return;
       }
 
-      getUserData(firebaseUser.uid).then((userData) => {
+      getUserData(firebaseUser.uid).then((userData: UserData) => {
         if (firebaseUser.email === null) return;
         setCurrentUser({
           userUid: firebaseUser.uid,

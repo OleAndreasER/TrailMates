@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { addUserData } from "./firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -27,26 +28,6 @@ const firebaseConfig = {
 const app: FirebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const auth = getAuth(app);
-
-const baseUserURI = "http://localhost:3001/user/";
-
-export const getUserData = async (userUid: string) => {
-  const response = await fetch(baseUserURI + userUid);
-  return await response.json();
-};
-
-const addUserData = (userUid: string, name: string, type: string) => {
-  fetch(baseUserURI + userUid, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: name,
-      type: type,
-    }),
-  }).catch((error) => {
-    console.error(error);
-  });
-};
 
 export const signUp = async (
   email: string,
