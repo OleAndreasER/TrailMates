@@ -16,9 +16,22 @@
   margin: 5% 0 0 8%;
 }
 
-.search-bar-container {
-  margin-left: 7%;
-  margin-top: 2%;
+.search-bar-cover {
+  background-color: rgb(0, 0, 0, 0);
+  border: none;
+  font-size: 1.5vw;
+}
+
+.search-cover {
+  font-family: "Montserrat", sans-serif;
+  background-color: rgb(0, 0, 0, 0);
+  border-bottom: var(--secondary) 3px solid;
+  width: 35vw;
+  height: 5vh;
+  margin: 4% 0 0 8%;
+  padding: 0 0 0.5% 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .search-button-cover {
@@ -46,12 +59,11 @@ input:focus {
 .scrolldown-indicator {
   animation: bounce 2s ease infinite;
   bottom: 0;
-  color: #ea712f;
+  color: var(--secondary);
   display: inline-block;
   margin: 0 0 1% 0;
   left: 47.8vw;
-  position: relative;
-  top: 12vw;
+  position: absolute;
   text-align: center;
   width: 3vw;
   font-size: 2rem;

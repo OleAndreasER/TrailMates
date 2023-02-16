@@ -1,6 +1,6 @@
 import "./Header.css";
 import img from "../assets/cover.svg";
-import Searchbar from "../Searchbar/Searchbar";
+import { ReactComponent as SearchIcon } from "../assets/search_icon.svg";
 
 export const Header = () => {
   return (
@@ -9,9 +9,17 @@ export const Header = () => {
         Hva er ditt
         <br /> neste reisemål?
       </h1>
-      <div className="search-bar-container">
-        <Searchbar type="header" />
-      </div>
+      <form className="search-cover">
+        <input
+          type="text"
+          placeholder="Mitt neste reisemål er..."
+          name="search"
+          className="search-bar-cover"
+        />
+        <button type="submit" className="search-button-cover">
+          <SearchIcon />
+        </button>
+      </form>
       <div className="scrolldown-indicator">╲╱</div>
     </header>
   );

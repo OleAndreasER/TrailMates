@@ -5,7 +5,7 @@
   justify-content: center;
   justify-content: center;
   letter-spacing: 0.03vw;
-  margin-bottom: 10vh;
+  margin-bottom: 8%;
 }
 
 .container h2 {
@@ -21,7 +21,7 @@
 .seperator {
   width: 70%;
   height: 1%;
-  background-color: #ea712f;
+  background-color: var(--accent);
   border-radius: 100px;
   margin: 6% auto 6%;
 }
@@ -60,7 +60,7 @@
   .seperator {
     width: 70%;
     height: 5%;
-    background-color: #ea712f;
+    background-color: var(--accent);
     border-radius: 100px;
     margin: 6% auto 6%;
   }
