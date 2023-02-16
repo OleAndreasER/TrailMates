@@ -16,6 +16,6 @@ export const getUserData: (userUid: string) => Promise<UserData> = async (
   return await get(userUid);
 };
 
-export const addUserData = (userUid: string, userData: UserData) => {
+export const putUserData = (userUid: string, userData: UserData) => {
   return put(userUid, userData);
 };

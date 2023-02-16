@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { addUserData } from "./firestore";
+import { putUserData } from "./firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -38,7 +38,7 @@ export const signUp = async (
   await createUserWithEmailAndPassword(auth, email, password).then(
     (userCredentials: UserCredential) => {
       const userUid = userCredentials.user.uid;
-      addUserData(userUid, { name: name, userType: userType })
+      putUserData(userUid, { name: name, userType: userType })
         .then((res: Response) => {
           if (res.status == 500) {
             throw new Error("Something went wrong");
