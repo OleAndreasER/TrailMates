@@ -1,12 +1,15 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import "./App.css";
 import { Header } from "./components/Header/Header";
-import { BrowserRouter } from "react-router-dom";
-import { Routes, Route } from "react-router";
-import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
 import { SplitSection } from "./components/SplitSection/SplitSection";
 import { Navbar } from "./components/Navbar/Navbar";;
+
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router";
+
+import { Frontpage } from "./pages/Frontpage/Frontpage";
+import { Searchresults } from "./pages/Searchresults/Searchresults";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3000/")

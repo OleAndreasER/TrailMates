@@ -63,6 +63,7 @@ input:focus{
     bottom: 0;
     color:#ea712f;
     display: inline-block;
+    margin: 0 0 1% 0;
     left: 47.8vw;
     position: absolute;
     text-align: center;
