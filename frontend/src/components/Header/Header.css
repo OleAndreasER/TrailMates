@@ -13,7 +13,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 120%;
-  margin: 5% 0 0 8%;
+  margin: 11% 0 0 8%;
 }
 
 .search-bar-container {
@@ -56,7 +56,7 @@ input:focus {
   font-weight: 700;
   height: 3rem;
   position: relative;
-  top: 14vw;
+  top: 11vw;
 }
 
 @keyframes bounce {
