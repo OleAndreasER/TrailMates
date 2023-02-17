@@ -1,13 +1,10 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import "./App.css";
 import { Navbar } from "./components/Navbar/Navbar";
-
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
-
-import { PrivateProfile } from "./pages/PrivateProfile/PrivateProfile";
 import { Frontpage } from "./pages/Frontpage/Frontpage";
-import { Footer } from "./components/Footer/Footer";
+import  Footer  from "./components/Footer/Footer";
 import Searchresults from "./pages/Searchresults/Searchresults";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
@@ -28,7 +25,8 @@ export const App = () => {
       <Navbar></Navbar>
       <main>
         <Routes>
-          <Route path="/" element={<PrivateProfile />} />
+          <Route path="/" element={<Frontpage />} />
+          <Route path="/search" element={<Searchresults />} />
         </Routes>
       </main>
     </BrowserRouter>

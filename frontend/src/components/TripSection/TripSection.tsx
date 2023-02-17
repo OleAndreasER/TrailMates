@@ -30,7 +30,7 @@ const tripDummyObjects: Trip[] = [
   },
   {
     _id: 4,
-    destination: "El Badi Palass, Marrakesh",
+    destination: "El Badi Palass",
     img: "https://imageio.forbes.com/specials-images/dam/imageserve/1166259909/960x0.jpg",
     country: "Morokko",
     rating: 3.9,
@@ -70,7 +70,7 @@ export const TripSection = ({ text, trips }: Props) => {
     <div className="trip-section">
       <h1 className="section-header-text">{text}</h1>
       <svg className="trip-section-divider">
-        <rect x="0" y="0" rx="5" />
+        <rect x="0" y="0" rx="5" overflow={"visible"} />
       </svg>
       <div id="slider-container">
         <Slider items={items} />

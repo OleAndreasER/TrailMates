@@ -16,22 +16,9 @@
   margin: 5% 0 0 8%;
 }
 
-.search-bar-cover {
-  background-color: rgb(0, 0, 0, 0);
-  border: none;
-  font-size: 1.5vw;
-}
-
-.search-cover {
-  font-family: "Montserrat", sans-serif;
-  background-color: rgb(0, 0, 0, 0);
-  border-bottom: var(--accent-color) 3px solid;
-  width: 35vw;
-  height: 5vh;
-  margin: 4% 0 0 8%;
-  padding: 0 0 0.5% 0;
-  display: flex;
-  justify-content: space-between;
+.search-bar-container {
+  margin-left: 7%;
+  margin-top: 2%;
 }
 
 .search-button-cover {
@@ -63,7 +50,8 @@ input:focus {
   display: inline-block;
   margin: 0 0 1% 0;
   left: 47.8vw;
-  position: absolute;
+  position: relative;
+  top: 12vw;
   text-align: center;
   width: 3vw;
   font-size: 2rem;
