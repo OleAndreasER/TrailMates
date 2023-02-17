@@ -1,34 +1,18 @@
-import { NavLink } from "react-router-dom";
 import "./Header.css";
+import img from "../assets/cover.svg";
+import Searchbar from "../Searchbar/Searchbar";
 
 export const Header = () => {
   return (
-    <header>
-      <form>
-        <input
-          type="text"
-          placeholder="Search.."
-          name="search"
-          className="search-bar"
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </form>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/users" className="nav-link">
-              Users
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/" className="nav-link">
-              Frontpage
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+    <header className="cover" style={{ backgroundImage: `url(${img})` }}>
+      <h1>
+        Hva er ditt
+        <br /> neste reisemål?
+      </h1>
+      <div className="search-bar-container">
+        <Searchbar type="header" />
+      </div>
+      <div className="scrolldown-indicator">╲╱</div>
     </header>
   );
 };
