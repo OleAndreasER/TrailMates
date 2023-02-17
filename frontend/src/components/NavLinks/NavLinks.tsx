@@ -7,23 +7,17 @@ const NavLinks: React.FC = () => {
     `nav-link ${isActive && "active"}`;
 
   return (
-    <ul className="nav-links">
-      <li>
-        <NavLink className={activeStyle} end to="/">
-          Utforsk
-        </NavLink>
-      </li>
-      <li>
-        <NavLink className={activeStyle} end to="/minereiser">
-          Mine Reiser
-        </NavLink>
-      </li>
-      <li>
-        <NavLink className={activeStyle} end to="/favoritter">
-          Favoritter
-        </NavLink>
-      </li>
-    </ul>
+    <div className="container-nav-links">
+      <NavLink className={activeStyle} end to="/">
+        Utforsk
+      </NavLink>
+      <NavLink className={activeStyle} end to="/minereiser">
+        Mine Reiser
+      </NavLink>
+      <NavLink className={activeStyle} end to="/favoritter">
+        Favoritter
+      </NavLink>
+    </div>
   );
 };
 

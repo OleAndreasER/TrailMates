@@ -1,5 +1,5 @@
 #search-container {
-  margin: 15px;
+  margin: 8% 0;
   grid-template-columns: 6fr 1fr;
   display: grid;
   justify-content: center;
@@ -13,7 +13,7 @@
 .header {
   width: 500px;
   height: 40px;
-  border-bottom: 5px solid var(--secondary);
+  border-bottom: 4px solid var(--secondary);
 }
 
 .header-text {
@@ -22,7 +22,7 @@
 
 .nav {
   height: 37px;
-  width: 400px;
+  width: 2%;
   border-radius: 10000px;
   border: 2px solid #ffffff;
   padding: 0;
@@ -33,7 +33,7 @@ input[type="text"] {
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 5px 15px;
+  padding: 5px 1px;
   color: white;
   overflow: hidden;
   font-weight: 500;
@@ -46,7 +46,7 @@ input[type="text"] {
 .search-icon {
   position: relative;
   right: 0px;
-  margin: 0 0 0 15px;
+  margin: 0 4% 0 0;
   float: right;
   border: none;
 }
