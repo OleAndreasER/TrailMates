@@ -1,4 +1,3 @@
-import { User } from "firebase/auth";
 import { get, put } from "../utils/fetchMethods";
 
 export interface UserData {
