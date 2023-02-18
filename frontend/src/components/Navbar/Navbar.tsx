@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Button } from "../Button/Button";
 import { UserContext } from "../../authentication/UserProvider";
-import { auth } from "../../authentication/authentication";
+import { logOut } from "../../authentication/authentication";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,7 +32,7 @@ export const Navbar = () => {
 
   const handleClick = () => {
     if (currentUser) {
-      auth.signOut();
+      logOut();
     } else {
       navigate("/login");
     }

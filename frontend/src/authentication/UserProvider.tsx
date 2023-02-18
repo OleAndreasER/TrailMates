@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "./authentication";
-import { getUserData, UserData } from "./firestore";
+import { getUserData, putUserData, UserData } from "./firestore";
 
 export interface User extends UserData {
   userUid: string;
@@ -10,7 +10,7 @@ export interface User extends UserData {
 
 interface UserContextValue {
   currentUser: User | null;
-  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
+  updateCurrentUser: (updatedUser: User) => void;
 }
 
 export const UserContext = React.createContext<UserContextValue>(
@@ -49,7 +49,13 @@ export default ({ children }: UserProviderProps) => {
     });
   }, []);
 
-  const value = { currentUser, setCurrentUser };
+  const updateCurrentUser = async (updatedUser: User) => {
+    await putUserData(currentUser!.userUid, updatedUser)
+      .then(() => setCurrentUser(updatedUser))
+      .catch((err) => alert(err));
+  };
+
+  const value = { currentUser, updateCurrentUser };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
