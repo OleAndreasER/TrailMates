@@ -7,7 +7,7 @@ export const startUserRoutes = (app: Express) => {
     const userUid = req.params.userUid;
     getUserData(userUid)
       .then((user) => {
-        res.json(user);
+        res.json(user.data());
       })
       .catch((error) => {
         res.status(500).send("Error");

@@ -1,0 +1,31 @@
+.demo-container {
+  background-color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 35vh;
+}
+
+.demo-container input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.demo-container input {
+  color: black;
+  display: block;
+  margin: 10px;
+  width: 15vw;
+  height: 2vh;
+}
+
+.demo-container .button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+}
+
+.demo-container .button-container button {
+  width: 4vw;
+  height: 5vh;
+}

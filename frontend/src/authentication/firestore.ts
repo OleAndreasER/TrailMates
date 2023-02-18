@@ -4,6 +4,7 @@ export interface UserData {
   name: string;
   userType: string;
   nationality?: string;
+  placeOfResidence?: string;
   aboutUser?: string;
   age?: number;
   phoneNumber?: string;

@@ -10,7 +10,8 @@
   margin-bottom: 0;
 }
 
-.container-inforow p {
+.container-inforow p,
+.container-inforow input[type="text"] {
   font-size: 1.5vw;
   margin: 1% 0 3% 0;
 }
@@ -29,8 +30,13 @@
   justify-content: space-between;
 }
 
-.user-context p {
+.user-context p,
+.user-context input[type="text"] {
   margin-left: 5%;
+}
+
+.user-context input[type="text"] {
+  border: 2px solid #333;
 }
 
 .edit-button {
@@ -58,7 +64,8 @@
     margin-bottom: 0;
   }
 
-  .container-inforow p {
+  .container-inforow p,
+  .container-inforow input[type="text"] {
     font-size: 1rem;
     margin: 1% 0 3% 0;
   }

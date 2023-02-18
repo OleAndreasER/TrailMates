@@ -17,35 +17,6 @@ nav {
   background-color: var(--secondary);
 }
 
-.search-button-nav {
-  background-color: rgb(0, 0, 0, 0);
-  cursor: pointer;
-  font-size: 0.8rem;
-  margin: 0 3% 1% 0;
-  border: 0;
-  height: 30px;
-  color: #f9f9f9;
-}
-
-.search-button-nav:hover {
-  opacity: 0.7;
-}
-
-.search-bar {
-  background-color: rgb(0, 0, 0, 0);
-  border: none;
-  font-size: 1rem;
-}
-
-.search-div {
-  font-family: "Montserrat", sans-serif;
-  background-color: rgb(0, 0, 0, 0);
-  border: #f9f9f9 2px solid;
-  border-radius: 100px;
-  width: 25vw;
-  height: 5vh;
-}
-
 .logo {
   height: 5vw;
   cursor: pointer;

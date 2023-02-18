@@ -79,6 +79,10 @@
   font-size: 1.2vw;
 }
 
+.user-context input[type="text"] {
+  all: unset;
+}
+
 @media only screen and (max-width: 768px) {
   .container-privateprofile {
     flex-direction: column;

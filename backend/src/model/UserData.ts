@@ -6,6 +6,7 @@ export default interface UserData {
   aboutUser?: string;
   age?: number;
   phoneNumber?: string;
+  placeOfResidence?: string;
 }
 
 export const isValidUserType = (userType: string) =>

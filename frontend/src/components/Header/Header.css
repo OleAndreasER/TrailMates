@@ -34,15 +34,6 @@
   opacity: 0.7;
 }
 
-input {
-  font-weight: 500;
-  color: #f9f9f9;
-}
-
-input:focus {
-  outline: none;
-}
-
 .scrolldown-indicator {
   animation: bounce 2s ease infinite;
   bottom: 0;

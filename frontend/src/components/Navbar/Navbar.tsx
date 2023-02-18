@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./Navbar.css";
 import logo from "../assets/logo.svg";
 import NavLinks from "../NavLinks/NavLinks";
@@ -6,6 +6,8 @@ import Searchbar from "../Searchbar/Searchbar";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Button } from "../Button/Button";
+import { UserContext } from "../../authentication/UserProvider";
+import { auth } from "../../authentication/authentication";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,23 +15,28 @@ export const Navbar = () => {
   const [visible, setVisible] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset;
+      const scrollTop = window.scrollY;
       setVisible(prevScrollPos > scrollTop || scrollTop < 10);
       setPrevScrollPos(scrollTop);
-      if (scrollTop > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(scrollTop > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollPos, visible]);
+
+  const handleClick = () => {
+    if (currentUser) {
+      auth.signOut();
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <nav
@@ -47,7 +54,7 @@ export const Navbar = () => {
       <Searchbar type="nav" />
       <NavLinks />
       <Button
-        text="Logg inn"
+        text={currentUser ? "Logg ut" : "Logg inn"}
         styling={
           isScrolled || location.pathname !== "/"
             ? "accent-outline"
@@ -55,7 +62,21 @@ export const Navbar = () => {
         }
         width="12%"
         height="20%"
+        onClick={handleClick}
       />
+      {currentUser && (
+        <Button
+          text="Profil"
+          styling={
+            isScrolled || location.pathname !== "/"
+              ? "accent-outline"
+              : "secondary-outline"
+          }
+          width="5%"
+          height="20%"
+          onClick={() => navigate("/profile")}
+        />
+      )}
     </nav>
   );
 };

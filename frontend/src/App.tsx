@@ -9,6 +9,7 @@ import Searchresults from "./pages/Searchresults/Searchresults";
 import UserProvider from "./authentication/UserProvider";
 import { PrivateProfile } from "./pages/PrivateProfile/PrivateProfile";
 import { PublicProfile } from "./pages/PublicProfile/PublicProfile";
+import SignInDemo from "./components/SignInDemo/SignInDemo";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3000/")
@@ -26,8 +27,9 @@ export const App = () => {
         <main>
           <Routes>
             <Route path="/" element={<Frontpage />} />
-            <Route path="/privatepage" element={<PrivateProfile />} />
-            <Route path="/publicpage" element={<PublicProfile />} />
+            <Route path="/login" element={<SignInDemo />} />
+            <Route path="/profile" element={<PrivateProfile />} />
+            <Route path="/profile/:uid" element={<PublicProfile />} />
           </Routes>
           <Footer />
         </main>

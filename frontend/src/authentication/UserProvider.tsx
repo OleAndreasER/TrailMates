@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { auth } from "./authentication";
 import { getUserData, UserData } from "./firestore";
 
@@ -8,7 +8,14 @@ export interface User extends UserData {
   creationDate: string;
 }
 
-export const UserContext = React.createContext<User | null>(null);
+interface UserContextValue {
+  currentUser: User | null;
+  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+
+export const UserContext = React.createContext<UserContextValue>(
+  {} as UserContextValue,
+);
 
 interface UserProviderProps {
   children: any;
@@ -42,7 +49,7 @@ export default ({ children }: UserProviderProps) => {
     });
   }, []);
 
-  return (
-    <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
-  );
+  const value = { currentUser, setCurrentUser };
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
