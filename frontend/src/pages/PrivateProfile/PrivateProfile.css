@@ -77,10 +77,16 @@
 
 .aboutme-text {
   font-size: 1.2vw;
+  overflow-wrap: break-word;
 }
 
 .user-context input[type="text"] {
   all: unset;
+}
+
+.public-profile-button {
+  width: 12vw;
+  height: 3vh;
 }
 
 @media only screen and (max-width: 768px) {

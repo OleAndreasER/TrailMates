@@ -5,7 +5,7 @@ import { putUserData } from "../../authentication/firestore";
 
 interface Props {
   info: string;
-  title: "Navn" | "Alder" | "Bosted" | "Telefon";
+  title: "Navn" | "Alder" | "Bosted" | "Telefon" | "Om meg";
 }
 
 const attributeEquivalent = {
@@ -13,6 +13,7 @@ const attributeEquivalent = {
   Alder: "age",
   Bosted: "placeOfResidence",
   Telefon: "phoneNumber",
+  "Om meg": "aboutUser",
 };
 
 // TODO: Add validation?
@@ -22,7 +23,9 @@ export const ProfileItem = ({ info, title }: Props) => {
   const [edit, setEdit] = useState(false);
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     if (title === "Telefon") {
       const re = /^\d{0,8}$/;
       if (e.target.value === "" || re.test(e.target.value)) {
@@ -53,7 +56,14 @@ export const ProfileItem = ({ info, title }: Props) => {
     setEdit(!edit);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.style.height = "auto";
+    e.currentTarget.style.height = e.currentTarget.scrollHeight + "px";
+  };
+
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     if (e.key === "Enter") {
       handleClick();
     }
@@ -64,33 +74,63 @@ export const ProfileItem = ({ info, title }: Props) => {
   };
 
   return (
-    <div className="container-inforow flex-column">
-      <h3>{title}</h3>
-      <div className="user-context flex-row">
-        {edit ? (
-          <>
-            <input
-              type="text"
+    <>
+      {title === "Om meg" ? (
+        <>
+          {edit ? (
+            <textarea
+              rows={7}
               placeholder={title}
               onChange={handleChange}
-              value={value}
               onKeyDown={handleKeyDown}
-              autoFocus
-            />
-            <a className="edit-button" onClick={handleClick}>
-              Lagre
-            </a>
-          </>
-        ) : (
-          <>
-            <p>{value + (title === "Alder" && value !== "" ? " år" : "")}</p>
-            <a className="edit-button" onClick={handleClick}>
-              Rediger
-            </a>
-          </>
-        )}
-      </div>
-      <div className="seperator"></div>
-    </div>
+              className="aboutme-textarea"
+              onInput={handleInput}
+            >
+              {value}
+            </textarea>
+          ) : (
+            <p onDoubleClick={handleClick}>{value}</p>
+          )}
+          <a
+            className="edit-button"
+            style={{ fontSize: "1.2vw", display: "block" }}
+            onClick={handleClick}
+          >
+            {edit ? "Lagre" : "Endre bio"}
+          </a>
+        </>
+      ) : (
+        <div className="container-inforow flex-column">
+          <h3>{title}</h3>
+          <div className="user-context flex-row">
+            {edit ? (
+              <>
+                <input
+                  type="text"
+                  placeholder={title}
+                  onChange={handleChange}
+                  value={value}
+                  onKeyDown={handleKeyDown}
+                  autoFocus
+                />
+                <a className="edit-button" onClick={handleClick}>
+                  Lagre
+                </a>
+              </>
+            ) : (
+              <>
+                <p onDoubleClick={handleClick}>
+                  {value + (title === "Alder" && value !== "" ? " år" : "")}
+                </p>
+                <a className="edit-button" onClick={handleClick}>
+                  Rediger
+                </a>
+              </>
+            )}
+          </div>
+          <div className="seperator"></div>
+        </div>
+      )}
+    </>
   );
 };

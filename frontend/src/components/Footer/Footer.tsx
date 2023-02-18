@@ -18,10 +18,10 @@ class Footer extends Component {
           </div>
 
           <div className="ft-main-item flex-column footer-links">
-            <Link to="/utforsk">Utforsk</Link>
+            <Link to="/">Utforsk</Link>
             <Link to="/minereiser">Mine Reiser</Link>
             <Link to="/favoritter">Favoritter</Link>
-            <Link to="/profil">Profil</Link>
+            <Link to="/profile">Profil</Link>
           </div>
         </section>
       </footer>

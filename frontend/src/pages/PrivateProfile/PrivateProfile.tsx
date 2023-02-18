@@ -4,7 +4,8 @@ import { ProfileItem } from "../../components/ProfileItem/ProfileItem";
 import { Button } from "../../components/Button/Button";
 import { useEffect, useContext } from "react";
 import { UserContext } from "../../authentication/UserProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { auth } from "../../authentication/authentication";
 
 export const PrivateProfile = () => {
   useEffect(() => {
@@ -12,11 +13,18 @@ export const PrivateProfile = () => {
   }, []);
 
   const { currentUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <div className="container-privateprofile">
       {currentUser ? (
         <>
+          <Button
+            text="Se offentlig profil"
+            styling="accent-fill"
+            className="public-profile-button"
+            onClick={() => navigate(`/profile/${currentUser.userUid}`)}
+          />
           <div className="container-aboutme">
             <div
               className="private-profile-img"
@@ -28,10 +36,10 @@ export const PrivateProfile = () => {
                 <div className="title-decoration-1"></div>
               </div>
               <div className="aboutme-text">
-                <p>{currentUser.aboutUser}</p>
-                <a className="edit-button" style={{ fontSize: "1.2vw" }}>
-                  Endre bio
-                </a>
+                <ProfileItem
+                  info={currentUser.aboutUser || ""}
+                  title="Om meg"
+                />
               </div>
             </div>
           </div>
@@ -70,6 +78,7 @@ export const PrivateProfile = () => {
                   text="Logg ut"
                   styling="secondary-outline"
                   width="25%"
+                  onClick={() => auth.signOut()}
                 />
               </div>
             </div>

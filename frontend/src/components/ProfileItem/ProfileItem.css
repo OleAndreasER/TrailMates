@@ -56,6 +56,14 @@
   margin: 0 0 2% 0;
 }
 
+.aboutme-textarea {
+  all: unset;
+  height: min-content;
+  width: 100%;
+  resize: none;
+  border: 2px solid #333;
+}
+
 @media only screen and (max-width: 768px) {
   .container-inforow h3 {
     font-size: 1.2rem;
