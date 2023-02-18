@@ -10,6 +10,7 @@ import UserProvider from "./authentication/UserProvider";
 import { PrivateProfile } from "./pages/PrivateProfile/PrivateProfile";
 import { PublicProfile } from "./pages/PublicProfile/PublicProfile";
 import SignInDemo from "./components/SignInDemo/SignInDemo";
+import { ToTopButton } from "./components/ToTopButton/ToTopButton";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3000/")
@@ -33,6 +34,7 @@ export const App = () => {
           </Routes>
           <Footer />
         </main>
+        <ToTopButton />
       </BrowserRouter>
     </UserProvider>
   );

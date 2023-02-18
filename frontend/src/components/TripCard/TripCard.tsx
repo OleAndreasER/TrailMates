@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ReactComponent as FilledHeart } from "../../resources/media/heart-filled-icon.svg";
+import { ReactComponent as Arrow } from "../../components/assets/card-arrow.svg";
 import "./TripCard.css";
 import { Trip } from "../../types/types";
 
@@ -22,10 +23,19 @@ export const TripCard = ({ trip }: Props) => {
         className="card-image"
         style={{ backgroundImage: `url(${trip.img})` }}
       >
-        <FilledHeart
-          className={`heart ${liked && "filled"}`}
-          onClick={handleClick}
-        />
+        <div className="container-card-readmore flex-column">
+          <FilledHeart
+            className={`heart ${liked && "filled"}`}
+            onClick={handleClick}
+          />
+          <div className="card-readmore-text">
+            <div className="flex-row">
+              <a>Les mer</a>
+              <Arrow className="card-readmore-arrow" />
+            </div>
+            <div className="card-readmore-underline"></div>
+          </div>
+        </div>
       </div>
       <h3>{trip.destination}</h3>
       <h4>{trip.country}</h4>
