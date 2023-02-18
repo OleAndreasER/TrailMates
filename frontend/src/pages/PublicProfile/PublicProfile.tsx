@@ -89,7 +89,7 @@ export const PublicProfile = () => {
               <h2>{fname}s reiser!</h2>
               <TitleSeperator height="5px" width="25vw" color="accent" />
             </div>
-            <TripSection text="" />
+            <TripSection text="" textColor="white" />
           </div>
           <div className="container-public-user-reviews flex-column">
             <h2>{fname}s erfaringer</h2>

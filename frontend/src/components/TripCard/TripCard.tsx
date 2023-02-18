@@ -6,9 +6,10 @@ import { Trip } from "../../types/types";
 
 interface Props {
   trip: Trip;
+  color: "black" | "white";
 }
 
-export const TripCard = ({ trip }: Props) => {
+export const TripCard = ({ trip, color }: Props) => {
   // TODO: Check if the logged in user has liked this trip already.
   const [liked, setLiked] = useState(false);
 
@@ -37,10 +38,12 @@ export const TripCard = ({ trip }: Props) => {
           </div>
         </div>
       </div>
-      <h3>{trip.destination}</h3>
-      <h4>{trip.country}</h4>
-      <h5>Vurdering: {trip.rating}/5</h5>
-      <h5>Estimert kostnad: {trip.estimatedCost} NOK</h5>
+      <div style={{ color }}>
+        <h3>{trip.destination}</h3>
+        <h4>{trip.country}</h4>
+        <h5>Vurdering: {trip.rating}/5</h5>
+        <h5>Estimert kostnad: {trip.estimatedCost} NOK</h5>
+      </div>
     </div>
   );
 };

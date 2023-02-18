@@ -13,9 +13,9 @@ export const Frontpage = () => {
       <Header />
       <SplitSection />
       <div className="frontpage-container">
-        <TripSection text="Toppreiser" />
-        <TripSection text="Drømmereiser under 10 000kr" />
-        <TripSection text="Anbefalt for deg" />
+        <TripSection text="Toppreiser" textColor="black" />
+        <TripSection text="Drømmereiser under 10 000kr" textColor="black" />
+        <TripSection text="Anbefalt for deg" textColor="black" />
       </div>
     </div>
   );

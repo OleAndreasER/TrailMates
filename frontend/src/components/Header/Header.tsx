@@ -3,6 +3,14 @@ import img from "../assets/cover.svg";
 import Searchbar from "../Searchbar/Searchbar";
 
 export const Header = () => {
+  const scrolldown = () => {
+    window.scrollTo({
+      top: window.innerHeight - 10,
+      behavior: "smooth",
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
   return (
     <header className="cover" style={{ backgroundImage: `url(${img})` }}>
       <h1>
@@ -12,7 +20,9 @@ export const Header = () => {
       <div className="search-bar-container">
         <Searchbar type="header" />
       </div>
-      <div className="scrolldown-indicator">╲╱</div>
+      <div className="scrolldown-indicator">
+        <a onClick={scrolldown}>╲╱</a>
+      </div>
     </header>
   );
 };

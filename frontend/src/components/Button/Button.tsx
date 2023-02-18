@@ -16,6 +16,7 @@ interface ButtonProps {
   icon?: "heart" | "comment" | "images";
   className?: string;
   style?: React.CSSProperties;
+  textColor?: string;
 }
 
 const iconComponents = {
@@ -33,11 +34,12 @@ export const Button = ({
   icon,
   style,
   className,
+  textColor,
 }: ButtonProps) => {
   return (
     <button
       className={`button ${styling} ${className}`}
-      style={{ ...style, width, height }}
+      style={{ ...style, color: textColor, width, height }}
       onClick={onClick}
     >
       {text}

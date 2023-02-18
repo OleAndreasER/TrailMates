@@ -37,7 +37,6 @@
 .scrolldown-indicator {
   animation: bounce 2s ease infinite;
   bottom: 0;
-  color: var(--secondary);
   display: inline-block;
   margin: 0 0 1% 0;
   left: 47.8vw;
@@ -47,7 +46,15 @@
   font-weight: 700;
   height: 3rem;
   position: relative;
-  top: 8.5vw;
+  top: 18vh;
+}
+
+.scrolldown-indicator a {
+  color: var(--secondary);
+}
+
+.scrolldown-indicator a:hover {
+  cursor: pointer;
 }
 
 @keyframes bounce {

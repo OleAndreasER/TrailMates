@@ -57,13 +57,14 @@ function getDummyObjects(num: number) {
 interface Props {
   text: string;
   trips?: Trip[];
+  textColor: "black" | "white";
 }
 
-export const TripSection = ({ text, trips }: Props) => {
+export const TripSection = ({ text, trips, textColor }: Props) => {
   // TODO: Replace this with a call to the backend, or take in the trips as props.
   // Can also consider taking a function or query as a prop to display specific trips.
   const items = getDummyObjects(10).map((obj) => (
-    <TripCard trip={obj} key={obj._id} />
+    <TripCard trip={obj} key={obj._id} color={textColor} />
   ));
 
   return (
