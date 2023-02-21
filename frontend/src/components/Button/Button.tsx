@@ -38,7 +38,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`button ${styling} ${className}`}
+      className={`${className || ""} button ${styling}`}
       style={{ ...style, color: textColor, width, height }}
       onClick={onClick}
     >

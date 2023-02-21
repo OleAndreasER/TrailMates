@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "children": "^0.2.3",
+    "styled-components": "^5.3.6"
+  }
+}

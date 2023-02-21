@@ -33,31 +33,41 @@ export const signUp = async (
   name: string,
   userType = "User",
 ) =>
-  await createUserWithEmailAndPassword(auth, email, password).then(
-    (userCredentials: UserCredential) => {
+  {
+    return await createUserWithEmailAndPassword(auth, email, password).then(
+    async (userCredentials: UserCredential) => {
       const userUid = userCredentials.user.uid;
-      putUserData(userUid, { name: name, userType: userType })
+      return await putUserData(userUid, { name: name, userType: userType })
         .then((res: Response) => {
           if (res.status == 500) {
-            throw new Error("Something went wrong");
+            return false;
+            // throw new Error("Something went wrong");
           }
           console.log(`Signed up with email: ${email}`);
+          return true;
         })
         .catch((error) => {
           auth.currentUser?.delete().then(() => {
             console.log("Server is down probably..");
+            return false;
           });
+          return false;
         });
-    },
-  );
+    }
+  )
+  };
 
-export const logIn = (email: string, password: string) =>
-  signInWithEmailAndPassword(auth, email, password)
+export const logIn = async (email: string, password: string) =>
+  await signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
       console.log(`Logged in with email: ${email}`);
+
+      // TODO: get proper return values on success/failure
+      return true;
     })
     .catch((error) => {
       console.error(error);
+      return false;
     });
 
 export const logOut = () => {
