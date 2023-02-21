@@ -41,7 +41,7 @@
 
 .button.accent-fill {
   background-color: var(--accent);
-  font-size: 1vw;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 

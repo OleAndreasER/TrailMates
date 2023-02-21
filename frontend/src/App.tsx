@@ -5,11 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import Footer from "./components/Footer/Footer";
-import Searchresults from "./pages/Searchresults/Searchresults";
 import UserProvider from "./authentication/UserProvider";
 import { PrivateProfile } from "./pages/PrivateProfile/PrivateProfile";
 import { PublicProfile } from "./pages/PublicProfile/PublicProfile";
-import SignInDemo from "./components/SignInDemo/SignInDemo";
 import { ToTopButton } from "./components/ToTopButton/ToTopButton";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
@@ -28,7 +26,6 @@ export const App = () => {
         <main>
           <Routes>
             <Route path="/" element={<Frontpage />} />
-            <Route path="/login" element={<SignInDemo />} />
             <Route path="/profile" element={<PrivateProfile />} />
             <Route path="/profile/:uid" element={<PublicProfile />} />
           </Routes>

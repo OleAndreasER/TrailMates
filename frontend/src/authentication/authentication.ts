@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { FirebaseApp, initializeApp } from "firebase/app";
+import { FirebaseApp, FirebaseError, initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -32,42 +32,37 @@ export const signUp = async (
   password: string,
   name: string,
   userType = "User",
-) =>
-  {
-    return await createUserWithEmailAndPassword(auth, email, password).then(
-    async (userCredentials: UserCredential) => {
+) => {
+  return await createUserWithEmailAndPassword(auth, email, password)
+    .then(async (userCredentials: UserCredential) => {
       const userUid = userCredentials.user.uid;
       return await putUserData(userUid, { name: name, userType: userType })
         .then((res: Response) => {
           if (res.status == 500) {
-            return false;
-            // throw new Error("Something went wrong");
+            return new Error("Serveren er nede, prøv igjen senere");
           }
           console.log(`Signed up with email: ${email}`);
           return true;
         })
         .catch((error) => {
           auth.currentUser?.delete().then(() => {
-            console.log("Server is down probably..");
-            return false;
+            return new Error("Serveren er nede.");
           });
           return false;
         });
-    }
-  )
-  };
+    })
+    .catch((error: FirebaseError) => {
+      return error;
+    });
+};
 
 export const logIn = async (email: string, password: string) =>
   await signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
       console.log(`Logged in with email: ${email}`);
-
-      // TODO: get proper return values on success/failure
-      return true;
     })
-    .catch((error) => {
-      console.error(error);
-      return false;
+    .catch((error: Error) => {
+      return error;
     });
 
 export const logOut = () => {

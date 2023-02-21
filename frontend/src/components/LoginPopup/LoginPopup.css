@@ -13,13 +13,12 @@
   width: 60vw;
   height: 70vh;
   background-color: white;
-  border-radius: 25px;
+  border-radius: 35px;
   display: flex;
   overflow: hidden;
   background-image: url("../assets/hwavebg.svg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-repeat: repeat-y;
+  background-size: 60% 100%;
 }
 
 .left-container,
@@ -36,7 +35,13 @@
 
 .left-container {
   color: var(--white-font);
-  overflow: visible;
+  background: linear-gradient(
+    90deg,
+    var(--secondary) 0%,
+    var(--secondary) 50%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .right-container {
@@ -66,18 +71,9 @@
 
 .right-container .login-button,
 .right-container .register-button {
-  all: unset;
-  width: 250px;
+  width: 60%;
   height: 40px;
-  text-align: center;
-  background-color: var(--accent);
-  color: var(--white-font);
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 100px;
   margin-top: 5%;
-  cursor: pointer;
-  position: relative;
 }
 
 .right-container > p {
@@ -98,6 +94,7 @@ p u:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .right-container > .close-button {
@@ -109,10 +106,31 @@ p u:hover {
   height: 30px;
   stroke-width: 1px;
   stroke: var(--secondary);
+  fill: var(--secondary);
 }
 
-.right-container > .close-button:hover path,
-.right-container > .close-button:hover g {
-  fill: var(--primary);
-  stroke: var(--primary);
+.right-container > .close-button:hover {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.right-container .error {
+  color: red;
+}
+
+@media only screen and (max-width: 1468px) {
+  .login-container {
+    background-image: none;
+  }
+
+  .left-container {
+    color: var(--white-font);
+    background: var(--secondary);
+  }
+}
+
+@media only screen and (max-width: 856px) {
+  .right-container > h1 {
+    font-size: 1.5rem;
+  }
 }

@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 import { InputField } from "../InputField/InputField";
-import { logIn, signUp, logOut } from "../../authentication/authentication";
+import { logIn, signUp } from "../../authentication/authentication";
 import "./LoginPopup.css";
-import { UserContext } from "../../authentication/UserProvider";
 import { ReactComponent as CloseIcon } from "../assets/cross-icon.svg";
+import { isValidEmail, isValidPassword } from "../../utils/validatorMethods";
+import { FirebaseError } from "@firebase/app";
 
 interface UserInfo {
   email: string;
@@ -13,6 +14,30 @@ interface UserInfo {
   confirmPassword: string;
 }
 
+enum ERROR {
+  INVALID_EMAIL = "Dette er ikke en gyldig e-post",
+  INVALID_PASSWORD = "Passordet må være minst 6 tegn",
+  NON_MATCHING_PASSWORDS = "Passordene er ikke like",
+}
+
+const getErrorMessage = (err: FirebaseError) => {
+  switch (err.code) {
+    case "auth/email-already-in-use":
+      return "En bruker med denne e-posten eksisterer allerede";
+    case "auth/invalid-email":
+      return "Dette er ikke en gyldig e-post";
+    case "auth/weak-password":
+      return "Passordet må være minst 6 tegn";
+    case "auth/user-not-found":
+      return "Fant ingen bruker med denne e-posten";
+    case "auth/wrong-password":
+      return "Feil passord";
+    default:
+      console.log(err.code);
+      return "Noe gikk galt";
+  }
+};
+
 interface Props {
   visible: boolean;
   setIsVisible: (isVisible: boolean) => void;
@@ -20,8 +45,8 @@ interface Props {
 
 export const LoginPopup = ({ visible, setIsVisible }: Props) => {
   const [userInfo, setUserInfo] = useState<UserInfo>({} as UserInfo);
-  const { currentUser } = useContext(UserContext);
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const getOnChangeHandler = (
     key: keyof UserInfo,
@@ -45,44 +70,86 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
 
   useEffect(() => {
     clearUserInfo();
+    setErrorMessage(``);
   }, [isLoggingIn]);
 
   const handleGoToRegisterClick = () => {
     setIsLoggingIn(false);
   };
 
-  function delay(time: number) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
+  const addErrMessage = (err: string) => {
+    setErrorMessage((prev) => `${prev}❌ ${err}`);
+  };
 
   const handleRegisterButtonClicked = async () => {
-    // Add feedback to user
-    if (userInfo.password !== userInfo.confirmPassword) {
-      alert("Passordene er ikke like");
-      return;
-    }
-    const isSignedUp = await signUp(
+    if (!validateFields()) return;
+
+    const signupResponse = await signUp(
       userInfo.email,
       userInfo.password,
       userInfo.name,
     );
-    if (isSignedUp) {
-      await handleLoginButtonClicked();
-    } else {
-      alert("Noe gikk galt");
+    if (signupResponse === true) {
+      logIn(userInfo.email, userInfo.password);
+      clearUserInfo();
+      setErrorMessage("");
+      setIsVisible(false);
+    } else if (signupResponse instanceof FirebaseError) {
+      addErrMessage(getErrorMessage(signupResponse));
+    } else if (signupResponse instanceof Error) {
+      addErrMessage(signupResponse.message);
     }
   };
 
+  const validateFields = () => {
+    // Has to use a flag because the addErrMessage method is async
+    let flag = true;
+    setErrorMessage("");
+    if (!isValidEmail(userInfo.email)) {
+      addErrMessage(ERROR.INVALID_EMAIL);
+      flag = false;
+    }
+    if (!isValidPassword(userInfo.password)) {
+      addErrMessage(ERROR.INVALID_PASSWORD);
+      flag = false;
+    }
+    if (!isLoggingIn && userInfo.password !== userInfo.confirmPassword) {
+      addErrMessage(ERROR.NON_MATCHING_PASSWORDS);
+      flag = false;
+    }
+    return flag;
+  };
+
   const handleLoginButtonClicked = async () => {
-    const isLoggedIn = await logIn(userInfo.email, userInfo.password);
-    if (isLoggedIn) {
+    if (!validateFields()) return;
+    const loginResponse = await logIn(userInfo.email, userInfo.password);
+    if (!loginResponse) {
       clearUserInfo();
+      setErrorMessage("");
       setIsVisible(false);
+    } else if (loginResponse instanceof FirebaseError) {
+      addErrMessage(getErrorMessage(loginResponse));
+    } else {
+      addErrMessage(loginResponse.message);
     }
   };
 
   const handleClickOnCross = () => {
     setIsVisible(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      if (isLoggingIn) {
+        handleLoginButtonClicked();
+      } else {
+        handleRegisterButtonClicked();
+      }
+    }
+
+    if (e.key === "Escape") {
+      handleClickOnCross();
+    }
   };
 
   return (
@@ -122,11 +189,11 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
                 onChange={getOnChangeHandler("password")}
                 value={userInfo.password}
                 type="password"
+                onKeyDown={handleKeyDown}
               />
-              <p className="password-forgot">
-                <p>Glemt passord?</p>
-              </p>
+              {/* <p className="password-forgot">Glemt passord?</p> */}
               <div className="button-container">
+                <p className="error">{errorMessage}</p>
                 <Button
                   text="LOGG INN"
                   styling="accent-fill"
@@ -165,8 +232,10 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
                 onChange={getOnChangeHandler("confirmPassword")}
                 value={userInfo.confirmPassword}
                 type="password"
+                onKeyDown={handleKeyDown}
               />
               <div className="button-container">
+                <p className="error">{errorMessage}</p>
                 <Button
                   text="REGISTRER DEG"
                   styling="accent-fill"
