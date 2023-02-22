@@ -33,7 +33,7 @@ const getErrorMessage = (err: FirebaseError) => {
     case "auth/wrong-password":
       return "Feil passord";
     default:
-      console.log(err.code);
+      console.warn(err.code);
       return "Noe gikk galt";
   }
 };
@@ -48,6 +48,13 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>();
 
+  /**
+   * Returns a function that updates the state of the userInfo object
+   * on change of a input field.
+   *
+   * @param key The key of the property to update
+   * @returns A function that updates the state of the userInfo object
+   */
   const getOnChangeHandler = (
     key: keyof UserInfo,
   ): ((e: React.ChangeEvent<HTMLInputElement>) => void) => {
@@ -91,9 +98,10 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
     );
     if (signupResponse === true) {
       logIn(userInfo.email, userInfo.password);
-      clearUserInfo();
-      setErrorMessage("");
-      setIsVisible(false);
+
+      // Temporary solution until someone finds a fix for the bug where
+      // the user state doesn't update when you register a new user.
+      window.location.reload();
     } else if (signupResponse instanceof FirebaseError) {
       addErrMessage(getErrorMessage(signupResponse));
     } else if (signupResponse instanceof Error) {
@@ -102,7 +110,8 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
   };
 
   const validateFields = () => {
-    // Has to use a flag because the addErrMessage method is async
+    // Has to use a flag because the addErrMessage method is async,
+    // and thus may return before the state has been updated.
     let flag = true;
     setErrorMessage("");
     if (!isValidEmail(userInfo.email)) {
@@ -122,6 +131,7 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
 
   const handleLoginButtonClicked = async () => {
     if (!validateFields()) return;
+
     const loginResponse = await logIn(userInfo.email, userInfo.password);
     if (!loginResponse) {
       clearUserInfo();
@@ -159,6 +169,7 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
     >
       <div className="login-container">
         <div className="left-container">
+          {/* TODO: Replace with actual content */}
           <h1>Test</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

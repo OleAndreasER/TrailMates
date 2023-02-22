@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import "./Footer.css";
@@ -18,8 +17,8 @@ const Footer = () => {
 
         <div className="ft-main-item flex-column footer-links">
           <Link to="/">Utforsk</Link>
-          <Link to="/minereiser">Mine Reiser</Link>
-          <Link to="/favoritter">Favoritter</Link>
+          <Link to="/trips">Mine Reiser</Link>
+          <Link to="/favourites">Favoritter</Link>
           <Link to="/profile">Profil</Link>
         </div>
       </section>

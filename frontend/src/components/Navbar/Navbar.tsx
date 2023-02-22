@@ -3,7 +3,7 @@ import "./Navbar.css";
 import logo from "../assets/logo.svg";
 import NavLinks from "../NavLinks/NavLinks";
 import Searchbar from "../Searchbar/Searchbar";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "../Button/Button";

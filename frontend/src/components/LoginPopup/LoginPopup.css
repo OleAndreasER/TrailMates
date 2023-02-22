@@ -24,7 +24,6 @@
 .left-container,
 .right-container {
   width: 50%;
-  height: 100%;
   display: flex;
   justify-items: space-around;
   align-items: center;
@@ -95,6 +94,9 @@ p u:hover {
   align-items: center;
   justify-content: center;
   width: 100%;
+  position: absolute;
+  bottom: 5%;
+  padding: 3%;
 }
 
 .right-container > .close-button {
@@ -130,7 +132,23 @@ p u:hover {
 }
 
 @media only screen and (max-width: 856px) {
+  .left-container > h1,
   .right-container > h1 {
     font-size: 1.5rem;
+  }
+
+  .right-container > p,
+  .left-container > p {
+    font-size: 0.7rem;
+  }
+
+  .login-container {
+    width: 90vw;
+    height: 90vh;
+    border-radius: 20px;
+  }
+
+  .right-container > .button-container {
+    margin-left: 7%;
   }
 }

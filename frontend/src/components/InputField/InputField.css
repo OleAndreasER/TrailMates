@@ -4,17 +4,16 @@
   flex-direction: column;
   width: 100%;
   position: relative;
-  margin-top: 13px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
-.input-container > input[type="text"],
-.input-container > input[type="email"],
-.input-container > input[type="password"] {
+.input-container > input {
   all: unset;
   border-bottom: 1px solid var(--primary);
   width: 90%;
   height: 40px;
+  font-size: 1.2rem;
 }
 
 .input-container > label {
@@ -23,4 +22,8 @@
   font-size: 0.95rem;
   position: absolute;
   top: -14px;
+}
+
+.input-container > input:focus {
+  border-color: var(--secondary);
 }
