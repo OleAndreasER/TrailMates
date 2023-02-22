@@ -13,7 +13,7 @@ interface InputFields {
   confirmPassword: string;
 }
 
-enum ERROR {
+enum InputError {
   INVALID_EMAIL = "Dette er ikke en gyldig e-post.",
   INVALID_PASSWORD = "Passordet må være minst 6 tegn.",
   NON_MATCHING_PASSWORDS = "Passordene er ikke like.",
@@ -95,15 +95,15 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
     let flag = true;
     setErrorMessage("");
     if (!isValidEmail(inputFields.email)) {
-      addErrMessage(ERROR.INVALID_EMAIL);
+      addErrMessage(InputError.INVALID_EMAIL);
       flag = false;
     }
     if (!isValidPassword(inputFields.password)) {
-      addErrMessage(ERROR.INVALID_PASSWORD);
+      addErrMessage(InputError.INVALID_PASSWORD);
       flag = false;
     }
     if (!isLoggingIn && inputFields.password !== inputFields.confirmPassword) {
-      addErrMessage(ERROR.NON_MATCHING_PASSWORDS);
+      addErrMessage(InputError.NON_MATCHING_PASSWORDS);
       flag = false;
     }
     return flag;
