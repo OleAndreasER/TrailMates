@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 import { InputField } from "../InputField/InputField";
-import { logIn, signUp } from "../../authentication/authentication";
+import { logIn, signUp, AuthError } from "../../authentication/authentication";
 import "./LoginPopup.css";
 import { ReactComponent as CloseIcon } from "../assets/cross-icon.svg";
 import { isValidEmail, isValidPassword } from "../../utils/validatorMethods";
-import { FirebaseError } from "@firebase/app";
 
-interface UserInfo {
+interface InputFields {
   email: string;
   name: string;
   password: string;
@@ -15,28 +14,10 @@ interface UserInfo {
 }
 
 enum ERROR {
-  INVALID_EMAIL = "Dette er ikke en gyldig e-post",
-  INVALID_PASSWORD = "Passordet må være minst 6 tegn",
-  NON_MATCHING_PASSWORDS = "Passordene er ikke like",
+  INVALID_EMAIL = "Dette er ikke en gyldig e-post.",
+  INVALID_PASSWORD = "Passordet må være minst 6 tegn.",
+  NON_MATCHING_PASSWORDS = "Passordene er ikke like.",
 }
-
-const getErrorMessage = (err: FirebaseError) => {
-  switch (err.code) {
-    case "auth/email-already-in-use":
-      return "En bruker med denne e-posten eksisterer allerede";
-    case "auth/invalid-email":
-      return "Dette er ikke en gyldig e-post";
-    case "auth/weak-password":
-      return "Passordet må være minst 6 tegn";
-    case "auth/user-not-found":
-      return "Fant ingen bruker med denne e-posten";
-    case "auth/wrong-password":
-      return "Feil passord";
-    default:
-      console.warn(err.code);
-      return "Noe gikk galt";
-  }
-};
 
 interface Props {
   visible: boolean;
@@ -44,30 +25,33 @@ interface Props {
 }
 
 export const LoginPopup = ({ visible, setIsVisible }: Props) => {
-  const [userInfo, setUserInfo] = useState<UserInfo>({} as UserInfo);
+  const [inputFields, setInputFields] = useState<InputFields>(
+    {} as InputFields,
+  );
+  // isLoggingIn = false, means user is signing in.
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>();
 
   /**
-   * Returns a function that updates the state of the userInfo object
+   * Returns a function that updates the state of the inputFields object
    * on change of a input field.
    *
    * @param key The key of the property to update
-   * @returns A function that updates the state of the userInfo object
+   * @returns A function that updates the state of the inputFields object
    */
   const getOnChangeHandler = (
-    key: keyof UserInfo,
+    key: keyof InputFields,
   ): ((e: React.ChangeEvent<HTMLInputElement>) => void) => {
     return (e) => {
-      setUserInfo({
-        ...userInfo,
+      setInputFields({
+        ...inputFields,
         [key]: e.target.value,
       });
     };
   };
 
-  const clearUserInfo = () => {
-    setUserInfo({
+  const clearInputFields = () => {
+    setInputFields({
       email: "",
       name: "",
       password: "",
@@ -76,7 +60,7 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
   };
 
   useEffect(() => {
-    clearUserInfo();
+    clearInputFields();
     setErrorMessage(``);
   }, [isLoggingIn]);
 
@@ -89,24 +73,20 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
   };
 
   const handleRegisterButtonClicked = async () => {
-    if (!validateFields()) return;
+    const fieldsAreValid = validateFields();
+    if (!fieldsAreValid) return;
 
-    const signupResponse = await signUp(
-      userInfo.email,
-      userInfo.password,
-      userInfo.name,
+    signUp(inputFields.email, inputFields.password, inputFields.name).then(
+      (error?: AuthError) => {
+        if (error) {
+          addErrMessage(error);
+        } else {
+          setIsVisible(false);
+          clearInputFields();
+          setErrorMessage("");
+        }
+      },
     );
-    if (signupResponse === true) {
-      logIn(userInfo.email, userInfo.password);
-
-      // Temporary solution until someone finds a fix for the bug where
-      // the user state doesn't update when you register a new user.
-      window.location.reload();
-    } else if (signupResponse instanceof FirebaseError) {
-      addErrMessage(getErrorMessage(signupResponse));
-    } else if (signupResponse instanceof Error) {
-      addErrMessage(signupResponse.message);
-    }
   };
 
   const validateFields = () => {
@@ -114,15 +94,15 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
     // and thus may return before the state has been updated.
     let flag = true;
     setErrorMessage("");
-    if (!isValidEmail(userInfo.email)) {
+    if (!isValidEmail(inputFields.email)) {
       addErrMessage(ERROR.INVALID_EMAIL);
       flag = false;
     }
-    if (!isValidPassword(userInfo.password)) {
+    if (!isValidPassword(inputFields.password)) {
       addErrMessage(ERROR.INVALID_PASSWORD);
       flag = false;
     }
-    if (!isLoggingIn && userInfo.password !== userInfo.confirmPassword) {
+    if (!isLoggingIn && inputFields.password !== inputFields.confirmPassword) {
       addErrMessage(ERROR.NON_MATCHING_PASSWORDS);
       flag = false;
     }
@@ -130,18 +110,18 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
   };
 
   const handleLoginButtonClicked = async () => {
-    if (!validateFields()) return;
+    const fieldsAreValid = validateFields();
+    if (!fieldsAreValid) return;
 
-    const loginResponse = await logIn(userInfo.email, userInfo.password);
-    if (!loginResponse) {
-      clearUserInfo();
-      setErrorMessage("");
-      setIsVisible(false);
-    } else if (loginResponse instanceof FirebaseError) {
-      addErrMessage(getErrorMessage(loginResponse));
-    } else {
-      addErrMessage(loginResponse.message);
-    }
+    logIn(inputFields.email, inputFields.password).then((error?: AuthError) => {
+      if (error) {
+        addErrMessage(error);
+      } else {
+        clearInputFields();
+        setErrorMessage("");
+        setIsVisible(false);
+      }
+    });
   };
 
   const handleClickOnCross = () => {
@@ -192,13 +172,13 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
               <InputField
                 labelText="EMAIL"
                 onChange={getOnChangeHandler("email")}
-                value={userInfo.email}
+                value={inputFields.email}
                 type="text"
               />
               <InputField
                 labelText="PASSORD"
                 onChange={getOnChangeHandler("password")}
-                value={userInfo.password}
+                value={inputFields.password}
                 type="password"
                 onKeyDown={handleKeyDown}
               />
@@ -223,25 +203,25 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
               <InputField
                 labelText="NAVN"
                 onChange={getOnChangeHandler("name")}
-                value={userInfo.name}
+                value={inputFields.name}
                 type="text"
               />
               <InputField
                 labelText="EMAIL"
                 onChange={getOnChangeHandler("email")}
-                value={userInfo.email}
+                value={inputFields.email}
                 type="email"
               />
               <InputField
                 labelText="PASSORD"
                 onChange={getOnChangeHandler("password")}
-                value={userInfo.password}
+                value={inputFields.password}
                 type="password"
               />
               <InputField
                 labelText="BEKREFT PASSORD"
                 onChange={getOnChangeHandler("confirmPassword")}
-                value={userInfo.confirmPassword}
+                value={inputFields.confirmPassword}
                 type="password"
                 onKeyDown={handleKeyDown}
               />
