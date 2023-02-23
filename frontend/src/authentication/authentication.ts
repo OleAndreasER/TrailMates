@@ -29,20 +29,18 @@ export const auth = getAuth(app);
 
 export enum AuthError {
   EMAIL_IN_USE = "En bruker med denne e-posten eksisterer allerede.",
-  INVALID_EMAIL = "Dette er ikke en gyldig e-post addresse.",
+  INVALID_EMAIL_OR_PASSWORD = "Feil e-post eller passord.",
   SHORT_PASSWORD = "Passordet må være minst 6 tegn.",
-  WRONG_EMAIL = "Fant ingen bruker med denne e-posten.",
-  WRONG_PASSWORD = "Feil passord.",
   OTHER = "Noe gikk galt.",
 }
 
 const toAuthError = (error: FirebaseError) =>
   ({
     "auth/email-already-in-use": AuthError.EMAIL_IN_USE,
-    "auth/invalid-email": AuthError.INVALID_EMAIL,
+    "auth/invalid-email": AuthError.INVALID_EMAIL_OR_PASSWORD,
     "auth/weak-password": AuthError.SHORT_PASSWORD,
-    "auth/user-not-found": AuthError.WRONG_EMAIL,
-    "auth/wrong-password": AuthError.WRONG_PASSWORD,
+    "auth/user-not-found": AuthError.INVALID_EMAIL_OR_PASSWORD,
+    "auth/wrong-password": AuthError.INVALID_EMAIL_OR_PASSWORD,
   }[error.code] || AuthError.OTHER);
 
 export const signUp: (
@@ -75,6 +73,7 @@ export const signUp: (
         });
     })
     .catch((error: FirebaseError) => {
+      console.log(error.code);
       return toAuthError(error);
     });
 };
@@ -89,6 +88,7 @@ export const logIn: (
       return undefined;
     })
     .catch((error: FirebaseError) => {
+      console.log(error.code);
       return toAuthError(error);
     });
 };

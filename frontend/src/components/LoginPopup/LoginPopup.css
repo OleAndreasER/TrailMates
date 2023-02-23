@@ -16,14 +16,11 @@
   border-radius: 35px;
   display: flex;
   overflow: hidden;
-  background-image: url("../assets/hwavebg.svg");
-  background-repeat: repeat-y;
-  background-size: 60% 100%;
+  animation: slideIn-Y 0.55s cubic-bezier(0.1, 0.8, 0.28, 0.95);
 }
 
 .left-container,
 .right-container {
-  width: 50%;
   display: flex;
   justify-items: space-around;
   align-items: center;
@@ -33,17 +30,20 @@
 }
 
 .left-container {
+  width: 65%;
   color: var(--white-font);
-  background: linear-gradient(
-    90deg,
-    var(--secondary) 0%,
-    var(--secondary) 50%,
-    rgba(255, 255, 255, 0) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background-image: url("../assets/hwavebg.svg");
+  background-repeat: no-repeat;
+  padding-right: 10%;
+  background-size: cover;
+  background-repeat: repeat-y;
+}
+
+.left-container svg {
 }
 
 .right-container {
+  width: 35%;
   color: var(--accent);
   position: relative;
 }
@@ -118,17 +118,6 @@ p u:hover {
 
 .right-container .error {
   color: red;
-}
-
-@media only screen and (max-width: 1468px) {
-  .login-container {
-    background-image: none;
-  }
-
-  .left-container {
-    color: var(--white-font);
-    background: var(--secondary);
-  }
 }
 
 @media only screen and (max-width: 856px) {
