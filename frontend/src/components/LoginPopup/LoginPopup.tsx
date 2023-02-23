@@ -14,7 +14,7 @@ interface InputFields {
 }
 
 enum InputError {
-  NO_NAME = "Du må ha et navn.",
+  EMPTY_FIELDS = "Det er tomme felt.",
   INVALID_EMAIL = "Dette er ikke en gyldig e-post.",
   INVALID_PASSWORD = "Passordet må være minst 6 tegn.",
   NON_MATCHING_PASSWORDS = "Passordene er ikke like.",
@@ -69,24 +69,26 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
     setIsLoggingIn(false);
   };
 
-  const inputFieldError: () => InputError | undefined = () => {
-    if (!isLoggingIn && inputFields.name === "") {
-      return InputError.NO_NAME;
+  const signUpFieldError: () => InputError | undefined = () => {
+    if (Object.values(inputFields).some((inputValue) => inputValue === "")) {
+      return InputError.EMPTY_FIELDS;
     }
+    // Only when signing up
     if (!isValidEmail(inputFields.email)) {
       return InputError.INVALID_EMAIL;
     }
     if (!isValidPassword(inputFields.password)) {
       return InputError.INVALID_PASSWORD;
     }
-    if (!isLoggingIn && inputFields.password !== inputFields.confirmPassword) {
+    if (inputFields.password !== inputFields.confirmPassword) {
       return InputError.NON_MATCHING_PASSWORDS;
     }
+
     return undefined;
   };
 
   const handleRegisterButtonClicked = async () => {
-    const error = inputFieldError();
+    const error = signUpFieldError();
     if (error) {
       setErrorMessage(error);
       return;
@@ -97,15 +99,20 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
         if (error) {
           setErrorMessage(error);
         } else {
-          setIsVisible(false);
           clearInputFields();
           setErrorMessage("");
+          setIsVisible(false);
         }
       },
     );
   };
 
   const handleLoginButtonClicked = async () => {
+    if (inputFields.email === "" || inputFields.password === "") {
+      setErrorMessage(InputError.EMPTY_FIELDS);
+      return;
+    }
+
     logIn(inputFields.email, inputFields.password).then((error?: AuthError) => {
       if (error) {
         setErrorMessage(error);
