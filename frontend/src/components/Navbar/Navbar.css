@@ -10,13 +10,12 @@ nav {
   justify-content: space-around;
   z-index: 3;
   margin-bottom: 100px;
-  animation: slideIn-Y 1s ease-out;
 }
 
 .scrolled {
   border-bottom: 4px solid var(--accent);
   background-color: var(--secondary);
-  animation: slideIn-Y 1s ease-out;
+  animation: slideIn-Y 0.25s ease-out;
 }
 
 .logo {

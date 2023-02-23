@@ -17,6 +17,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [canSetVisibility, setCanSetVisibility] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const { currentUser } = useContext(UserContext);
@@ -27,7 +28,17 @@ export const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setVisible(prevScrollPos > scrollTop || scrollTop < 10);
+
+      const setAsVisible = async () => {
+        setVisible(prevScrollPos > scrollTop || scrollTop < 10);
+        await new Promise((resolve) => {
+          setCanSetVisibility(false);
+          setTimeout(resolve, 750);
+        }).then(() => setCanSetVisibility(true));
+      };
+
+      if (canSetVisibility || prevScrollPos < scrollTop) setAsVisible();
+
       setPrevScrollPos(scrollTop);
       setIsScrolled(scrollTop > 50);
     };
@@ -101,7 +112,7 @@ export const Navbar = () => {
           className={`navbar ${
             isScrolled || location.pathname !== "/" ? "scrolled" : ""
           }`}
-          style={{ visibility: visible ? "visible" : "hidden" }}
+          style={{ display: visible ? "flex" : "none" }}
         >
           <img
             src={logo}
