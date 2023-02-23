@@ -48,6 +48,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-icons": "^3.0.0",
     "@types/react-responsive": "^8.0.5",
+    "@types/styled-components": "^5.1.26",
     "prettier": "^2.8.4",
     "svg-react-loader": "^0.4.6"
   }

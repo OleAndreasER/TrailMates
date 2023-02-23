@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { FirebaseApp, initializeApp } from "firebase/app";
+import { FirebaseApp, FirebaseError, initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -29,36 +29,71 @@ const firebaseConfig = {
 const app: FirebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-export const signUp = async (
+export enum AuthError {
+  EMAIL_IN_USE = "En bruker med denne e-posten eksisterer allerede.",
+  INVALID_EMAIL = "Dette er ikke en gyldig e-post addresse.",
+  SHORT_PASSWORD = "Passordet må være minst 6 tegn.",
+  WRONG_EMAIL = "Fant ingen bruker med denne e-posten.",
+  WRONG_PASSWORD = "Feil passord.",
+  OTHER = "Noe gikk galt.",
+}
+
+const toAuthError = (error: FirebaseError) =>
+  ({
+    "auth/email-already-in-use": AuthError.EMAIL_IN_USE,
+    "auth/invalid-email": AuthError.INVALID_EMAIL,
+    "auth/weak-password": AuthError.SHORT_PASSWORD,
+    "auth/user-not-found": AuthError.WRONG_EMAIL,
+    "auth/wrong-password": AuthError.WRONG_PASSWORD,
+  }[error.code] || AuthError.OTHER);
+
+export const signUp: (
   email: string,
   password: string,
   name: string,
+) => Promise<AuthError | undefined> = (
+  email,
+  password,
+  name,
   userType = "User",
-) =>
-  await createUserWithEmailAndPassword(auth, email, password).then(
-    (userCredentials: UserCredential) => {
+) => {
+  return createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredentials: UserCredential) => {
       const userUid = userCredentials.user.uid;
-      putUserData(userUid, { name: name, userType: userType })
+      return putUserData(userUid, { name: name, userType: userType })
         .then((res: Response) => {
           if (res.status == 500) {
-            throw new Error("Something went wrong");
+            return AuthError.OTHER;
           }
           console.log(`Signed up with email: ${email}`);
+          return undefined;
         })
         .catch((error) => {
+          // Undo creation of Firebase Auth user.
           auth.currentUser?.delete().then(() => {
-            console.log("Server is down probably..");
+            return AuthError.OTHER;
           });
+          return AuthError.OTHER;
         });
-    },
-  );
+    })
+    .catch((error: FirebaseError) => {
+      return toAuthError(error);
+    });
+};
 
-export const logIn = (email: string, password: string) =>
-  signInWithEmailAndPassword(auth, email, password)
+export const logIn: (
+  email: string,
+  password: string,
+) => Promise<AuthError | undefined> = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials: UserCredential) => {
       console.log(`Logged in with email: ${email}`);
+      return undefined;
     })
-    .catch(console.error);
+    .catch((error: FirebaseError) => {
+      return toAuthError(error);
+    });
+};
 
 export const logOut = () => {
   console.log("Logging out");

@@ -85,7 +85,7 @@ export const PrivateProfile = () => {
           </div>
         </>
       ) : (
-        <Navigate to="/login" />
+        <Navigate to="/" />
       )}
     </div>
   );
