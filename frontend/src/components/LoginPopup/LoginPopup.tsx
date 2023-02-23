@@ -14,6 +14,7 @@ interface InputFields {
 }
 
 enum InputError {
+  NO_NAME = "Du må ha et navn.",
   INVALID_EMAIL = "Dette er ikke en gyldig e-post.",
   INVALID_PASSWORD = "Passordet må være minst 6 tegn.",
   NON_MATCHING_PASSWORDS = "Passordene er ikke like.",
@@ -61,25 +62,40 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
 
   useEffect(() => {
     clearInputFields();
-    setErrorMessage(``);
+    setErrorMessage("");
   }, [isLoggingIn]);
 
   const handleGoToRegisterClick = () => {
     setIsLoggingIn(false);
   };
 
-  const addErrMessage = (err: string) => {
-    setErrorMessage((prev) => `${prev}❌ ${err}`);
+  const inputFieldError: () => InputError | undefined = () => {
+    if (!isLoggingIn && inputFields.name === "") {
+      return InputError.NO_NAME;
+    }
+    if (!isValidEmail(inputFields.email)) {
+      return InputError.INVALID_EMAIL;
+    }
+    if (!isValidPassword(inputFields.password)) {
+      return InputError.INVALID_PASSWORD;
+    }
+    if (!isLoggingIn && inputFields.password !== inputFields.confirmPassword) {
+      return InputError.NON_MATCHING_PASSWORDS;
+    }
+    return undefined;
   };
 
   const handleRegisterButtonClicked = async () => {
-    const fieldsAreValid = validateFields();
-    if (!fieldsAreValid) return;
+    const error = inputFieldError();
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
 
     signUp(inputFields.email, inputFields.password, inputFields.name).then(
       (error?: AuthError) => {
         if (error) {
-          addErrMessage(error);
+          setErrorMessage(error);
         } else {
           setIsVisible(false);
           clearInputFields();
@@ -89,33 +105,10 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
     );
   };
 
-  const validateFields = () => {
-    // Has to use a flag because the addErrMessage method is async,
-    // and thus may return before the state has been updated.
-    let flag = true;
-    setErrorMessage("");
-    if (!isValidEmail(inputFields.email)) {
-      addErrMessage(InputError.INVALID_EMAIL);
-      flag = false;
-    }
-    if (!isValidPassword(inputFields.password)) {
-      addErrMessage(InputError.INVALID_PASSWORD);
-      flag = false;
-    }
-    if (!isLoggingIn && inputFields.password !== inputFields.confirmPassword) {
-      addErrMessage(InputError.NON_MATCHING_PASSWORDS);
-      flag = false;
-    }
-    return flag;
-  };
-
   const handleLoginButtonClicked = async () => {
-    const fieldsAreValid = validateFields();
-    if (!fieldsAreValid) return;
-
     logIn(inputFields.email, inputFields.password).then((error?: AuthError) => {
       if (error) {
-        addErrMessage(error);
+        setErrorMessage(error);
       } else {
         clearInputFields();
         setErrorMessage("");
