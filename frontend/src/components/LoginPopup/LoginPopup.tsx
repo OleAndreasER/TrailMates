@@ -150,18 +150,23 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
       <div className="login-container">
         <div className="left-container">
           {/* TODO: Replace with actual content */}
-          <h1>Test</h1>
+          <h1>TrailMates</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          Velkommen til TrailMates, den ultimate destinasjonen for backpackere 
+          som ønsker å utforske verden på en autentisk og uforglemmelig måte! 
+          Vi er glade for å ha deg her, og vi er her for å hjelpe deg med å få 
+          mest mulig ut av backpacking-opplevelsene dine.
             <br />
             <br />
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
+            Vi vet at backpacking kan være en utfordrende og spennende opplevelse, 
+            og det er derfor vi er her for å hjelpe deg med alt du trenger for å lykkes. 
+            Fra å velge den beste tiden på året for å besøke forskjellige steder, til å 
+            finne de mest pittoreske campingplassene, så har vi deg dekket.
+            <br />
+            <br />
+            Takk for at du velger TrailMates som din guide til backpacking-verdenen. 
+            Vi er her for å hjelpe deg med å få mest mulig ut av opplevelsen og utforske 
+            verden på en unik og autentisk måte. Lykke til med din neste eventyrlystne reise!
           </p>
         </div>
         <div className="right-container">

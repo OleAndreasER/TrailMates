@@ -17,29 +17,25 @@ export const SplitSection = () => {
         </h2>
         <TitleSeperator width="70%" height="1%" color="secondary" />
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
+        Velkommen til TrailMates, den ultimate destinasjonen for backpackere 
+        som ønsker å utforske verden på en autentisk og uforglemmelig måte! 
+        Vi er glade for å ha deg her, og vi er her for å hjelpe deg med å få 
+        mest mulig ut av backpacking-opplevelsene dine.
         </p>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
+        På TrailMates finner du alt du trenger for å planlegge den perfekte 
+        backpacking-turen, enten du skal til fjerne, eksotiske steder eller 
+        utforske lokale ruter. Vi har omfattende guider til de beste 
+        backpacking-stiene, detaljerte kart og ruteplanlegger, og en mengde 
+        nyttige tips og triks for å hjelpe deg med å pakke lett og få mest 
+        mulig ut av opplevelsen.
         </p>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
+        Takk for at du har valgt TrailMates som din guide til backpacking-verdenen. 
+        Vi er her for å hjelpe deg med å få mest mulig ut av opplevelsen og utforske 
+        verden på en unik og autentisk måte. Lykke til med din neste eventyrlystne reise!
         </p>
+        
       </div>
     </div>
   );
