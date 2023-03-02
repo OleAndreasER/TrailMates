@@ -1,0 +1,88 @@
+.cover-TripPage {
+  margin-top: var(--header-offset);
+  background-size: cover;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: start;
+  padding: var(--global-padding);
+  padding-bottom: 8%;
+}
+
+.cover-TripPage-info {
+  width: 50%;
+  height: auto;
+  justify-content: space-around;
+}
+
+.cover-TripPage-info h1 {
+  font-weight: 600;
+  font-size: 5vw;
+}
+
+.cover-TripPage-info h2 {
+  font-weight: 500;
+  font-size: 2vw;
+}
+
+.cover-TripPage-info p {
+  font-weight: 300;
+  font-size: 1.5vw;
+}
+
+.cover-TripPage-buttons {
+  width: 50%;
+  height: auto;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.cover-info-container {
+  width: 100%;
+}
+
+.container-general-info {
+  padding: var(--global-padding);
+  height: 60vh;
+  margin: 7% 0;
+  align-items: center;
+}
+
+.trippage-general-info-row {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.trippage-general-info-left {
+  width: 50%;
+}
+
+.trippage-general-info-right {
+  width: 50%;
+}
+
+.trippage-profile-container {
+  color: var(--white-tone);
+  background-color: var(--secondary);
+  align-items: center;
+  margin: auto;
+  height: 40vh;
+  width: 75%;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding: 5% 0;
+}
+
+.trippage-profile-container h2 {
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-size: 2vw;
+}
+
+.trip-page-profilepic {
+  height: 40%;
+  width: auto;
+  border-radius: 1000px;
+}
