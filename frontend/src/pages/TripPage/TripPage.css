@@ -8,7 +8,6 @@
   justify-content: end;
   align-items: start;
   padding: var(--global-padding);
-  padding-bottom: 8%;
 }
 
 .cover-TripPage-info {
@@ -41,6 +40,7 @@
 
 .cover-info-container {
   width: 100%;
+  margin-bottom: 8%;
 }
 
 .container-general-info {
@@ -61,28 +61,4 @@
 
 .trippage-general-info-right {
   width: 50%;
-}
-
-.trippage-profile-container {
-  color: var(--white-tone);
-  background-color: var(--secondary);
-  align-items: center;
-  margin: auto;
-  height: 40vh;
-  width: 75%;
-  border-radius: 5px;
-  justify-content: space-between;
-  padding: 5% 0;
-}
-
-.trippage-profile-container h2 {
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  font-size: 2vw;
-}
-
-.trip-page-profilepic {
-  height: 40%;
-  width: auto;
-  border-radius: 1000px;
 }
