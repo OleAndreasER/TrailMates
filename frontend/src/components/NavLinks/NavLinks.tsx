@@ -23,7 +23,7 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
       <NavLink className={activeStyle} end to="/" onClick={onClick}>
         Utforsk
       </NavLink>
-      <NavLink className={activeStyle} end to="/reiserute" onClick={onClick}>
+      <NavLink className={activeStyle} end to="/mytrips" onClick={onClick}>
         Mine Reiser
       </NavLink>
       <NavLink className={activeStyle} end to="/favourites" onClick={onClick}>
