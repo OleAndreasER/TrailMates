@@ -29,7 +29,7 @@ export const Navbar = () => {
       const scrollTop = window.scrollY;
       setVisible(prevScrollPos > scrollTop || scrollTop < 10);
       setPrevScrollPos(scrollTop);
-      setIsScrolled(scrollTop > 50);
+      setIsScrolled(scrollTop > 80);
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -99,9 +99,14 @@ export const Navbar = () => {
         />
         <nav
           className={`navbar ${
-            isScrolled || location.pathname !== "/" ? "scrolled" : ""
+            isScrolled ||
+            (location.pathname !== "/reiserute" && location.pathname !== "/")
+              ? "scrolled"
+              : ""
           }`}
-          style={{ visibility: visible ? "visible" : "hidden" }}
+          style={{
+            top: visible ? "0px" : "var(--header-offset)",
+          }}
         >
           <img
             src={logo}

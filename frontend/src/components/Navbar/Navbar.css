@@ -17,6 +17,7 @@ nav {
   border-bottom: 4px solid var(--accent);
   background-color: var(--secondary);
   animation: slideIn-Y 1s ease-out;
+  transition: top 0.7s;
 }
 
 .logo {

@@ -4,6 +4,12 @@ import img from "../../components/assets/TripPage_header.png";
 import { Button } from "../../components/Button/Button";
 import { TripDetailsItem } from "../../components/TripDetailsItem/TripDetailsItem";
 import profilepic from "../../components/assets/profilepic.png";
+import { TripAuthor } from "../../components/TripAuthor/TripAuthor";
+import { TitleSeperator } from "../../components/TitleSeperator/TitleSeperator";
+import caro1 from "../../components/assets/caro/caro1.png";
+import caro2 from "../../components/assets/caro/caro2.png";
+import caro3 from "../../components/assets/caro/caro3.png";
+import caro4 from "../../components/assets/caro/caro4.png";
 
 export const TripPage = () => {
   useEffect(() => {
@@ -25,23 +31,26 @@ export const TripPage = () => {
             <Button
               text={"Kommentarer"}
               styling={"accent-fill"}
-              width={"20%"}
-              height={"3vh"}
+              width={"28%"}
+              height={"2.5vh"}
               icon={"comment"}
+              fontSize={"1vw"}
             ></Button>
             <Button
               text={"# Bilder"}
               styling={"accent-fill"}
-              width={"20%"}
-              height={"3vh"}
+              width={"28%"}
+              height={"2.5vh"}
               icon={"images"}
+              fontSize={"1vw"}
             ></Button>
             <Button
               text={"Lagre reise"}
               styling={"accent-fill"}
-              width={"20%"}
-              height={"3vh"}
+              width={"28%"}
+              height={"2.5vh"}
               icon={"heart"}
+              fontSize={"1vw"}
             ></Button>
           </div>
         </div>
@@ -60,19 +69,118 @@ export const TripPage = () => {
           </div>
         </div>
         <div className="trippage-general-info-right">
-          <div className="trippage-profile-container flex-column">
-            <h2>SKREVET AV</h2>
-            <img src={profilepic} alt="" className="trip-page-profilepic" />
-            <h3>Jane Doe</h3>
-            <p># Reiser</p>
-            <Button
-              text={"Vis profil"}
-              styling={"accent-outline"}
-              width={"40%"}
-              height={"3vh"}
-            ></Button>
+          <TripAuthor author={"Jane Doe"} trips={11} profilePic={profilepic} />
+        </div>
+      </div>
+      <div className="trippage-main-container flex-row">
+        <div className="trippage-main-l flex-column">
+          <img src={caro1}></img>
+          <div
+            className="flex-row"
+            style={{
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "80%",
+            }}
+          >
+            <h2>Beskrivelse</h2>
+            <div
+              style={{
+                width: "68%",
+                height: ".3vh",
+                borderRadius: "100px",
+                backgroundColor: "var(--accent)",
+              }}
+            />
+          </div>
+          <div className="text-wrapper">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <br />
+              <br />
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <br />
+              <br />
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <br />
+              <br />
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
           </div>
         </div>
+        <div className="trippage-main-r flex-column">
+          <img src={caro2}></img>
+          <div
+            className="flex-row"
+            style={{
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "80%",
+            }}
+          >
+            <h2>Detaljer</h2>
+            <div
+              style={{
+                width: "68%",
+                height: ".3vh",
+                borderRadius: "100px",
+                backgroundColor: "var(--accent)",
+              }}
+            ></div>
+          </div>
+          <div className="trippage-extra-info"></div>
+          <div className="trippage-extra-itemwrapper">
+            <h3>Klima</h3>
+            <p>Varmt, 30 grader celcius</p>
+          </div>
+          <div className="trippage-extra-itemwrapper">
+            <h3>Reiselengde</h3>
+            <p>1 453 kilometer</p>
+          </div>
+          <div className="trippage-extra-itemwrapper">
+            <h3>Attraksjoner</h3>
+            <p>
+              Eiffeltårnet, Stockholm Universitet, Odense, Barcelona Katedral,
+              Warsawa Gamlebyen
+            </p>
+          </div>
+          <div
+            style={{
+              width: "80%",
+              height: ".3vh",
+              borderRadius: "100px",
+              backgroundColor: "var(--accent)",
+            }}
+          />
+        </div>
+      </div>
+      <div className="trippage-review-container flex-column">
+        <h1>Omtaler</h1>
+        <div className="review-sep" />
       </div>
     </>
   );

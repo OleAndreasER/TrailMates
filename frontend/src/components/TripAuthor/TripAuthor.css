@@ -1,0 +1,33 @@
+.trippage-profile-container {
+  color: var(--white-tone);
+  background-color: var(--secondary);
+  align-items: center;
+  margin: auto;
+  height: 32vh;
+  width: 80%;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding: 5% 0;
+  padding-bottom: 15%;
+}
+
+.trippage-profile-container h2 {
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-size: 2vw;
+}
+
+.trippage-profile-container h3 {
+  margin-top: 3%;
+}
+
+.trippage-profile-container p {
+  font-weight: 500;
+  font-size: 1.1vw;
+}
+
+.trip-page-profilepic {
+  height: 40%;
+  width: auto;
+  border-radius: 1000px;
+}

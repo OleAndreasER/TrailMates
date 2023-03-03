@@ -11,19 +11,21 @@
 }
 
 .cover-TripPage-info {
-  width: 50%;
+  width: 55%;
   height: auto;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .cover-TripPage-info h1 {
   font-weight: 600;
-  font-size: 5vw;
+  font-size: 4vw;
+  margin: 1% 0;
 }
 
 .cover-TripPage-info h2 {
   font-weight: 500;
-  font-size: 2vw;
+  font-size: 1.8vw;
+  margin-bottom: 0;
 }
 
 .cover-TripPage-info p {
@@ -32,21 +34,21 @@
 }
 
 .cover-TripPage-buttons {
-  width: 50%;
+  width: 45%;
   height: auto;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-end;
 }
 
 .cover-info-container {
   width: 100%;
-  margin-bottom: 8%;
+  margin-bottom: 6.5%;
 }
 
 .container-general-info {
   padding: var(--global-padding);
   height: 60vh;
-  margin: 7% 0;
+  margin: 8% 0;
   align-items: center;
 }
 
@@ -61,4 +63,84 @@
 
 .trippage-general-info-right {
   width: 50%;
+}
+
+.trippage-main-container {
+  min-height: 70vh;
+  background-color: var(--secondary);
+  padding-bottom: 5%;
+}
+
+.trippage-main-l {
+  width: 58%;
+  align-items: center;
+  color: var(--white-tone);
+  font-weight: 500;
+  font-size: 1.2vw;
+}
+
+.trippage-main-r {
+  width: 42%;
+  align-items: start;
+  color: var(--white-tone);
+  font-weight: 600;
+}
+
+.trippage-main-l h2,
+.trippage-main-r h2 {
+  font-size: 2.3vw;
+  font-weight: 500;
+}
+
+.trippage-main-l img,
+.trippage-main-r img {
+  border-radius: 5px;
+  width: 80%;
+  height: auto;
+  margin-top: -8%;
+  margin-bottom: 4%;
+}
+
+.trippage-review-container {
+  min-height: 40vh;
+  align-items: center;
+  margin: 3% 0;
+  padding: var(--global-padding);
+}
+
+.trippage-review-container h1 {
+  margin-bottom: 0;
+  font-weight: 500;
+  font-size: 3vw;
+}
+
+.review-sep {
+  width: 25vw;
+  height: 0.8vh;
+  background-color: var(--accent);
+  margin: 2%;
+  border-radius: 100px;
+}
+
+.text-wrapper {
+  width: 70%;
+  margin: auto;
+  padding-left: 2%;
+}
+
+.trippage-extra-itemwrapper {
+  width: 80%;
+  margin: 2% 0;
+}
+
+.trippage-extra-itemwrapper h3 {
+  font-size: 1.1vw;
+  font-weight: 400;
+  margin: 0;
+}
+
+.trippage-extra-itemwrapper p {
+  font-size: 1.5vw;
+  font-weight: 500;
+  margin: 3% 0;
 }

@@ -1,15 +1,19 @@
 .trip-details-item-container {
-  width: 12vw;
+  width: 13vw;
   margin: 5% 0;
+  justify-content: space-between;
 }
 
 .trip-detail-item-seperator {
   width: 100%;
-  height: 0.3vh;
+  height: 0.4vh;
   background-color: var(--secondary);
   border-radius: 100px;
 }
 
 .trip-details-item-container h3 {
   font-weight: 500;
+  font-size: 1.4vw;
+  margin-bottom: 5%;
+  margin-left: 0;
 }
