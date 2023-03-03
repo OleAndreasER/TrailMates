@@ -71,7 +71,6 @@ export const Navbar = () => {
             className="logo"
             onClick={() => navigate("/")}
           />
-          <Searchbar type="nav" width="50%" height="30%" />
           <>
             <div className="nav-right-mobile">
               <a onClick={toggleMenu}>

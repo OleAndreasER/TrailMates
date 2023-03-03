@@ -44,7 +44,7 @@ export const PublicProfile = () => {
     <div className="container-public-profile">
       {isValidUser && user ? (
         <>
-          <div className="flex-row m5">
+          <div className="flex-row m5 pp_container">
             <div className="container-public-userinfo flex-column">
               <div
                 className="public-profile-img"

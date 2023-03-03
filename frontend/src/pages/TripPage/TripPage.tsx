@@ -38,7 +38,7 @@ export const TripPage = () => {
         className="cover-TripPage flex-column"
         style={{ backgroundImage: `url(${img})` }}
       >
-        <div className="flex-row cover-info-container">
+        <div className="cover-info-container">
           <div className="flex-column cover-TripPage-info">
             <p> Av John Doe</p>
             <h1> Oslo - La Rioja</h1>

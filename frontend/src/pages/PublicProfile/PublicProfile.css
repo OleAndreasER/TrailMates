@@ -96,3 +96,19 @@
   margin: 0;
   margin-bottom: 500px; /*Må fjernes når reviews legges inn*/
 }
+
+@media only screen and (max-width: 768px) {
+  .pp_container {
+    flex-direction: column;
+    width: 100%;
+  }
+  .pp_container > * {
+    width: 80%;
+    margin: auto;
+    align-items: center;
+  }
+  .container-public-userinfo {
+    margin: 50% 0;
+    transform: scale(3);
+  }
+}
