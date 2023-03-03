@@ -1,20 +1,37 @@
-import { Component, useEffect } from "react";
+import { Component, useEffect, useRef, useState } from "react";
 import "./TripPage.css";
 import img from "../../components/assets/TripPage_header.png";
 import { Button } from "../../components/Button/Button";
 import { TripDetailsItem } from "../../components/TripDetailsItem/TripDetailsItem";
 import profilepic from "../../components/assets/profilepic.png";
 import { TripAuthor } from "../../components/TripAuthor/TripAuthor";
-import { TitleSeperator } from "../../components/TitleSeperator/TitleSeperator";
+import { PopupImageCarousel } from "../../components/PopupImageCarousel/PopupImageCarousel";
 import caro1 from "../../components/assets/caro/caro1.png";
 import caro2 from "../../components/assets/caro/caro2.png";
 import caro3 from "../../components/assets/caro/caro3.png";
 import caro4 from "../../components/assets/caro/caro4.png";
+import { CloseButton } from "react-bootstrap";
 
 export const TripPage = () => {
   useEffect(() => {
     document.title = "Trailmates - Reiseinformajon";
   }, []);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const images = [caro1, caro2, caro3, caro4];
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  const scrollHandlerReviews = () => {
+    sectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       <div
@@ -35,6 +52,7 @@ export const TripPage = () => {
               height={"2.5vh"}
               icon={"comment"}
               fontSize={"1vw"}
+              onClick={scrollHandlerReviews}
             ></Button>
             <Button
               text={"# Bilder"}
@@ -43,6 +61,7 @@ export const TripPage = () => {
               height={"2.5vh"}
               icon={"images"}
               fontSize={"1vw"}
+              onClick={handleOpenPopup}
             ></Button>
             <Button
               text={"Lagre reise"}
@@ -74,7 +93,24 @@ export const TripPage = () => {
       </div>
       <div className="trippage-main-container flex-row">
         <div className="trippage-main-l flex-column">
-          <img src={caro1}></img>
+          <img src={caro1} onClick={handleOpenPopup}></img>
+          <PopupImageCarousel
+            images={images}
+            titles={[
+              "City of Rioja",
+              "Celementines in Rioja",
+              "City of Prague",
+              "Streets in Sicily",
+            ]}
+            dates={[
+              "09.Januar.2022",
+              "11.Januar.2022",
+              "10.Januar.2022",
+              "12.Januar.2022",
+            ]}
+            isOpen={isPopupOpen}
+            onClose={handleClosePopup}
+          />
           <div
             className="flex-row"
             style={{
@@ -178,7 +214,7 @@ export const TripPage = () => {
           />
         </div>
       </div>
-      <div className="trippage-review-container flex-column">
+      <div className="trippage-review-container flex-column" ref={sectionRef}>
         <h1>Omtaler</h1>
         <div className="review-sep" />
       </div>

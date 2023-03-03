@@ -119,7 +119,8 @@ export const Navbar = () => {
           <Button
             text={currentUser ? "Logg ut" : "Logg inn"}
             styling={
-              isScrolled || location.pathname !== "/"
+              isScrolled ||
+              (location.pathname !== "/reiserute" && location.pathname !== "/")
                 ? "accent-outline"
                 : "secondary-outline"
             }
@@ -131,7 +132,9 @@ export const Navbar = () => {
             <Button
               text="Profil"
               styling={
-                isScrolled || location.pathname !== "/"
+                isScrolled ||
+                (location.pathname !== "/reiserute" &&
+                  location.pathname !== "/")
                   ? "accent-outline"
                   : "secondary-outline"
               }

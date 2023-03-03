@@ -100,6 +100,10 @@
   margin-top: -8%;
   margin-bottom: 4%;
 }
+.trippage-main-l img:hover,
+.trippage-main-r img:hover {
+  cursor: pointer;
+}
 
 .trippage-review-container {
   min-height: 40vh;
