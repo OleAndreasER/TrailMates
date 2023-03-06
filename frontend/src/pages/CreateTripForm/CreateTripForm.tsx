@@ -1,164 +1,93 @@
-import { useEffect } from "react";
-import { TextInput } from "react-native/types";
+import React, { FormEvent } from "react";
+import "./CreateTripForm.css";
+
+interface CustomElements extends HTMLFormControlsCollection {
+    startDestinasjon: HTMLInputElement;
+  Reisemål: HTMLInputElement;
+  Land: HTMLInputElement;
+  Pris: HTMLInputElement;
+  Reisetid: HTMLInputElement;
+  Vurdering: HTMLInputElement;
+  Klima: HTMLInputElement;
+  Lengde: HTMLInputElement;
+}
+
+interface CustomForm extends HTMLFormElement {
+  readonly elements: CustomElements;
+}
 
 export const CreateTripForm = () => {
-  useEffect(() => {
-    document.title = "Opprett reiserute";
-  }, []);
+  const onSubmit = (event: FormEvent<CustomForm>) => {
+    event.preventDefault();
+    const target = event.currentTarget.elements;
+
+    const data = {
+      startDestinasjon: target.startDestinasjon.value,
+      Reisemål: target.Reisemål.value,
+      Land: target.Land.value,
+      Pris: target.Pris.value,
+      Reisetid: target.Reisetid.value,
+      Vurdering: target.Vurdering.value,
+      Klima: target.Klima.value,
+      Lengde: target.Lengde.value,
+    };
+
+    console.log(data);
+  };
 
   return (
-    <div>
-      <h1>Opprett reiserute</h1>
-      <form method="post" className={"user-form"}>
-        <TextInput
-          label={"Startdestinasjon"}
-          placeholder="Startdestinasjon"
-          type="text"
-          name="startdestinasjon"
-          required
-        />
-        <TextInput
-          label={"Reisemål"}
-          placeholder="Reisemål"
-          type="text"
-          name="reisemål"
-          required
-        />
-        <TextInput
-          label={"Land"}
-          placeholder="Land"
-          type="text"
-          name="land"
-          required
-        />
-        <TextInput
-          label={"Pris"}
-          placeholder="Pris"
-          type="text"
-          name="pris"
-          required
-        />
-        <TextInput
-          label={"Reisetid"}
-          placeholder="Reisetid"
-          type="text"
-          name="reisetid"
-          required
-        />
-        <TextInput
-          label={"Vurderinger"}
-          placeholder="Vurderinger"
-          type="text"
-          name="vurderinger"
-          required
-        />
-      </form>
-      <h1>Beskrivelse</h1>
-      <form method="post" className={"user-form-description"}>
-        <TextInput
-          label={"Beskrivelse"}
-          placeholder="Beskrivelse"
-          type="text"
-          name="beskrivelse"
-          required
-        />
-      </form>
-      <h1>Detaljer</h1>
-      <form method="post" className={"user-form-details"}>
-        <TextInput
-          label={"Klima"}
-          placeholder="Klima"
-          type="text"
-          name="klima"
-          required
-        />
-        <TextInput
-          label={"Reiselengde i meter"}
-          placeholder="Reiselengde i meter"
-          type="text"
-          name="reiselengde"
-          required
-        />
-        <TextInput
-          label={"Attraksjoner"}
-          placeholder="Attraksjoner"
-          type="text"
-          name="attraksjoner"
-          required
-        />
-        /
-      </form>
-    </div>
+    <form className="form" onSubmit={onSubmit}>
+    <div className="title">Beskrivelse</div>
+      <div className="large_field">
+        <input id="Beskrivelse" />
+      </div>
+    <div className="title">Generelt</div>
+      <div className="field">
+        <label htmlFor="startDestinasjon">Startdestinasjon</label>
+        <div className="box"></div>
+        <input id="startDestinasjon" />
+      </div>
+      <div className="field">
+        <label htmlFor="Reisemål">Reisemål</label>
+        <div className="box"></div>
+        <input type="Reisemål" id="Reisemål" />
+      </div>
+      <div className="field">
+        <label htmlFor="Land">Land</label>
+        <div className="box"></div>
+        <input type="Land" id="Land" />
+      </div>
+      <div className="field">
+        <label htmlFor="Pris">Pris</label>
+        <div className="box"></div>
+        <input type="Pris" id="Pris" />
+      </div>
+      <div className="field">
+        <label htmlFor="Reisetid">Reisetid</label>
+        <div className="box"></div>
+        <input type="Reisetid" id="Reisetid" />
+      </div>
+      <div className="field">
+        <label htmlFor="Vurdering">Vurdering (1-5)</label>
+        <div className="box"></div>
+        <input type="Vurdering" id="Vurdering" />
+      </div>
+      <div className="title">Detaljer</div>
+      <div className="field">
+        <label htmlFor="Klima">Klima</label>
+        <div className="box"></div>
+        <input type="Klima" id="Klima" />
+        </div>
+        <div className="field">
+        <label htmlFor="Lengde">Lengde (i kilometer)</label>
+        <div className="box"></div>
+        <input type="Lengde" id="Lengde" />
+        </div>
+      <div className="field checkbox">
+        <input type="checkbox" id="conditionsAccepted" />
+        <label htmlFor="conditionsAccepted">I agree to the terms and conditions</label>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
-
-  const TextInput = ({
-    className,
-    label,
-    value,
-    type,
-    onChangeAction,
-    required,
-    placeholder,
-  }: {
-
-
-  //     return (
-  //         <div>
-  //           <h1>Add User</h1>
-  //           <form method="post" className={"user-form"}>
-  //             <TextInput
-  //               label={"Name"}
-  //               placeholder="Name"
-  //               type="text"
-  //               name="name"
-  //               required
-  //             />
-  //             <TextInput
-  //               label={"Email"}
-  //               placeholder="Email"
-  //               type="email"
-  //               name="email"
-  //               required
-  //             />
-  //             <TextInput
-  //               label={"Country"}
-  //               placeholder="Country"
-  //               type="text"
-  //               name="country"
-  //               required
-  //             />
-  //             <TextInput
-  //               label={"Phone"}
-  //               placeholder="Phone"
-  //               type="text"
-  //               name="phone"
-  //               required
-  //             />
-  //           </form>
-  //         </div>
-  //       );
-
-  // }
-  // const TextInput = ({
-  //     className,
-  //     label,
-  //     value,
-  //     type,
-  //     onChangeAction,
-  //     placeholder
-  //   }) => {
-  //     return (
-  //       <div className={`${className} form-field`}>
-  //         <label htmlFor={label}>{label}</label>
-  //         <input
-  //           placeholder={placeholder || "Text"}
-  //           type={type || "text"}
-  //           value={value}
-  //           onChange={onChangeAction}
-  //         />
-  //       </div>
-  //     );
-};
-
-//const { currentUser } = useContext(UserContext);
-//const navigate = useNavigate();
+}

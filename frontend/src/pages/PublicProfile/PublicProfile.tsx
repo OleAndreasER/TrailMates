@@ -8,6 +8,7 @@ import { UserData, getUserData } from "../../authentication/firestore";
 import { useParams } from "react-router-dom";
 import { User, UserContext } from "../../authentication/UserProvider";
 
+
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();
   const [isValidUser, setIsValidUser] = useState<boolean>(false);
@@ -36,7 +37,17 @@ export const PublicProfile = () => {
     return user?.name.split(" ")[0];
   }, [user]);
 
+  function CheckLastLetterEquals(){
+    if (user?.name.split(" ")[0].slice(-1) == 's'){
+      return true;
+    }
+    return false;
+  }
+
   useEffect(() => {
+    if (CheckLastLetterEquals()){
+      document.title = fname + " sin profil";
+    }
     document.title = fname + "s profil";
   }, [user]);
 

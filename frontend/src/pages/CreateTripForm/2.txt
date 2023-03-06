@@ -1,0 +1,103 @@
+import { useEffect } from "react";
+import { TextInput } from "react-native/types";
+
+interface Props {
+  info: string;
+  title: "startdestinasjon" | "" | "" | "" | "";
+}
+
+const userAttributeEquivalent = {
+  Startdestinasjon: "startdestinasjon",
+};
+
+
+export const CreateTripForm = ({info, title}:Props) => {
+  useEffect(() => {
+    document.title = "Opprett reiserute";
+  }, []);
+
+  return (
+    <div>
+      <h1>Opprett reiserute</h1>
+      <form method="post" className={"user-form"}>
+        <input
+          label={"Startdestinasjon"}
+          placeholder="Startdestinasjon"
+          type="text"
+          name="startdestinasjon"
+          required
+        />
+        <input
+          label={"Reisemål"}
+          placeholder="Reisemål"
+          type="text"
+          name="reisemål"
+          required
+        />
+        <input
+          label={"Land"}
+          placeholder="Land"
+          type="text"
+          name="land"
+          required
+        />
+        <input
+          label={"Pris"}
+          placeholder="Pris"
+          type="text"
+          name="pris"
+          required
+        />
+        <input
+          label={"Reisetid"}
+          placeholder="Reisetid"
+          type="text"
+          name="reisetid"
+          required
+        />
+        <input
+          label={"Vurderinger"}
+          placeholder="Vurderinger"
+          type="text"
+          name="vurderinger"
+          required
+        />
+      </form>
+      <h1>Beskrivelse</h1>
+      <form method="post" className={"user-form-description"}>
+        <TextInput
+          label={"Beskrivelse"}
+          placeholder="Beskrivelse"
+          type="text"
+          name="beskrivelse"
+          required
+        />
+      </form>
+      <h1>Detaljer</h1>
+      <form method="post" className={"user-form-details"}>
+        <TextInput
+          label={"Klima"}
+          placeholder="Klima"
+          type="text"
+          name="klima"
+          required
+        />
+        <TextInput
+          label={"Reiselengde i meter"}
+          placeholder="Reiselengde i meter"
+          type="text"
+          name="reiselengde"
+          required
+        />
+        <TextInput
+          label={"Attraksjoner"}
+          placeholder="Attraksjoner"
+          type="text"
+          name="attraksjoner"
+          required
+        />
+        /
+      </form>
+    </div>
+  );
+}

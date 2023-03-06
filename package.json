@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@material-ui/styles": "^4.11.5",
+    "@mui/material": "^5.11.11",
     "children": "^0.2.3",
     "styled-components": "^5.3.6"
   }
