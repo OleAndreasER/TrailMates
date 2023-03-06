@@ -3,6 +3,7 @@ import "./TripPage.css";
 import img from "../../components/assets/TripPage_header.png";
 import { Button } from "../../components/Button/Button";
 import { TripDetailsItem } from "../../components/TripDetailsItem/TripDetailsItem";
+import { ReviewBox } from "../../components/ReviewBox/ReviewBox";
 import profilepic from "../../components/assets/profilepic.png";
 import { TripAuthor } from "../../components/TripAuthor/TripAuthor";
 import { PopupImageCarousel } from "../../components/PopupImageCarousel/PopupImageCarousel";
@@ -217,6 +218,26 @@ export const TripPage = () => {
       <div className="trippage-review-container flex-column" ref={sectionRef}>
         <h1>Omtaler</h1>
         <div className="review-sep" />
+        <ReviewBox
+          title={"En fantastisk reise! - Reiste 10. Januar 2022"}
+          content={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
+          }
+          author={"Krisitan Holgren"}
+          rating={"3/5"}
+          travels={"11 Reiser"}
+          profilePic={profilepic}
+        />
+        <ReviewBox
+          title={"En helt OK reise! - Reiste 12. September 2021"}
+          content={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
+          }
+          author={"Krisitan Holgren"}
+          rating={"5/5"}
+          travels={"10 Reiser"}
+          profilePic={profilepic}
+        />
       </div>
     </>
   );
