@@ -2,13 +2,13 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "./lib/index.js",
+  "main": "./lib/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "lint": "tslint -c tslint.json src/**/*.ts",
     "prepublish": "npm run build",
-    "server": "npm run build && node lib/index.js"
+    "server": "npm run build && node lib/app.js"
   },
   "author": "",
   "license": "ISC",

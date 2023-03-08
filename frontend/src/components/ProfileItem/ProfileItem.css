@@ -39,6 +39,10 @@
   border: 2px solid #333;
 }
 
+.dark-mode .user-context input[type="text"] {
+  border: 2px solid var(--dark-accent);
+}
+
 .edit-button {
   color: var(--secondary);
   font-size: 1vw;
@@ -56,12 +60,20 @@
   margin: 0 0 2% 0;
 }
 
+.dark-mode .seperator {
+  background-color: var(--dark-accent);
+}
+
 .aboutme-textarea {
   all: unset;
   height: min-content;
   width: 100%;
   resize: none;
   border: 2px solid #333;
+}
+
+.dark-mode .aboutme-textarea {
+  border: 2px solid var(--dark-accent);
 }
 
 @media only screen and (max-width: 768px) {

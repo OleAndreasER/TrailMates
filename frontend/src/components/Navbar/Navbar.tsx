@@ -12,22 +12,37 @@ import { logOut } from "../../authentication/authentication";
 import { ReactComponent as Hamburger } from "../assets/hamburger.svg";
 import { ReactComponent as Close } from "../assets/navbar_close.svg";
 import { LoginPopup } from "../LoginPopup/LoginPopup";
+import { ToggleSwitch } from "../ToggleSwitch/ToggleSwitch";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [canSetVisibility, setCanSetVisibility] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const { currentUser } = useContext(UserContext);
   const isSmallScreen = useMediaQuery({ maxWidth: 768 });
   const [isOpen, setIsOpen] = useState(false);
   const [isShowingPopup, setIsShowingPopup] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem("dark-mode") === "true",
+  );
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setVisible(prevScrollPos > scrollTop || scrollTop < 10);
+
+      const setAsVisible = async () => {
+        setVisible(prevScrollPos > scrollTop || scrollTop < 10);
+        await new Promise((resolve) => {
+          setCanSetVisibility(false);
+          setTimeout(resolve, 750);
+        }).then(() => setCanSetVisibility(true));
+      };
+
+      if (canSetVisibility || prevScrollPos < scrollTop) setAsVisible();
+
       setPrevScrollPos(scrollTop);
       setIsScrolled(scrollTop > 50);
     };
@@ -40,6 +55,16 @@ export const Navbar = () => {
   useEffect(() => {
     document.body.style.overflow = isShowingPopup ? "hidden" : "unset";
   }, [isShowingPopup]);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("dark-mode", "true");
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("dark-mode", "false");
+    }
+  }, [isDarkMode]);
 
   const handleClick = () => {
     if (currentUser) {
@@ -101,7 +126,7 @@ export const Navbar = () => {
           className={`navbar ${
             isScrolled || location.pathname !== "/" ? "scrolled" : ""
           }`}
-          style={{ visibility: visible ? "visible" : "hidden" }}
+          style={{ display: visible ? "flex" : "none" }}
         >
           <img
             src={logo}
@@ -135,6 +160,10 @@ export const Navbar = () => {
               onClick={() => navigate("/profile")}
             />
           )}
+          <ToggleSwitch
+            booleanState={isDarkMode}
+            booleanStateToggler={() => setIsDarkMode(!isDarkMode)}
+          />
         </nav>
       </>
     );

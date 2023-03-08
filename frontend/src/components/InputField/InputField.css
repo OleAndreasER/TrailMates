@@ -16,12 +16,20 @@
   font-size: 1.2rem;
 }
 
+.dark-mode .input-container > input {
+  border-bottom: 1px solid var(--dark-mode-font);
+}
+
 .input-container > label {
   all: unset;
   color: var(--dark-font);
   font-size: 0.95rem;
   position: absolute;
   top: -14px;
+}
+
+.dark-mode .input-container > label {
+  color: var(--dark-mode-font);
 }
 
 .input-container > input:focus {

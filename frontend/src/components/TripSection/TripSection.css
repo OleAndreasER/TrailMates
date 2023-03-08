@@ -1,3 +1,7 @@
+.dark-mode {
+  color: var(--dark-mode-font) !important;
+}
+
 .trip-section {
   width: 100%;
   margin-bottom: 3%;

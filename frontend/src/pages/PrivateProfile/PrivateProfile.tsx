@@ -1,19 +1,50 @@
 import "./PrivateProfile.css";
-import profilepic from "../../components/assets/profilepic.png";
 import { ProfileItem } from "../../components/ProfileItem/ProfileItem";
 import { Button } from "../../components/Button/Button";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, ChangeEvent, useRef, useState } from "react";
 import { UserContext } from "../../authentication/UserProvider";
 import { Navigate, useNavigate } from "react-router-dom";
-import { auth } from "../../authentication/authentication";
+import { logOut } from "../../authentication/authentication";
+import { uploadFile, getImgSrc } from "../../storage/util/methods";
 
 export const PrivateProfile = () => {
+  const { currentUser } = useContext(UserContext);
+  const [imageURL, setImageURL] = useState<string>();
+  const navigate = useNavigate();
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     document.title = "Min Profil";
   }, []);
 
-  const { currentUser } = useContext(UserContext);
-  const navigate = useNavigate();
+  useEffect(() => {
+    getImgSrc(`profilepics/${currentUser?.userUid}`).then((url) => {
+      setImageURL(url);
+    });
+  }, [currentUser]);
+
+  const onFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.currentTarget.files?.item(0);
+    if (
+      file?.type !== "image/png" &&
+      file?.type !== "image/jpeg" &&
+      file?.type !== "image/jpg" &&
+      file?.type !== "image/jfif"
+    ) {
+      alert("Bildet må være av typen PNG, JPG eller JPEG");
+      return;
+    }
+    const path = `profilepics/${currentUser?.userUid}`;
+
+    await uploadFile(file, path);
+    await getImgSrc(`profilepics/${currentUser?.userUid}`).then((url) => {
+      setImageURL(url);
+    });
+  };
+
+  const onUploadClicked = () => {
+    inputFileRef.current?.click();
+  };
 
   return (
     <div className="container-privateprofile">
@@ -26,10 +57,18 @@ export const PrivateProfile = () => {
             onClick={() => navigate(`/profile/${currentUser.userUid}`)}
           />
           <div className="container-aboutme">
-            <div
-              className="private-profile-img"
-              style={{ backgroundImage: `url(${profilepic})` }}
-            />
+            <div className="private-profile-img-border">
+              <p
+                className="private-profile-upload-text"
+                onClick={onUploadClicked}
+              >
+                Last opp profilbilde
+              </p>
+              <div
+                className="private-profile-img"
+                style={{ backgroundImage: `url(${imageURL})` }}
+              />
+            </div>
             <div className="container-text flex-column">
               <div className="title-aboutme flex-row">
                 <h2>Om meg</h2>
@@ -78,11 +117,19 @@ export const PrivateProfile = () => {
                   text="Logg ut"
                   styling="secondary-outline"
                   width="25%"
-                  onClick={() => auth.signOut()}
+                  onClick={logOut}
                 />
               </div>
             </div>
           </div>
+          <input
+            style={{ display: "none" }}
+            type="file"
+            name="image"
+            onChange={onFileUpload}
+            accept="image/*"
+            ref={inputFileRef}
+          />
         </>
       ) : (
         <Navigate to="/" />

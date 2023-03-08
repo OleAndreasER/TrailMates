@@ -12,6 +12,12 @@
 
   --global-padding: 0 4%;
   --white-tone: #f9f9f9;
+
+  /* Dark mode variables */
+  --dark-primary: #161616;
+  --dark-secondary: #e7793c;
+  --dark-accent: #5187dd;
+  --dark-mode-font: #ffffff;
 }
 
 body {
@@ -19,6 +25,11 @@ body {
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body.dark-mode {
+  background-color: var(--dark-primary);
+  color: var(--dark-mode-font);
 }
 
 main:not(header) {

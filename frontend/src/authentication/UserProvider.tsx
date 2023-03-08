@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "./authentication";
 import { getUserData, putUserData, UserData } from "./firestore";
+import { auth } from "../firebase/config";
 
 export interface User extends UserData {
   userUid: string;
@@ -21,7 +21,7 @@ interface UserProviderProps {
   children: any;
 }
 
-export default ({ children }: UserProviderProps) => {
+const UserProvider = ({ children }: UserProviderProps) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -59,3 +59,5 @@ export default ({ children }: UserProviderProps) => {
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
+
+export default UserProvider;

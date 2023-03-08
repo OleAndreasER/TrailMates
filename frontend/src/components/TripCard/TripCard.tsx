@@ -38,7 +38,7 @@ export const TripCard = ({ trip, color }: Props) => {
           </div>
         </div>
       </div>
-      <div style={{ color }}>
+      <div className={color}>
         <h3>{trip.destination}</h3>
         <h4>{trip.country}</h4>
         <h5>Vurdering: {trip.rating}/5</h5>

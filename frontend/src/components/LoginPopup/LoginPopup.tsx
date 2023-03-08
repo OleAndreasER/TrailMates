@@ -26,9 +26,12 @@ interface Props {
 }
 
 export const LoginPopup = ({ visible, setIsVisible }: Props) => {
-  const [inputFields, setInputFields] = useState<InputFields>(
-    {} as InputFields,
-  );
+  const [inputFields, setInputFields] = useState<InputFields>({
+    email: "",
+    name: "",
+    password: "",
+    confirmPassword: "",
+  });
   // isLoggingIn = false, means user is signing in.
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>();

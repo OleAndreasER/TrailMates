@@ -19,6 +19,10 @@
   animation: slideIn-Y 0.55s cubic-bezier(0.1, 0.8, 0.28, 0.95);
 }
 
+.dark-mode .login-container {
+  background-color: var(--dark-primary) !important;
+}
+
 .left-container,
 .right-container {
   display: flex;

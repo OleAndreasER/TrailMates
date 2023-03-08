@@ -65,14 +65,51 @@
   margin: 0 0 0 3%;
 }
 
-.private-profile-img {
-  background-size: contain;
+.private-profile-img-border {
   border: var(--secondary) 0.5vw solid;
   width: 19vw;
   height: 19vw;
   border-radius: 1000px;
   align-self: center;
   margin: 2vh auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.private-profile-img {
+  background-size: contain;
+  height: 100%;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.private-profile-img:hover,
+.private-profile-upload-text:hover ~ .private-profile-img {
+  filter: brightness(50%) blur(2px);
+}
+
+.private-profile-upload-text {
+  all: unset;
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--white-font);
+  font-size: 2.3rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.private-profile-upload-text:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  text-decoration: underline;
+}
+
+.private-profile-img-border:hover .private-profile-upload-text {
+  visibility: visible;
 }
 
 .aboutme-text {
@@ -94,7 +131,7 @@
     flex-direction: column;
   }
 
-  .private-profile-img {
+  .private-profile-img-border {
     width: 50vw;
     height: 50vw;
   }
