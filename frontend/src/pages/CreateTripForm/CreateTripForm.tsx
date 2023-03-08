@@ -1,8 +1,9 @@
 import React, { FormEvent } from "react";
+import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import "./CreateTripForm.css";
 
 interface CustomElements extends HTMLFormControlsCollection {
-    startDestinasjon: HTMLInputElement;
+  startDestinasjon: HTMLInputElement;
   Reisemål: HTMLInputElement;
   Land: HTMLInputElement;
   Pris: HTMLInputElement;
@@ -10,6 +11,7 @@ interface CustomElements extends HTMLFormControlsCollection {
   Vurdering: HTMLInputElement;
   Klima: HTMLInputElement;
   Lengde: HTMLInputElement;
+  Beskrivelse: HTMLInputElement;
 }
 
 interface CustomForm extends HTMLFormElement {
@@ -30,6 +32,7 @@ export const CreateTripForm = () => {
       Vurdering: target.Vurdering.value,
       Klima: target.Klima.value,
       Lengde: target.Lengde.value,
+      Beskrivelse: target.Beskrivelse.value,
     };
 
     console.log(data);
@@ -37,57 +40,118 @@ export const CreateTripForm = () => {
 
   return (
     <form className="form" onSubmit={onSubmit}>
-    <div className="title">Beskrivelse</div>
-      <div className="large_field">
-        <input id="Beskrivelse" />
-      </div>
-    <div className="title">Generelt</div>
-      <div className="field">
-        <label htmlFor="startDestinasjon">Startdestinasjon</label>
-        <div className="box"></div>
-        <input id="startDestinasjon" />
-      </div>
-      <div className="field">
-        <label htmlFor="Reisemål">Reisemål</label>
-        <div className="box"></div>
-        <input type="Reisemål" id="Reisemål" />
-      </div>
-      <div className="field">
-        <label htmlFor="Land">Land</label>
-        <div className="box"></div>
-        <input type="Land" id="Land" />
-      </div>
-      <div className="field">
-        <label htmlFor="Pris">Pris</label>
-        <div className="box"></div>
-        <input type="Pris" id="Pris" />
-      </div>
-      <div className="field">
-        <label htmlFor="Reisetid">Reisetid</label>
-        <div className="box"></div>
-        <input type="Reisetid" id="Reisetid" />
-      </div>
-      <div className="field">
-        <label htmlFor="Vurdering">Vurdering (1-5)</label>
-        <div className="box"></div>
-        <input type="Vurdering" id="Vurdering" />
-      </div>
-      <div className="title">Detaljer</div>
-      <div className="field">
-        <label htmlFor="Klima">Klima</label>
-        <div className="box"></div>
-        <input type="Klima" id="Klima" />
+      <div className="left-container-d">
+        <div className="title">Generelt</div>
+        <div className="field">
+          <label htmlFor="startDestinasjon">Start</label>
+          <input
+            className="input-box"
+            id="startDestinasjon"
+            placeholder="By, turistområde, osv..."
+            required
+          />
         </div>
         <div className="field">
-        <label htmlFor="Lengde">Lengde (i kilometer)</label>
-        <div className="box"></div>
-        <input type="Lengde" id="Lengde" />
+          <label htmlFor="Reisemål">Reisemål</label>
+          <input
+            className="input-box"
+            type="Reisemål"
+            id="Reisemål"
+            placeholder="By, turistområde, osv..."
+            required
+          />
         </div>
-      <div className="field checkbox">
-        <input type="checkbox" id="conditionsAccepted" />
-        <label htmlFor="conditionsAccepted">I agree to the terms and conditions</label>
+        <div className="field">
+          <label htmlFor="Land">Land</label>
+          <input
+            className="input-box"
+            type="Land"
+            id="Land"
+            placeholder="Norge, USA, Island, osv..."
+            required
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="Pris">Pris</label>
+          <input
+            className="input-box"
+            type="Pris"
+            id="Pris"
+            placeholder="Eks. 10000kr, 30000kr,..."
+            required
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="Reisetid">Reisetid</label>
+          <input
+            className="input-box"
+            type="Reisetid"
+            id="Reisetid"
+            placeholder="Eks. 2-3 dager..."
+            required
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="Vurdering">Vurdering</label>
+          <input
+            className="input-box"
+            type="Vurdering"
+            id="Vurdering"
+            placeholder="Rangering fra 1-5..."
+            required
+          />
+        </div>
+        <div className="title">Detaljer</div>
+        <div className="field">
+          <label htmlFor="Klima">Klima</label>
+          <input
+            className="input-box"
+            type="Klima"
+            id="Klima"
+            placeholder="Forventet temperatur..."
+            required
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="Lengde">Lengde</label>
+          <input
+            className="input-box"
+            type="Lengde"
+            id="Lengde"
+            placeholder="Distanse i kilometer..."
+            required
+          />
+        </div>
+        <div className="field checkbox">
+          <input
+            className="input-box"
+            type="checkbox"
+            id="conditionsAccepted"
+            required
+          />
+          <label htmlFor="conditionsAccepted">
+            I agree to the terms and conditions
+          </label>
+        </div>
       </div>
-      <button type="submit">Submit</button>
+      <div className="right-container-d">
+        <div className="title">Beskrivelse</div>
+        <div className="large-field">
+          <textarea
+            className="input-description"
+            id="Beskrivelse"
+            placeholder="Skriv litt om reisen din her..."
+            required
+          ></textarea>
+        </div>
+        <div className="title">Bilder</div>
+        <div className="image-upload">
+          <ImageUpload />
+        </div>
+      </div>
+      <button className="submit-button" type="submit">
+        Send inn
+      </button>
     </form>
   );
-}
+};
