@@ -170,9 +170,6 @@ export const TripForm = () => {
             id="conditionsAccepted"
             required
           />
-          <label htmlFor="conditionsAccepted">
-            I agree to the terms and conditions
-          </label>
         </div>
       </div>
       <div className="right-container-d">
