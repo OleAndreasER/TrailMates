@@ -163,14 +163,6 @@ export const TripForm = () => {
             required
           />
         </div>
-        <div className="field checkbox">
-          <input
-            className="input-box"
-            type="checkbox"
-            id="conditionsAccepted"
-            required
-          />
-        </div>
       </div>
       <div className="right-container-d">
         <div className="title">Beskrivelse</div>
