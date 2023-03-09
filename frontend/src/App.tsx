@@ -10,7 +10,7 @@ import { PrivateProfile } from "./pages/PrivateProfile/PrivateProfile";
 import { PublicProfile } from "./pages/PublicProfile/PublicProfile";
 import { ToTopButton } from "./components/ToTopButton/ToTopButton";
 import { TripPage } from "./pages/TripPage/TripPage";
-import { CreateTripForm } from "./pages/CreateTripForm/CreateTripForm";
+import { TripForm } from "./pages/TripForm/TripForm";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3000/")
@@ -31,7 +31,7 @@ export const App = () => {
             <Route path="/profile" element={<PrivateProfile />} />
             <Route path="/profile/:uid" element={<PublicProfile />} />
             <Route path="/reiserute" element={<TripPage />} />
-            <Route path="/createtrip/" element={<CreateTripForm />} />
+            <Route path="/createtrip/" element={<TripForm />} />
           </Routes>
           <Footer />
         </main>

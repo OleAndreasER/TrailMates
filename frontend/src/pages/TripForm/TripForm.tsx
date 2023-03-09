@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useState } from "react";
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
-import "./CreateTripForm.css";
+import "./TripForm.css";
 import { UserContext } from "../../authentication/UserProvider";
 import { TripData } from "../../types/Trip";
 import { uploadFile } from "../../storage/util/methods";
@@ -21,7 +21,7 @@ interface CustomForm extends HTMLFormElement {
   readonly elements: CustomElements;
 }
 
-export const CreateTripForm = () => {
+export const TripForm = () => {
   const [imageIds, setImageIds] = useState<string[]>([]);
   const [files, setFiles] = useState<FileList | null>(null);
   const { currentUser } = useContext(UserContext);
