@@ -38,15 +38,8 @@ export const PublicProfile = () => {
     return user?.name.split(" ")[0];
   }, [user]);
 
-  function CheckLastLetterEquals(){
-    if (user?.name.split(" ")[0].slice(-1) == 's'){
-      return true;
-    }
-    return false;
-  }
-
   useEffect(() => {
-    if (CheckLastLetterEquals()){
+    if (fname?.endsWith("s")){
       document.title = fname + " sin profil";
     }
     document.title = fname + "s profil";
