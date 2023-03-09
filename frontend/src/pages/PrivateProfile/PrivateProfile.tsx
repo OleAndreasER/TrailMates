@@ -12,15 +12,21 @@ export const PrivateProfile = () => {
   const [imageURL, setImageURL] = useState<string>();
   const navigate = useNavigate();
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const [hasImage, setHasImage] = useState(false);
 
   useEffect(() => {
     document.title = "Min Profil";
   }, []);
 
   useEffect(() => {
-    getImgSrc(`profilepics/${currentUser?.userUid}`).then((url) => {
-      setImageURL(url);
-    });
+    getImgSrc(`profilepics/${currentUser?.userUid}`)
+      .then((url) => {
+        setImageURL(url);
+        setHasImage(true);
+      })
+      .catch((error) => {
+        setHasImage(false);
+      });
   }, [currentUser]);
 
   const onFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +65,9 @@ export const PrivateProfile = () => {
           <div className="container-aboutme">
             <div className="private-profile-img-border">
               <p
-                className="private-profile-upload-text"
+                className={`private-profile-upload-text${
+                  !hasImage ? " missing-image" : ""
+                }`}
                 onClick={onUploadClicked}
               >
                 Last opp profilbilde

@@ -8,6 +8,7 @@ interface ButtonProps {
   height?: string;
   text: string;
   onClick?: () => void;
+  fontSize?: string;
   styling:
     | "secondary-outline"
     | "accent-outline"
@@ -31,6 +32,7 @@ export const Button = ({
   styling,
   text,
   onClick,
+  fontSize,
   icon,
   style,
   className,
@@ -39,7 +41,7 @@ export const Button = ({
   return (
     <button
       className={`${className || ""} button ${styling}`}
-      style={{ ...style, color: textColor, width, height }}
+      style={{ ...style, color: textColor, width, height, fontSize }}
       onClick={onClick}
     >
       {text}

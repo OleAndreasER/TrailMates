@@ -44,7 +44,7 @@ export const Navbar = () => {
       if (canSetVisibility || prevScrollPos < scrollTop) setAsVisible();
 
       setPrevScrollPos(scrollTop);
-      setIsScrolled(scrollTop > 50);
+      setIsScrolled(scrollTop > 80);
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -96,7 +96,6 @@ export const Navbar = () => {
             className="logo"
             onClick={() => navigate("/")}
           />
-          <Searchbar type="nav" width="50%" height="30%" />
           <>
             <div className="nav-right-mobile">
               <a onClick={toggleMenu}>
@@ -124,9 +123,14 @@ export const Navbar = () => {
         />
         <nav
           className={`navbar ${
-            isScrolled || location.pathname !== "/" ? "scrolled" : ""
+            isScrolled ||
+            (location.pathname !== "/reiserute" && location.pathname !== "/")
+              ? "scrolled"
+              : ""
           }`}
-          style={{ display: visible ? "flex" : "none" }}
+          style={{
+            top: visible ? "0px" : "var(--header-offset)",
+          }}
         >
           <img
             src={logo}
@@ -139,7 +143,8 @@ export const Navbar = () => {
           <Button
             text={currentUser ? "Logg ut" : "Logg inn"}
             styling={
-              isScrolled || location.pathname !== "/"
+              isScrolled ||
+              (location.pathname !== "/reiserute" && location.pathname !== "/")
                 ? "accent-outline"
                 : "secondary-outline"
             }
@@ -151,7 +156,9 @@ export const Navbar = () => {
             <Button
               text="Profil"
               styling={
-                isScrolled || location.pathname !== "/"
+                isScrolled ||
+                (location.pathname !== "/reiserute" &&
+                  location.pathname !== "/")
                   ? "accent-outline"
                   : "secondary-outline"
               }

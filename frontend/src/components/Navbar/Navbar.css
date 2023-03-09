@@ -15,7 +15,8 @@ nav {
 .scrolled {
   border-bottom: 4px solid var(--accent);
   background-color: var(--secondary);
-  animation: slideIn-Y 0.25s ease-out;
+  animation: slideIn-Y 1s ease-out;
+  transition: top 0.7s;
 }
 
 .logo {
@@ -38,7 +39,7 @@ nav {
 
 @media only screen and (max-width: 768px) {
   .logo {
-    height: 12vw;
+    height: 18vw;
   }
 }
 

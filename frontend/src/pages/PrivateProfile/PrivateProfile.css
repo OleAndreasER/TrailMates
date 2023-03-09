@@ -74,10 +74,11 @@
   margin: 2vh auto;
   overflow: hidden;
   position: relative;
+  background-color: #222222;
 }
 
 .private-profile-img {
-  background-size: contain;
+  background-size: cover;
   height: 100%;
   width: 100%;
   transition: 0.3s;
@@ -101,6 +102,10 @@
   font-weight: 500;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.private-profile-upload-text.missing-image {
+  visibility: visible;
 }
 
 .private-profile-upload-text:hover {
@@ -144,7 +149,7 @@
 
   .container-privateprofile h2 {
     text-align: left;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 500;
     margin: 2vh 0;
   }
@@ -156,11 +161,46 @@
   .container-userinfo,
   .container-aboutme {
     width: 90%;
-    margin: auto;
+    margin: 10% auto;
   }
 
   .container-infoboxes,
   .infobox-cta-section {
     margin-left: 0%;
+  }
+
+  .infobox-cta-section {
+    margin: 20% 0;
+    width: 100%;
+    flex-direction: column !important;
+    height: 20vh;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .button {
+    width: 70% !important;
+    height: 15% !important;
+    font-size: 1rem !important;
+  }
+
+  .container-inforow h3 {
+    margin-left: 0;
+  }
+
+  .accent-fill {
+    font-size: 1rem !important;
+    width: 40%;
+    height: 10% !important;
+    margin-bottom: 5%;
+  }
+
+  .edit-button {
+    margin: 8% 0 !important;
+    font-size: 1rem !important;
+  }
+
+  .user-context {
+    align-items: center;
   }
 }
