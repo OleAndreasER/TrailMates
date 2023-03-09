@@ -39,6 +39,7 @@
   background-position: 10px 10px;
   background-repeat: no-repeat;
   padding: 12px 0px 12px 20px;
+  font-family: "Montserrat", sans-serif;
 }
 .input-description {
   width: 200%;
@@ -49,6 +50,7 @@
   font-size: 16px;
   resize: none;
   padding: 12px 20px 12px 20px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .left-container-d {
@@ -76,15 +78,7 @@
   font-family: "Montserrat", sans-serif;
 }
 
-.input-description::placeholder {
-  color: grey;
-  font-family: "Montserrat", sans-serif;
-}
-
-.input-description::placeholder {
-  color: grey;
-  font-family: "Montserrat", sans-serif;
-}
+.input-description::placeholder,
 .input-box::placeholder {
   color: grey;
   font-family: "Montserrat", sans-serif;
@@ -93,4 +87,14 @@
 .image-upload {
   display: flex;
   align-self: center;
+}
+
+.dark-mode .field > input {
+  color: var(--dark-mode-font);
+  background-color: #424242;
+}
+
+.dark-mode .large-field > textarea {
+  color: var(--dark-mode-font);
+  background-color: #424242;
 }
