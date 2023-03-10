@@ -26,6 +26,7 @@ const ImageUpload = ({ setImageIds, setFiles }: Props) => {
       onChange={handleFilesChanged}
       accept="image/*"
       multiple={true}
+      className="button"
     />
   );
 };
