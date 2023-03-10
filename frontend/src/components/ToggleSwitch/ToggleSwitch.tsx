@@ -1,4 +1,6 @@
 import "./ToggleSwitch.css";
+import sun from "../../components/assets/sun.svg";
+import moon from "../../components/assets/moon.svg";
 
 interface Props {
   booleanState: boolean;
@@ -26,6 +28,7 @@ export const ToggleSwitch = ({
           onClick={booleanStateToggler}
           readOnly
         />
+
         <span className="slider"></span>
       </label>
     </div>

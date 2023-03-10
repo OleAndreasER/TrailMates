@@ -50,6 +50,7 @@
   text-decoration: underline;
   align-self: center;
   margin: 1% 0 3% 0;
+  transition: all 0.5s;
 }
 
 .seperator {
@@ -74,6 +75,12 @@
 
 .dark-mode .aboutme-textarea {
   border: 2px solid var(--dark-accent);
+}
+
+.edit-button:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  transition: all 0.5s;
 }
 
 @media only screen and (max-width: 768px) {

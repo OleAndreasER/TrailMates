@@ -131,6 +131,16 @@
   height: 3vh;
 }
 
+.darkmode-container {
+  width: 90%;
+  margin: 5% auto;
+  justify-content: flex-start;
+}
+.darkmode-container p {
+  margin-right: 5%;
+  font-size: 1.2vw;
+}
+
 @media only screen and (max-width: 768px) {
   .container-privateprofile {
     flex-direction: column;

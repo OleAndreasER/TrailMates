@@ -6,6 +6,7 @@ import { UserContext } from "../../authentication/UserProvider";
 import { Navigate, useNavigate } from "react-router-dom";
 import { logOut } from "../../authentication/authentication";
 import { uploadFile, getImgUrl } from "../../storage/util/methods";
+import { ToggleSwitch } from "../../components/ToggleSwitch/ToggleSwitch";
 
 export const PrivateProfile = () => {
   const { currentUser } = useContext(UserContext);
@@ -13,6 +14,9 @@ export const PrivateProfile = () => {
   const navigate = useNavigate();
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [hasImage, setHasImage] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem("dark-mode") === "true",
+  );
 
   useEffect(() => {
     document.title = "Min Profil";
@@ -51,6 +55,16 @@ export const PrivateProfile = () => {
   const onUploadClicked = () => {
     inputFileRef.current?.click();
   };
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("dark-mode", "true");
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("dark-mode", "false");
+    }
+  }, [isDarkMode]);
 
   return (
     <div className="container-privateprofile">
@@ -126,6 +140,13 @@ export const PrivateProfile = () => {
                   styling="secondary-outline"
                   width="25%"
                   onClick={logOut}
+                />
+              </div>
+              <div className="darkmode-container flex-row">
+                <p>Blir du blendet av bakgrunnen? Prøv Darkmode!</p>
+                <ToggleSwitch
+                  booleanState={isDarkMode}
+                  booleanStateToggler={() => setIsDarkMode(!isDarkMode)}
                 />
               </div>
             </div>
