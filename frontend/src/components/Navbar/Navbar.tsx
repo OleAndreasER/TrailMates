@@ -147,7 +147,7 @@ export const Navbar = () => {
             {currentUser && (
               <Button
                 text=""
-                className={currentUser ? "" : "hide"}
+                className={currentUser ? "add-trip-nav" : "hide"}
                 styling={
                   isScrolled ||
                   (location.pathname !== "/reiserute" &&

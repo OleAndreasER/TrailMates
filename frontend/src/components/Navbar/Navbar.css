@@ -20,12 +20,16 @@ nav {
 }
 
 .logo {
+  opacity: 1;
   height: 5vw;
   cursor: pointer;
+  transition: all 0.5s ease-out;
 }
 
-.logo:active {
-  opacity: 0.7;
+.logo:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+  transition: all 0.5s ease-out;
 }
 
 .close-mobile {
@@ -41,6 +45,15 @@ nav {
   justify-content: space-between;
   align-items: center;
   width: 18%;
+}
+
+.navbar-buttons-right .add-trip-nav:hover {
+  transform: rotate(0.5turn) scale(1.1);
+  transition: all 0.5s;
+}
+
+.navbar-buttons-right .add-trip-nav {
+  transition: all 0.5s;
 }
 
 @media only screen and (max-width: 768px) {

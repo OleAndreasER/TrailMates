@@ -7,9 +7,10 @@ interface Props {
   text: string;
   trips: Trip[];
   textColor: "black" | "white";
+  line?: "no";
 }
 
-export const TripSection = ({ text, trips, textColor }: Props) => {
+export const TripSection = ({ text, trips, textColor, line }: Props) => {
   const items = trips.map((trip) => (
     <TripCard trip={trip} key={trip.tripId} color={textColor} />
   ));
@@ -18,7 +19,13 @@ export const TripSection = ({ text, trips, textColor }: Props) => {
     <div className="trip-section">
       <h1 className="section-header-text">{text}</h1>
       <svg className="trip-section-divider">
-        <rect x="0" y="0" rx="5" overflow={"visible"} />
+        <rect
+          x="0"
+          y="0"
+          rx="5"
+          overflow={"visible"}
+          className={line == "no" ? "hide" : ""}
+        />
       </svg>
       <div id="slider-container">
         <Slider items={items} />

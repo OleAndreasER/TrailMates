@@ -57,6 +57,7 @@
   position: relative;
   height: 110%;
   border: none;
+  transition: all 0.5s ease-out;
 }
 
 .header.search-icon {
@@ -64,6 +65,10 @@
   width: 32px;
   margin: 0;
   margin: 0 1% 0 0;
+}
+
+.nav.search-icon:hover path {
+  fill: var(--white-tone);
 }
 
 .nav.search-icon {
@@ -74,14 +79,12 @@
 
 .search-icon:hover {
   cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.5s ease-out;
 }
 
 .search-icon:hover path {
-  fill: rgba(255, 255, 255, 0.8);
-}
-
-.search-icon:active path {
-  fill: rgba(255, 255, 255, 0.3);
+  fill: var(--secondary);
 }
 
 ::placeholder {
