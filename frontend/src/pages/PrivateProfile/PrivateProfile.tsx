@@ -143,7 +143,7 @@ export const PrivateProfile = () => {
                 />
               </div>
               <div className="darkmode-container flex-row">
-                <p>Blir du blendet av bakgrunnen? Prøv Darkmode!</p>
+                <p>Blir du blind av å se på bakgrunnen? Prøv Darkmode!</p>
                 <ToggleSwitch
                   booleanState={isDarkMode}
                   booleanStateToggler={() => setIsDarkMode(!isDarkMode)}
