@@ -5,7 +5,6 @@ import { UserContext } from "../../authentication/UserProvider";
 import { uploadFile } from "../../storage/util/methods";
 import { postTrip, TripSubmission } from "../../trips/trip";
 import { Navigate, useNavigate } from "react-router-dom";
-import { TitleSeperator } from "../../components/TitleSeperator/TitleSeperator";
 import { Button } from "../../components/Button/Button";
 import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
 import { TripSubmission } from "../../types/types";
