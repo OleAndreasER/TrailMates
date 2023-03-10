@@ -141,7 +141,9 @@ export const Navbar = () => {
             height="20%"
             onClick={handleClick}
           />
-          <div className="navbar-buttons-right flex-row">
+          <div
+            className={currentUser ? "navbar-buttons-right flex-row" : "hide"}
+          >
             {currentUser && (
               <Button
                 text=""
@@ -153,7 +155,13 @@ export const Navbar = () => {
                     ? "accent-outline"
                     : "secondary-outline"
                 }
-                icon={isScrolled ? "plusBlue" : "plusOrange"}
+                icon={
+                  isScrolled ||
+                  (location.pathname !== "/reiserute" &&
+                    location.pathname !== "/")
+                    ? "plusBlue"
+                    : "plusOrange"
+                }
                 width="2vw"
                 height="2vw"
                 onClick={() => navigate("/createtrip")}
