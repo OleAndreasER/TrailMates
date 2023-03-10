@@ -1,25 +1,5 @@
+import { Trip, TripSubmission } from "../types/types";
 import { get, post, put } from "../utils/fetchMethods";
-
-// Keep up to date with backend
-export interface TripSubmission {
-  startCity: string;
-  destinationCity: string;
-  countries: string[];
-  posterUid: string;
-  price: number;
-  tripDurationDays: number;
-  description: string;
-  degreesCelcius: number;
-  tripLengthKm: number;
-  attractions: string[];
-  imageIds: string[];
-}
-
-export default interface Trip extends TripSubmission {
-  tripId: string;
-  averageRating: number;
-  postDate: string;
-}
 
 export const getTrips = (): Promise<Trip[]> => get("trips/");
 

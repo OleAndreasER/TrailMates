@@ -6,6 +6,7 @@ interface Props {
   value: string;
   type: string;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  placeholder?: string;
 }
 
 export const InputField = ({
@@ -14,6 +15,7 @@ export const InputField = ({
   value,
   type,
   onKeyDown,
+  placeholder,
 }: Props) => {
   return (
     <div className="input-container">
@@ -23,6 +25,7 @@ export const InputField = ({
         onChange={onChange}
         value={value}
         onKeyDown={onKeyDown}
+        placeholder={placeholder || ""}
       />
     </div>
   );

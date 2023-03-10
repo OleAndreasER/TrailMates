@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { ReactComponent as FilledHeart } from "../../resources/media/heart-filled-icon.svg";
 import { ReactComponent as Arrow } from "../../components/assets/card-arrow.svg";
 import "./TripCard.css";
-import Trip from "../../trips/trip";
 import { useNavigate } from "react-router-dom";
 import { getImgUrl } from "../../storage/util/methods";
+import { Trip } from "../../types/types";
 
 interface Props {
   trip: Trip;

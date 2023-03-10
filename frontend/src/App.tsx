@@ -10,6 +10,8 @@ import { PublicProfile } from "./pages/PublicProfile/PublicProfile";
 import { ToTopButton } from "./components/ToTopButton/ToTopButton";
 import { TripPage } from "./pages/TripPage/TripPage";
 import { TripForm } from "./pages/TripForm/TripForm";
+import Searchresults from "./pages/Searchresults/Searchresults";
+import { MyTrips } from "./pages/MyTrips/MyTrips";
 
 export const App = () => {
   return (
@@ -23,6 +25,8 @@ export const App = () => {
             <Route path="/profile/:uid" element={<PublicProfile />} />
             <Route path="/reiserute/:tripId" element={<TripPage />} />
             <Route path="/createtrip/" element={<TripForm />} />
+            <Route path="/search" element={<Searchresults />} />
+            <Route path="/mytrips" element={<MyTrips />} />
           </Routes>
           <Footer />
         </main>

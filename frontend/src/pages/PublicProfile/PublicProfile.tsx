@@ -7,7 +7,9 @@ import { UserData, getUserData } from "../../authentication/firestore";
 import { useParams } from "react-router-dom";
 import { User, UserContext } from "../../authentication/UserProvider";
 import { getImgUrl } from "../../storage/util/methods";
-import Trip, { getTrips } from "../../trips/trip";
+import { getTrips } from "../../trips/trip";
+import { Trip } from "../../types/types";
+import { filterTripsByFieldEquality } from "../../utils/tripMethods";
 
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();
@@ -18,10 +20,12 @@ export const PublicProfile = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
 
   useEffect(() => {
-    getTrips().then((trips) => {
-      setTrips(trips);
-    });
-  }, []);
+    if (uid) {
+      getTrips().then((trips) => {
+        setTrips(filterTripsByFieldEquality(trips, "posterUid", uid));
+      });
+    }
+  }, [uid]);
 
   useEffect(() => {
     if (uid === currentUser?.userUid) {

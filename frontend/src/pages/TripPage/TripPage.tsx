@@ -6,9 +6,10 @@ import { ReviewBox } from "../../components/ReviewBox/ReviewBox";
 import { TripAuthor } from "../../components/TripAuthor/TripAuthor";
 import { PopupImageCarousel } from "../../components/PopupImageCarousel/PopupImageCarousel";
 import { useParams } from "react-router-dom";
-import Trip, { getTripById } from "../../trips/trip";
+import { getTripById } from "../../trips/trip";
 import { getUserData, UserData } from "../../authentication/firestore";
 import { getImgUrl } from "../../storage/util/methods";
+import { Trip } from "../../types/types";
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";

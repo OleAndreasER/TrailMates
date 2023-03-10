@@ -32,19 +32,22 @@ export const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-
+      if (scrollTop < 120) {
+        setVisible(true);
+        setIsScrolled(false);
+      }
       const setAsVisible = async () => {
         setVisible(prevScrollPos > scrollTop || scrollTop < 10);
         await new Promise((resolve) => {
           setCanSetVisibility(false);
-          setTimeout(resolve, 750);
+          setTimeout(resolve, 250);
         }).then(() => setCanSetVisibility(true));
       };
 
       if (canSetVisibility || prevScrollPos < scrollTop) setAsVisible();
 
-      setPrevScrollPos(scrollTop);
       setIsScrolled(scrollTop > 80);
+      setPrevScrollPos(scrollTop);
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
