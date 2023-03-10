@@ -5,6 +5,7 @@ import { UserContext } from "../../authentication/UserProvider";
 import { uploadFile } from "../../storage/util/methods";
 import { postTrip, TripSubmission } from "../../trips/trip";
 import { Navigate, useNavigate } from "react-router-dom";
+import { TitleSeperator } from "../../components/TitleSeperator/TitleSeperator";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;
@@ -79,6 +80,76 @@ export const TripForm = () => {
   }
 
   return (
+    <div className="trip-form-container">
+      <h1>Del din reiseopplevelse med andre!</h1>
+      <TitleSeperator
+        width={"70%"}
+        color={"accent"}
+        height={"0.5vh"}
+      ></TitleSeperator>
+      <div className="trip-form-top flex-row">
+        <div className="trip-form-top-left">
+          <h2>1. Litt generelt om reisen</h2>
+          <div className="field">
+            <label htmlFor="startCity">Start By</label>
+            <input
+              className="input-box"
+              id="startCity"
+              placeholder="Roma, Stavanger, Cape Town..."
+              required
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="destinationCity">Slutt By</label>
+            <input
+              className="input-box"
+              id="destinationCity"
+              placeholder="Firenze, Oslo, Mubishu..."
+              required
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="countries">Land</label>
+            <input
+              className="input-box"
+              id="countries"
+              placeholder="Norge, USA, Island, osv..."
+              required
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="price">Pris (kroner)</label>
+            <input
+              className="input-box"
+              type="number"
+              min="0"
+              max="999999"
+              id="price"
+              placeholder="Eks. 4500, 15000,..."
+              required
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="tripDurationDays">Varighet (dager)</label>
+            <input
+              className="input-box"
+              type="number"
+              min="0"
+              max="365"
+              id="tripDurationDays"
+              placeholder="Eks. 2, 3, 10..."
+              required
+            />
+          </div>
+        </div>
+        <div className="trip-form-top-right">
+          <h2>2. Legg inn noen fine bilder fra reisen din!</h2>
+        </div>
+      </div>
+    </div>
+
+    /* 
+
     <form className="form" onSubmit={onSubmit}>
       <div className="left-container-d">
         <div className="title">Generelt</div>
@@ -187,6 +258,6 @@ export const TripForm = () => {
       <button className="submit-button" type="submit">
         Send inn
       </button>
-    </form>
+    </form> */
   );
 };
