@@ -2,7 +2,6 @@ import "./ImageUpload.css";
 import { ChangeEvent, useState } from "react";
 import { ReactComponent as RightButton } from "../assets/caro/carousel_right.svg";
 import { ReactComponent as LeftButton } from "../assets/caro/carousel_left.svg";
-import { ReactComponent as CloseButton } from "../assets/caro/caro_close.svg";
 
 interface Props {
   setImageIds: React.Dispatch<React.SetStateAction<string[]>>;

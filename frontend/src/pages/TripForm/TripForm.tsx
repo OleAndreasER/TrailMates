@@ -7,6 +7,8 @@ import { postTrip, TripSubmission } from "../../trips/trip";
 import { Navigate, useNavigate } from "react-router-dom";
 import { TitleSeperator } from "../../components/TitleSeperator/TitleSeperator";
 import { Button } from "../../components/Button/Button";
+import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
+import { TripSubmission } from "../../types/types";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;
@@ -82,6 +84,7 @@ export const TripForm = () => {
 
   return (
     <form className="form" onSubmit={onSubmit}>
+      <LoadingIndicator isLoading={isLoading} />
       <div className="trip-form-container">
         <h1>Del din reiseopplevelse med andre!</h1>
         <div
