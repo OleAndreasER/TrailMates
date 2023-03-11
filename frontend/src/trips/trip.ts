@@ -12,3 +12,6 @@ export const putTrip = (tripId: string, trip: TripSubmission) => {
 
 export const postTrip = (trip: TripSubmission): Promise<Trip> =>
   post("trips/", trip);
+
+export const getTopRatedTrips = (): Promise<Trip[]> =>
+  get("trips/highestRated");

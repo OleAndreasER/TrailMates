@@ -9,7 +9,7 @@ import { User, UserContext } from "../../authentication/UserProvider";
 import { getImgUrl } from "../../storage/util/methods";
 import { getTrips } from "../../trips/trip";
 import { Trip } from "../../types/types";
-import { filterTripsByFieldEquality } from "../../utils/tripMethods";
+import { filterTripsByFieldEquality } from "../../trips/tripMethods";
 
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();

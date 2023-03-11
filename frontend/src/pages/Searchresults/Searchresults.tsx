@@ -3,9 +3,9 @@ import { useSearchParams } from "react-router-dom";
 import { TripCollection } from "../../components/TripCollection/TripCollection";
 import { Trip } from "../../types/types";
 import { getTrips } from "../../trips/trip";
-import { removeDuplicates } from "../../utils/tripMethods";
 import { InputField } from "../../components/InputField/InputField";
 import "./Searchresults.css";
+import { removeDuplicates } from "../../trips/tripMethods";
 
 /**
  * A trip that has a priority from 1 to 5.

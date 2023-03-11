@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import { Header } from "../../components/Header/Header";
 import { SplitSection } from "../../components/SplitSection/SplitSection";
 import { TripSection } from "../../components/TripSection/TripSection";
-import { getTrips } from "../../trips/trip";
+import { getTopRatedTrips, getTrips } from "../../trips/trip";
 import "./Frontpage.css";
 import { Trip } from "../../types/types";
-import { sortTripsByDate } from "../../utils/tripMethods";
+import { sortTripsByDate } from "../../trips/tripMethods";
 
 export const Frontpage = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
+  const [topRatedTrips, setTopRatedTrips] = useState<Trip[]>([]);
 
   useEffect(() => {
-    getTrips().then((trips) => {
-      setTrips(trips);
-    });
+    getTrips().then((trips) => setTrips(trips));
+    getTopRatedTrips().then((trips) => setTopRatedTrips(trips));
   }, []);
 
   useEffect(() => {
@@ -25,7 +25,11 @@ export const Frontpage = () => {
       <Header />
       <SplitSection />
       <div className="frontpage-container">
-        <TripSection trips={trips} text="Toppreiser" textColor="black" />
+        <TripSection
+          trips={topRatedTrips}
+          text="Toppreiser"
+          textColor="black"
+        />
         <TripSection
           trips={sortTripsByDate(trips, false)}
           text="Nylig publisert"

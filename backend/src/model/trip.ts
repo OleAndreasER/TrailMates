@@ -29,6 +29,8 @@ export const toTripData = (tripSubmission: TripSubmission): TripData => ({
 
 export const toTrip = (tripId: string, tripData: TripData): Trip => ({
   tripId: tripId,
-  averageRating: 4, //TODO: Calculate average rating
+  averageRating: randomIntUpTo(5), //TODO: Calculate average rating
   ...tripData,
 });
+
+const randomIntUpTo = (max: number) => Math.floor(Math.random() * (max + 1));

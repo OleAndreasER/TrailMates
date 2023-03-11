@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { TripCollection } from "../../components/TripCollection/TripCollection";
 import { Trip } from "../../types/types";
 import { getTrips } from "../../trips/trip";
-import { filterTripsByFieldEquality } from "../../utils/tripMethods";
+import { filterTripsByFieldEquality } from "../../trips/tripMethods";
 
 export const MyTrips = () => {
   const { currentUser } = useContext(UserContext);

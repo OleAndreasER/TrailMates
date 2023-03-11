@@ -48,3 +48,9 @@ export const postTrip = async (
   const collectionReference = await addDoc(collection(db, "trip"), tripData);
   return toTrip(collectionReference.id, tripData);
 };
+
+export const getTopRatedTrips = async () => {
+  const trips: Trip[] = await getTrips();
+  trips.sort((t1, t2) => t2.averageRating - t1.averageRating);
+  return trips.slice(0, 10);
+};

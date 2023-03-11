@@ -1,8 +1,23 @@
 import { Express, Request, Response } from "express";
-import { getTripById, postTrip, putTrip, getTrips } from "../db/trip";
+import {
+  getTripById,
+  postTrip,
+  putTrip,
+  getTrips,
+  getTopRatedTrips,
+} from "../db/trip";
 import { Trip } from "../model/trip";
 
 export const startTripRoutes = (app: Express) => {
+  app.get("/trips/highestRated", async (req: Request, res: Response) => {
+    try {
+      const topTrips: Trip[] = await getTopRatedTrips();
+      res.json(topTrips);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
   app.get("/trips/:tripId/", async (req: Request, res: Response) => {
     try {
       const tripId = req.params.tripId;
