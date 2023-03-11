@@ -15,6 +15,8 @@ import {
 } from "../model/trip";
 import db from "./db";
 
+const tripsToSend: number = 15;
+
 export const getTripById = async (tripId: string) => {
   const tripDocument = await getDoc(doc(db, "trip", tripId));
   if (!tripDocument.exists()) {
@@ -52,5 +54,11 @@ export const postTrip = async (
 export const getTopRatedTrips = async () => {
   const trips: Trip[] = await getTrips();
   trips.sort((t1, t2) => t2.averageRating - t1.averageRating);
-  return trips.slice(0, 10);
+  return trips.slice(0, tripsToSend);
+};
+
+export const getLatestTrips = async () => {
+  const trips: Trip[] = await getTrips();
+  trips.sort((t1, t2) => parseInt(t2.postDate) - parseInt(t1.postDate));
+  return trips.slice(0, tripsToSend);
 };

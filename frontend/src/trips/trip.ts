@@ -15,3 +15,5 @@ export const postTrip = (trip: TripSubmission): Promise<Trip> =>
 
 export const getTopRatedTrips = (): Promise<Trip[]> =>
   get("trips/highestRated");
+
+export const getLatestTrips = (): Promise<Trip[]> => get("trips/latest");

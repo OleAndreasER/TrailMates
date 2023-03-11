@@ -5,6 +5,7 @@ import {
   putTrip,
   getTrips,
   getTopRatedTrips,
+  getLatestTrips,
 } from "../db/trip";
 import { Trip } from "../model/trip";
 
@@ -13,6 +14,15 @@ export const startTripRoutes = (app: Express) => {
     try {
       const topTrips: Trip[] = await getTopRatedTrips();
       res.json(topTrips);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+  app.get("/trips/latest", async (req: Request, res: Response) => {
+    try {
+      const latestTrips: Trip[] = await getLatestTrips();
+      res.json(latestTrips);
     } catch (error) {
       res.status(500).send(error);
     }
