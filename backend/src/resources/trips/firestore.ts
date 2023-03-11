@@ -6,17 +6,11 @@ import {
   collection,
   addDoc,
 } from "firebase/firestore";
-import {
-  toTrip,
-  toTripData,
-  Trip,
-  TripData,
-  TripSubmission,
-} from "../model/trip";
-import db from "./db";
+import firestore from "../../firestore/firestore";
+import { toTrip, toTripData, Trip, TripData, TripSubmission } from "./trip";
 
 export const getTripById = async (tripId: string) => {
-  const tripDocument = await getDoc(doc(db, "trip", tripId));
+  const tripDocument = await getDoc(doc(firestore, "trip", tripId));
   if (!tripDocument.exists()) {
     console.log("No such document exists!");
   }
@@ -24,7 +18,7 @@ export const getTripById = async (tripId: string) => {
 };
 
 export const getTrips = async (): Promise<Trip[]> => {
-  const tripDocuments = await getDocs(collection(db, "trip"));
+  const tripDocuments = await getDocs(collection(firestore, "trip"));
 
   if (tripDocuments.empty) {
     console.log("No trips found!");
@@ -38,13 +32,16 @@ export const putTrip = async (
   tripId: string,
   tripSubmission: TripSubmission,
 ) => {
-  await setDoc(doc(db, "trip", tripId), tripSubmission, { merge: true });
+  await setDoc(doc(firestore, "trip", tripId), tripSubmission, { merge: true });
 };
 
 export const postTrip = async (
   tripSubmission: TripSubmission,
 ): Promise<Trip> => {
   const tripData = toTripData(tripSubmission);
-  const collectionReference = await addDoc(collection(db, "trip"), tripData);
+  const collectionReference = await addDoc(
+    collection(firestore, "trip"),
+    tripData,
+  );
   return toTrip(collectionReference.id, tripData);
 };

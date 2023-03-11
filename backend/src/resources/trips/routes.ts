@@ -1,6 +1,6 @@
 import { Express, Request, Response } from "express";
-import { getTripById, postTrip, putTrip, getTrips } from "../db/trip";
-import { Trip } from "../model/trip";
+import { getTripById, postTrip, putTrip, getTrips } from "./firestore";
+import { Trip } from "./trip";
 
 export const startTripRoutes = (app: Express) => {
   app.get("/trips/:tripId/", async (req: Request, res: Response) => {

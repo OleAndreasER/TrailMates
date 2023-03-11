@@ -1,6 +1,6 @@
 import { Express, Request, Response } from "express";
-import { getUserData, putUserData } from "../db/user";
-import { isValidUserType } from "../model/UserData";
+import { getUserData, putUserData } from "./firestore";
+import { isValidUserType } from "./user";
 
 export const startUserRoutes = (app: Express) => {
   app.get("/user/:userUid/", async (req: Request, res: Response) => {

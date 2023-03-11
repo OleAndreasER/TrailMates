@@ -1,6 +1,6 @@
 import express = require("express");
-import { startUserRoutes } from "./routes/user";
-import { startTripRoutes } from "./routes/trip";
+import { startTripRoutes } from "./resources/trips/routes";
+import { startUserRoutes } from "./resources/user/routes";
 
 const cors = require("cors");
 const app = express();
