@@ -41,11 +41,3 @@ export const filterTripsByFieldEquality = (
     return trip[field] === value;
   });
 };
-
-export const sortTripsByDate = (trips: Trip[], asc: boolean = true): Trip[] => {
-  return trips.sort((a, b) => {
-    const dateA = parseInt(a.postDate);
-    const dateB = parseInt(b.postDate);
-    return asc ? dateA - dateB : dateB - dateA;
-  });
-};
