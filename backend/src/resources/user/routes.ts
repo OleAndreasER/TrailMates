@@ -9,7 +9,7 @@ export const startUserRoutes = (app: Express) => {
       const userDocument = await getUserData(userUid);
       res.json(userDocument.data());
     } catch (error) {
-      res.status(500).send(error);
+      res.status(404).send(error);
     }
   });
 
@@ -25,10 +25,10 @@ export const startUserRoutes = (app: Express) => {
         res.json({ message: "OK" });
       } else {
         console.log("Rejecting because invalid userType: " + req.body.userType);
-        res.status(500).send("Invalid userType.");
+        res.status(400).send("Invalid userType.");
       }
     } catch (error) {
-      res.status(500).send(error);
+      res.status(404).send(error);
     }
   });
 };

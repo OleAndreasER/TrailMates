@@ -1,8 +1,12 @@
 import { Express, Request, Response } from "express";
+import { startFavoritesRoutes } from "./favorites/routes";
 import { getTripById, postTrip, putTrip, getTrips } from "./firestore";
 import { Trip } from "./trip";
 
 export const startTripRoutes = (app: Express) => {
+  //"trips/favorites/"
+  startFavoritesRoutes(app);
+
   app.get("/trips/:tripId/", async (req: Request, res: Response) => {
     try {
       const tripId = req.params.tripId;
