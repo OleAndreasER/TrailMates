@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Header } from "../../components/Header/Header";
 import { SplitSection } from "../../components/SplitSection/SplitSection";
 import { TripSection } from "../../components/TripSection/TripSection";
-import { getLatestTrips, getTopRatedTrips, getTrips } from "../../trips/trip";
+import { getLatestTrips, getTopRatedTrips, getTrips } from "../../trips/access";
 import "./Frontpage.css";
-import { Trip } from "../../types/types";
+import { Trip } from "../../trips/trip";
 
 export const Frontpage = () => {
   const [recommendedTrips, setRecommendedTrips] = useState<Trip[]>([]);

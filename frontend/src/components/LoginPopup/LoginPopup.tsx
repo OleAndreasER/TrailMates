@@ -4,7 +4,7 @@ import { InputField } from "../InputField/InputField";
 import { logIn, signUp, AuthError } from "../../authentication/authentication";
 import "./LoginPopup.css";
 import { ReactComponent as CloseIcon } from "../assets/cross-icon.svg";
-import { isValidEmail, isValidPassword } from "../../utils/validatorMethods";
+import { isValidEmail, isValidPassword } from "../../utils/validation";
 
 interface InputFields {
   email: string;

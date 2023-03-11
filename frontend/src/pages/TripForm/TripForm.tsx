@@ -3,10 +3,10 @@ import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import "./TripForm.css";
 import { UserContext } from "../../authentication/UserProvider";
 import { uploadFile } from "../../storage/util/methods";
-import { postTrip } from "../../trips/trip";
+import { postTrip } from "../../trips/access";
 import { Navigate, useNavigate } from "react-router-dom";
 import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
-import { TripSubmission } from "../../types/types";
+import { TripSubmission } from "../../trips/trip";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;

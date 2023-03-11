@@ -7,9 +7,9 @@ import { UserData, getUserData } from "../../authentication/firestore";
 import { useParams } from "react-router-dom";
 import { User, UserContext } from "../../authentication/UserProvider";
 import { getImgUrl } from "../../storage/util/methods";
-import { getTrips } from "../../trips/trip";
-import { Trip } from "../../types/types";
-import { filterTripsByFieldEquality } from "../../trips/tripMethods";
+import { getTrips } from "../../trips/access";
+import { Trip } from "../../trips/trip";
+import { filterTripsByFieldEquality } from "../../trips/utils";
 
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();

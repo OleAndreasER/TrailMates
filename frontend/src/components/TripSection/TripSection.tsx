@@ -1,4 +1,4 @@
-import { Trip } from "../../types/types";
+import { Trip } from "../../trips/trip";
 import { Slider } from "../Slider/Slider";
 import { TripCard } from "../TripCard/TripCard";
 import "./TripSection.css";

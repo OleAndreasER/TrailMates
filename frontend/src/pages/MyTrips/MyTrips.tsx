@@ -3,9 +3,9 @@ import "./MyTrips.css";
 import { UserContext } from "../../authentication/UserProvider";
 import { Navigate } from "react-router-dom";
 import { TripCollection } from "../../components/TripCollection/TripCollection";
-import { Trip } from "../../types/types";
-import { getTrips } from "../../trips/trip";
-import { filterTripsByFieldEquality } from "../../trips/tripMethods";
+import { Trip } from "../../trips/trip";
+import { getTrips } from "../../trips/access";
+import { filterTripsByFieldEquality } from "../../trips/utils";
 
 export const MyTrips = () => {
   const { currentUser } = useContext(UserContext);

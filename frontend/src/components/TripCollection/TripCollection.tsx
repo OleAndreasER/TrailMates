@@ -1,4 +1,4 @@
-import { Trip } from "../../types/types";
+import { Trip } from "../../trips/trip";
 import { TripCard } from "../TripCard/TripCard";
 import "./TripCollection.css";
 

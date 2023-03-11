@@ -4,7 +4,7 @@ import { ReactComponent as Arrow } from "../../components/assets/card-arrow.svg"
 import "./TripCard.css";
 import { useNavigate } from "react-router-dom";
 import { getImgUrl } from "../../storage/util/methods";
-import { Trip } from "../../types/types";
+import { Trip } from "../../trips/trip";
 
 interface Props {
   trip: Trip;
