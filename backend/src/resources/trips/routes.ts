@@ -9,14 +9,21 @@ import {
   getTopRatedTrips,
   getLatestTrips,
 } from "./firestore";
+import { parseTripQuery } from "./queryParsing";
 
 export const startTripRoutes = (app: Express) => {
   //"trips/favorites/"
   startFavoritesRoutes(app);
 
   app.get("/trips/highestRated", async (req: Request, res: Response) => {
+    const { amount } = parseTripQuery(req.query);
+    if (amount === undefined) {
+      res.status(400).send("Amount is invalid.");
+      return;
+    }
+
     try {
-      const topTrips: Trip[] = await getTopRatedTrips();
+      const topTrips: Trip[] = await getTopRatedTrips(amount);
       res.json(topTrips);
     } catch (error) {
       res.status(404).send(error);
@@ -24,8 +31,14 @@ export const startTripRoutes = (app: Express) => {
   });
 
   app.get("/trips/latest", async (req: Request, res: Response) => {
+    const { amount } = parseTripQuery(req.query);
+    if (amount === undefined) {
+      res.status(400).send("Amount is invalid.");
+      return;
+    }
+
     try {
-      const latestTrips: Trip[] = await getLatestTrips();
+      const latestTrips: Trip[] = await getLatestTrips(amount);
       res.json(latestTrips);
     } catch (error) {
       res.status(404).send(error);
@@ -42,8 +55,14 @@ export const startTripRoutes = (app: Express) => {
   });
 
   app.get("/trips/", async (req: Request, res: Response) => {
+    const { amount } = parseTripQuery(req.query);
+    if (amount === undefined) {
+      res.status(400).send("Amount is invalid.");
+      return;
+    }
+
     try {
-      const trips: Trip[] = await getTrips();
+      const trips: Trip[] = await getTrips(amount);
       res.json(trips);
     } catch (error) {
       res.status(404).send(error);
