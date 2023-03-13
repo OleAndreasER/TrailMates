@@ -16,11 +16,7 @@ export const startTripRoutes = (app: Express) => {
   startFavoritesRoutes(app);
 
   app.get("/trips/highestRated", async (req: Request, res: Response) => {
-    const { amount } = parseTripQuery(req.query);
-    if (amount === undefined) {
-      res.status(400).send("Amount is invalid.");
-      return;
-    }
+    const { amount = 20 } = parseTripQuery(req.query);
 
     try {
       const topTrips: Trip[] = await getTopRatedTrips(amount);
@@ -31,11 +27,7 @@ export const startTripRoutes = (app: Express) => {
   });
 
   app.get("/trips/latest", async (req: Request, res: Response) => {
-    const { amount } = parseTripQuery(req.query);
-    if (amount === undefined) {
-      res.status(400).send("Amount is invalid.");
-      return;
-    }
+    const { amount = 20 } = parseTripQuery(req.query);
 
     try {
       const latestTrips: Trip[] = await getLatestTrips(amount);
@@ -56,10 +48,6 @@ export const startTripRoutes = (app: Express) => {
 
   app.get("/trips/", async (req: Request, res: Response) => {
     const { amount } = parseTripQuery(req.query);
-    if (amount === undefined) {
-      res.status(400).send("Amount is invalid.");
-      return;
-    }
 
     try {
       const trips: Trip[] = await getTrips(amount);

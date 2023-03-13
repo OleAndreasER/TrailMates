@@ -3,7 +3,7 @@ export interface TripQuery {
 }
 
 export const parseTripQuery = (query: any): TripQuery => {
-  const { amount: amountStr = "20" } = query;
+  const { amount: amountStr } = query;
   return { amount: parseAmount(amountStr) };
 };
 
