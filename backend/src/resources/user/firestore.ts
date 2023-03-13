@@ -1,6 +1,6 @@
 import { setDoc, doc, getDoc } from "firebase/firestore";
-import UserData from "../model/UserData";
-import db from "./db";
+import { UserData } from "./user";
+import db from "../../firestore/firestore";
 
 export const getUserData = async (userUid: string) => {
   const userData = await getDoc(doc(db, "user", userUid));

@@ -51,7 +51,14 @@
   font-weight: 500;
 }
 
-svg {
-  margin-left: 10px;
-  height: 1.3em;
+.hide {
+  display: none !important;
+}
+
+.button svg {
+  margin-left: 10%;
+}
+
+.plus {
+  margin-left: 0 !important;
 }

@@ -17,7 +17,7 @@
   --dark-primary: #161616;
   --dark-secondary: #e7793c;
   --dark-accent: #5187dd;
-  --dark-mode-font: #ffffff;
+  --dark-mode-font: #f9f9f9;
 }
 
 body {
@@ -41,4 +41,8 @@ main:not(header) {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.hide {
+  display: none;
 }

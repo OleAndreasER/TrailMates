@@ -12,7 +12,6 @@ import { logOut } from "../../authentication/authentication";
 import { ReactComponent as Hamburger } from "../assets/hamburger.svg";
 import { ReactComponent as Close } from "../assets/navbar_close.svg";
 import { LoginPopup } from "../LoginPopup/LoginPopup";
-import { ToggleSwitch } from "../ToggleSwitch/ToggleSwitch";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,10 +24,6 @@ export const Navbar = () => {
   const isSmallScreen = useMediaQuery({ maxWidth: 768 });
   const [isOpen, setIsOpen] = useState(false);
   const [isShowingPopup, setIsShowingPopup] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("dark-mode") === "true",
-  );
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -58,16 +53,6 @@ export const Navbar = () => {
   useEffect(() => {
     document.body.style.overflow = isShowingPopup ? "hidden" : "unset";
   }, [isShowingPopup]);
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add("dark-mode");
-      localStorage.setItem("dark-mode", "true");
-    } else {
-      document.body.classList.remove("dark-mode");
-      localStorage.setItem("dark-mode", "false");
-    }
-  }, [isDarkMode]);
 
   const handleClick = () => {
     if (currentUser) {
@@ -144,7 +129,8 @@ export const Navbar = () => {
           <Searchbar type="nav" />
           <NavLinks />
           <Button
-            text={currentUser ? "Logg ut" : "Logg inn"}
+            text="Logg inn"
+            className={currentUser ? "hide" : ""}
             styling={
               isScrolled ||
               (location.pathname !== "/reiserute" && location.pathname !== "/")
@@ -155,25 +141,50 @@ export const Navbar = () => {
             height="20%"
             onClick={handleClick}
           />
-          {currentUser && (
-            <Button
-              text="Profil"
-              styling={
-                isScrolled ||
-                (location.pathname !== "/reiserute" &&
-                  location.pathname !== "/")
-                  ? "accent-outline"
-                  : "secondary-outline"
-              }
-              width="5%"
-              height="20%"
-              onClick={() => navigate("/profile")}
-            />
-          )}
-          <ToggleSwitch
-            booleanState={isDarkMode}
-            booleanStateToggler={() => setIsDarkMode(!isDarkMode)}
-          />
+          <div
+            className={currentUser ? "navbar-buttons-right flex-row" : "hide"}
+          >
+            {currentUser && (
+              <Button
+                text=""
+                className={currentUser ? "add-trip-nav" : "hide"}
+                styling={
+                  isScrolled ||
+                  (location.pathname !== "/reiserute" &&
+                    location.pathname !== "/")
+                    ? "accent-outline"
+                    : "secondary-outline"
+                }
+                icon={
+                  isScrolled ||
+                  (location.pathname !== "/reiserute" &&
+                    location.pathname !== "/")
+                    ? "plusBlue"
+                    : "plusOrange"
+                }
+                width="2vw"
+                height="2vw"
+                onClick={() => navigate("/createtrip")}
+                fontSize="1.2vw"
+              />
+            )}
+            {currentUser && (
+              <Button
+                text="Min Profil"
+                styling={
+                  isScrolled ||
+                  (location.pathname !== "/reiserute" &&
+                    location.pathname !== "/")
+                    ? "accent-fill"
+                    : "secondary-fill"
+                }
+                width="12vw"
+                height="2vw"
+                onClick={() => navigate("/profile")}
+                fontSize="1.2vw"
+              />
+            )}
+          </div>
         </nav>
       </>
     );

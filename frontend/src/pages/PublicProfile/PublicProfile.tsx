@@ -110,7 +110,7 @@ export const PublicProfile = () => {
               <h2>{possesiveFName} reiser!</h2>
               <TitleSeperator height="5px" width="25vw" color="accent" />
             </div>
-            <TripSection trips={trips} text="" textColor="white" />
+            <TripSection trips={trips} text="" textColor="white" line="no" />
           </div>
           <div className="container-public-user-reviews flex-column">
             <h2>{possesiveFName} erfaringer</h2>

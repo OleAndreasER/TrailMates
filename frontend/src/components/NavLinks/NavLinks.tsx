@@ -29,10 +29,6 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
       <NavLink className={activeStyle} end to="/favourites" onClick={onClick}>
         Favoritter
       </NavLink>
-      <NavLink className={activeStyle} end to="/createtrip" onClick={onClick}>
-        Opprett Reiserute
-      </NavLink>
-
     </div>
   );
 };

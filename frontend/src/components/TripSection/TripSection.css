@@ -34,3 +34,7 @@
   display: flex;
   justify-content: center;
 }
+
+.trip-section svg {
+  margin-left: 10%;
+}
