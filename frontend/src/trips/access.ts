@@ -17,3 +17,6 @@ export const getTopRatedTrips = (): Promise<Trip[]> =>
   get("trips/highestRated");
 
 export const getLatestTrips = (): Promise<Trip[]> => get("trips/latest");
+
+export const getUserTrips = (userUid: string): Promise<Trip[]> =>
+  get(`users/${userUid}/trips`);

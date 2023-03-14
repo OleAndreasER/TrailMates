@@ -4,23 +4,15 @@ import { UserContext } from "../../authentication/UserProvider";
 import { Navigate } from "react-router-dom";
 import { TripCollection } from "../../components/TripCollection/TripCollection";
 import { Trip } from "../../trips/trip";
-import { getTrips } from "../../trips/access";
-import { filterTripsByFieldEquality } from "../../trips/utils";
+import { getUserTrips } from "../../trips/access";
 
 export const MyTrips = () => {
   const { currentUser } = useContext(UserContext);
-  const [trips, setTrips] = useState<Trip[]>([]);
+  const [userTrips, setUserTrips] = useState<Trip[]>([]);
 
   useEffect(() => {
     if (currentUser) {
-      getTrips().then((trips) => {
-        const userTrips = filterTripsByFieldEquality(
-          trips,
-          "posterUid",
-          currentUser.userUid,
-        );
-        setTrips(userTrips);
-      });
+      getUserTrips(currentUser.userUid).then(setUserTrips);
     }
   }, [currentUser]);
 
@@ -28,7 +20,7 @@ export const MyTrips = () => {
 
   return (
     <div className="my-trips">
-      <TripCollection trips={trips} />
+      <TripCollection trips={userTrips} />
     </div>
   );
 };

@@ -31,13 +31,3 @@ export const removeDuplicates = (trips: Trip[]): Trip[] => {
   });
   return uniqueTrips;
 };
-
-export const filterTripsByFieldEquality = (
-  trips: Trip[],
-  field: keyof Trip,
-  value: string | number,
-): Trip[] => {
-  return trips.filter((trip) => {
-    return trip[field] === value;
-  });
-};
