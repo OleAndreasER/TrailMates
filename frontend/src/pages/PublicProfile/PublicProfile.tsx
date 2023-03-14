@@ -7,9 +7,8 @@ import { UserData, getUserData } from "../../authentication/firestore";
 import { useParams } from "react-router-dom";
 import { User, UserContext } from "../../authentication/UserProvider";
 import { getImgUrl } from "../../storage/util/methods";
-import { getTrips } from "../../trips/access";
+import { getUserTrips } from "../../trips/access";
 import { Trip } from "../../trips/trip";
-import { filterTripsByFieldEquality } from "../../trips/utils";
 
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();
@@ -17,13 +16,11 @@ export const PublicProfile = () => {
   const { uid } = useParams();
   const { currentUser } = useContext(UserContext);
   const [profilePicSrc, setProfilePicSrc] = useState<string>();
-  const [trips, setTrips] = useState<Trip[]>([]);
+  const [userTrips, setUserTrips] = useState<Trip[]>([]);
 
   useEffect(() => {
     if (uid) {
-      getTrips().then((trips) => {
-        setTrips(filterTripsByFieldEquality(trips, "posterUid", uid));
-      });
+      getUserTrips(uid).then(setUserTrips);
     }
   }, [uid]);
 
@@ -110,7 +107,12 @@ export const PublicProfile = () => {
               <h2>{possesiveFName} reiser!</h2>
               <TitleSeperator height="5px" width="25vw" color="accent" />
             </div>
-            <TripSection trips={trips} text="" textColor="white" line="no" />
+            <TripSection
+              trips={userTrips}
+              text=""
+              textColor="white"
+              line="no"
+            />
           </div>
           <div className="container-public-user-reviews flex-column">
             <h2>{possesiveFName} erfaringer</h2>
