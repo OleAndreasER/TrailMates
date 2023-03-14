@@ -1,9 +1,9 @@
 import { Express, Request, Response } from "express";
-import { getUserData, putUserData } from "./firestore";
+import { getUserData, getUserTrips, putUserData } from "./firestore";
 import { isValidUserType } from "./user";
 
 export const startUserRoutes = (app: Express) => {
-  app.get("/user/:userUid/", async (req: Request, res: Response) => {
+  app.get("/users/:userUid/", async (req: Request, res: Response) => {
     try {
       const userUid = req.params.userUid;
       const userDocument = await getUserData(userUid);
@@ -13,7 +13,7 @@ export const startUserRoutes = (app: Express) => {
     }
   });
 
-  app.put("/user/:userUid/", async (req: Request, res: Response) => {
+  app.put("/users/:userUid/", async (req: Request, res: Response) => {
     try {
       const userUid = req.params.userUid;
       if (isValidUserType(req.body.userType)) {
@@ -27,6 +27,16 @@ export const startUserRoutes = (app: Express) => {
         console.log("Rejecting because invalid userType: " + req.body.userType);
         res.status(400).send("Invalid userType.");
       }
+    } catch (error) {
+      res.status(404).send(error);
+    }
+  });
+
+  app.get("/users/:userUid/trips", async (req: Request, res: Response) => {
+    try {
+      const userUid = req.params.userUid;
+      const users = await getUserTrips(userUid);
+      res.json(users);
     } catch (error) {
       res.status(404).send(error);
     }

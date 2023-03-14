@@ -13,9 +13,9 @@ export interface UserData {
 export const getUserData: (userUid: string) => Promise<UserData> = (
   userUid: string,
 ) => {
-  return get("user/" + userUid);
+  return get("users/" + userUid);
 };
 
 export const putUserData = (userUid: string, userData: UserData) => {
-  return put("user/" + userUid, userData);
+  return put("users/" + userUid, userData);
 };
