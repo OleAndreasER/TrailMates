@@ -1,10 +1,20 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
+import firestore from "../../../firestore/firestore";
 import { getUserTrips } from "../../users/firestore";
 import { getFavorites } from "../favorites/firestore";
-import { getTrips } from "../firestore";
-import { Trip } from "../trip";
+import { toTrip, Trip, TripData } from "../trip";
 import config from "./config";
 import { getRecommendationBasis } from "./recommendationBasis";
 import recommendationScore from "./recommendationScore";
+
+const getTripsOfOtherUsers = async (userUid: string): Promise<Trip[]> => {
+  const tripDocuments = await getDocs(
+    query(collection(firestore, "trip"), where("posterUid", "!=", userUid)),
+  );
+  return tripDocuments.docs.map((tripDocument) =>
+    toTrip(tripDocument.id, tripDocument.data() as TripData),
+  );
+};
 
 export const getRecommendedTrips = async (
   userUid: string,
@@ -12,7 +22,7 @@ export const getRecommendedTrips = async (
 ): Promise<Trip[]> => {
   const favorites = await getFavorites(userUid);
   const userTrips = await getUserTrips(userUid);
-  const allTrips = await getTrips();
+  const allTrips = await getTripsOfOtherUsers(userUid);
   const basis = getRecommendationBasis(favorites, userTrips);
   console.log(basis);
   const withScore = allTrips.map((trip) => ({
