@@ -3,8 +3,10 @@ import Edit from "../assets/Edit.svg";
 import Remove from "../assets/Trashcan.svg";
 import "./TripAuthor.css";
 import { useNavigate } from "react-router-dom";
-import { deleteTrip } from "../../trips/access";
 import { Trip } from "../../trips/trip";
+import { useContext, useState } from "react";
+import { DeleteTripPopup } from "../DeleteTripPopup/DeleteTripPopup";
+import { UserContext } from "../../authentication/UserProvider";
 
 interface Props {
   author: string;
@@ -21,10 +23,19 @@ export const TripAuthor = ({
   authorUID,
   trip,
 }: Props) => {
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { currentUser } = useContext(UserContext);
 
   const handleProfileClick = () => {
     navigate(`/profile/${authorUID}`);
+  };
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
   };
 
   return (
@@ -42,14 +53,24 @@ export const TripAuthor = ({
           onClick={handleProfileClick}
         ></Button>
       </div>
-      <div className="flex-column trippage-profile-buttons">
-        <img src={Edit} alt="" />
-        <img
-          src={Remove}
-          onClick={() => (trip ? deleteTrip(trip.tripId) : null)}
-          alt=""
+      {trip && currentUser?.userUid === authorUID ? (
+        <>
+          <div className="flex-column trippage-profile-buttons">
+            <img src={Edit} alt="" />
+            <img src={Remove} onClick={handleOpenPopup} alt="" />
+          </div>
+          <DeleteTripPopup
+            tripId={trip.tripId}
+            isOpen={isPopupOpen}
+            onClose={handleClosePopup}
+          />
+        </>
+      ) : (
+        <div
+          className="flex-column trippage-profile-buttons"
+          style={{ width: "0" }}
         />
-      </div>
+      )}
     </div>
   );
 };
