@@ -4,25 +4,18 @@ import { UserContext } from "../../authentication/UserProvider";
 import { Navigate } from "react-router-dom";
 import { TripCollection } from "../../components/TripCollection/TripCollection";
 import { Trip } from "../../trips/trip";
-import { getFavorites } from "../../trips/favorites";
-import { filterTripsByFieldEquality } from "../../trips/utils";
+import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
+import { getFavorites } from "../../trips/favorites/favorites";
 
 export const Favorites = () => {
   const { currentUser } = useContext(UserContext);
   const [trips, setTrips] = useState<Trip[]>([]);
+  const { currentUserFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
-    if (currentUser) {
-      getFavorites(currentUser.userUid).then((trips) => {
-        const userTrips = filterTripsByFieldEquality(
-          trips,
-          "posterUid",
-          currentUser.userUid,
-        );
-        setTrips(userTrips);
-      });
-    }
-  }, [currentUser]);
+    if (!currentUser || !currentUser.userUid) return;
+    getFavorites(currentUser.userUid).then(setTrips);
+  }, [currentUser, currentUserFavorites]);
 
   if (!currentUser) return <Navigate to="/" />;
 
