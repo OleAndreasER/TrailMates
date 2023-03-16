@@ -1,13 +1,13 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useState, useEffect } from "react";
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import "./TripForm.css";
 import { UserContext } from "../../authentication/UserProvider";
-import { uploadFile } from "../../storage/util/methods";
-import { postTrip } from "../../trips/access";
-import { Navigate, useNavigate } from "react-router-dom";
+import { getImgUrl, uploadFile } from "../../storage/util/methods";
+import { getTripById, postTrip } from "../../trips/access";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
-import { TripSubmission } from "../../trips/trip";
+import { Trip, TripSubmission } from "../../trips/trip";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;
@@ -31,6 +31,14 @@ export const TripForm = () => {
   const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { tripId } = useParams();
+  const [trip, setTrip] = useState<Trip | undefined>();
+
+  useEffect(() => {
+    if (tripId) {
+      getTripById(tripId).then(setTrip);
+    }
+  }, [tripId]);
 
   const uploadFiles = async (tripId: string) => {
     for (let i = 0; i < (files?.length || 0); i++) {
@@ -78,9 +86,11 @@ export const TripForm = () => {
     setIsLoading(false);
   };
 
+  /*
   if (!currentUser) {
     return <Navigate to="/" />;
   }
+  */
 
   return (
     <form className="form" onSubmit={onSubmit}>
@@ -102,6 +112,7 @@ export const TripForm = () => {
             <div className="field">
               <label htmlFor="startCity">Hvor reiste du fra?</label>
               <input
+                defaultValue={trip?.startCity}
                 className="input-box"
                 id="startCity"
                 placeholder="Roma, Stavanger, Cape Town..."
@@ -111,6 +122,7 @@ export const TripForm = () => {
             <div className="field">
               <label htmlFor="destinationCity">Hvor reiste du til?</label>
               <input
+                defaultValue={trip?.destinationCity}
                 className="input-box"
                 id="destinationCity"
                 placeholder="Firenze, Oslo, Mubishu..."
@@ -120,6 +132,7 @@ export const TripForm = () => {
             <div className="field">
               <label htmlFor="countries">Hvilke land var du innom?</label>
               <input
+                defaultValue={trip?.countries.join(", ")}
                 className="input-box"
                 id="countries"
                 placeholder="Norge, USA, Island, osv..."
@@ -129,6 +142,7 @@ export const TripForm = () => {
             <div className="field">
               <label htmlFor="price">Hva kostet reisen?</label>
               <input
+                defaultValue={trip?.price}
                 className="input-box"
                 type="number"
                 min="0"
@@ -143,6 +157,7 @@ export const TripForm = () => {
                 Hvor lang tid brukte du på reisen?
               </label>
               <input
+                defaultValue={trip?.tripDurationDays}
                 className="input-box"
                 type="number"
                 min="0"
@@ -155,13 +170,32 @@ export const TripForm = () => {
           </div>
           <div className="trip-form-top-right">
             <h2>2. Legg inn noen fine bilder fra reisen din!</h2>
-            <ImageUpload {...{ setImageIds, setFiles }} />
+            {trip ? (
+              <ImageUpload
+                {...{
+                  setImageIds,
+                  setFiles,
+                  defaultImageIds: trip.imageIds,
+                  tripId: trip.tripId,
+                }}
+              />
+            ) : (
+              <ImageUpload
+                {...{
+                  setImageIds,
+                  setFiles,
+                  defaultImageIds: [],
+                  tripId: "",
+                }}
+              />
+            )}
           </div>
         </div>
         <div className="trip-form-middle flex-row">
           <div className="trip-form-middle-left">
             <h2>3. Fortell oss litt om reisen din!</h2>
             <textarea
+              defaultValue={trip?.description}
               className="input-description"
               id="description"
               placeholder="Skriv litt om reisen din her..."
@@ -173,6 +207,7 @@ export const TripForm = () => {
             <div className="field orange">
               <label htmlFor="degreesCelcius">Klima</label>
               <input
+                defaultValue={trip?.degreesCelcius}
                 className="input-box"
                 type="number"
                 min="-100"
@@ -186,6 +221,7 @@ export const TripForm = () => {
             <div className="field orange">
               <label htmlFor="tripLengthKm">Lengde</label>
               <input
+                defaultValue={trip?.tripLengthKm}
                 className="input-box"
                 type="number"
                 min="0"
@@ -198,6 +234,7 @@ export const TripForm = () => {
             <div className="field orange">
               <label htmlFor="attractions">Attraksjoner</label>
               <input
+                defaultValue={trip?.attractions.join(", ")}
                 className="input-box"
                 id="attractions"
                 placeholder="Eiffeltårnet, Sfinx, Colosseum..."

@@ -25,6 +25,7 @@ export const App = () => {
             <Route path="/profile/:uid" element={<PublicProfile />} />
             <Route path="/reiserute/:tripId" element={<TripPage />} />
             <Route path="/createtrip/" element={<TripForm />} />
+            <Route path="/createtrip/:tripId" element={<TripForm />} />
             <Route path="/search" element={<Searchresults />} />
             <Route path="/mytrips" element={<MyTrips />} />
           </Routes>
