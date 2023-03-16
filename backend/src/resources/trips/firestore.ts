@@ -8,6 +8,7 @@ import {
   query,
   orderBy,
   limit,
+  deleteDoc,
 } from "firebase/firestore";
 import firestore from "../../firestore/firestore";
 import { toTrip, toTripData, Trip, TripData, TripSubmission } from "./trip";
@@ -72,4 +73,8 @@ export const getLatestTrips = async (amount: number) => {
   return tripDocuments.docs.map((tripDocument) =>
     toTrip(tripDocument.id, tripDocument.data() as TripData),
   );
+};
+
+export const deleteTrip = async (tripId: string) => {
+  await deleteDoc(doc(firestore, "trip", tripId));
 };

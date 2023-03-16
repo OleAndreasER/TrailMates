@@ -163,6 +163,7 @@ export const TripPage = () => {
             trips={11}
             profilePic={profilePictureUrl ? profilePictureUrl : ""}
             authorUID={maybe(trip?.posterUid)}
+            trip={trip}
           />
         </div>
       </div>

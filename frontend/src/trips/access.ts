@@ -1,5 +1,5 @@
 import { Trip, TripSubmission } from "./trip";
-import { get, post, put } from "../utils/fetchMethods";
+import { del, get, post, put } from "../utils/fetchMethods";
 
 export const getTrips = (): Promise<Trip[]> => get("trips/");
 
@@ -17,3 +17,5 @@ export const getTopRatedTrips = (): Promise<Trip[]> =>
   get("trips/highestRated");
 
 export const getLatestTrips = (): Promise<Trip[]> => get("trips/latest");
+
+export const deleteTrip = (tripId: string) => del(`trips/${tripId}`);
