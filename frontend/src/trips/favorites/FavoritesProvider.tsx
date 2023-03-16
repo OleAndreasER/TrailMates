@@ -1,15 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../authentication/UserProvider";
-import { getFavorites } from "./favorites";
 import { retrieveFavorites } from "./utils";
+import { Trip } from "../trip";
 
 interface FavoritesProviderProps {
   children: any;
 }
 
 interface FavoritesContextValue {
-  currentUserFavorites: string[];
-  setCurrentUserFavorites: React.Dispatch<React.SetStateAction<string[]>>;
+  currentUserFavorites: Trip[];
+  setCurrentUserFavorites: React.Dispatch<React.SetStateAction<Trip[]>>;
 }
 
 export const FavoritesContext = React.createContext(
@@ -17,9 +17,7 @@ export const FavoritesContext = React.createContext(
 );
 
 export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
-  const [currentUserFavorites, setCurrentUserFavorites] = useState<string[]>(
-    [],
-  );
+  const [currentUserFavorites, setCurrentUserFavorites] = useState<Trip[]>([]);
   const { currentUser } = useContext(UserContext);
 
   useEffect(() => {

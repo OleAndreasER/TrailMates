@@ -19,7 +19,6 @@ interface Props {
 }
 
 export const TripCard = ({ trip, color }: Props) => {
-  // TODO: Check if the logged in user has liked this trip already.
   const [liked, setLiked] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(false);
