@@ -47,12 +47,20 @@ export const TripCard = ({ trip, color }: Props) => {
       setIsLoading(true);
 
       if (liked) {
-        await removeFavorite(uid, tripId, setCurrentUserFavorites).then(() =>
-          setLiked(false),
+        setLiked(false);
+        await removeFavorite(uid, tripId, setCurrentUserFavorites).catch(
+          (err) => {
+            console.warn(err);
+            setLiked(true);
+          },
         );
       } else {
-        await appendFavorite(uid, tripId, setCurrentUserFavorites).then(() =>
-          setLiked(true),
+        setLiked(true);
+        await appendFavorite(uid, tripId, setCurrentUserFavorites).catch(
+          (err) => {
+            console.warn(err);
+            setLiked(false);
+          },
         );
       }
       setIsLoading(false);
