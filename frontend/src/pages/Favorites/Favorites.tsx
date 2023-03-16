@@ -5,7 +5,6 @@ import { Navigate } from "react-router-dom";
 import { TripCollection } from "../../components/TripCollection/TripCollection";
 import { Trip } from "../../trips/trip";
 import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
-import { getFavorites } from "../../trips/favorites/favorites";
 
 export const Favorites = () => {
   const { currentUser } = useContext(UserContext);
@@ -13,8 +12,7 @@ export const Favorites = () => {
   const { currentUserFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
-    if (!currentUser || !currentUser.userUid) return;
-    getFavorites(currentUser.userUid).then(setTrips);
+    setTrips(currentUserFavorites);
   }, [currentUser, currentUserFavorites]);
 
   if (!currentUser) return <Navigate to="/" />;

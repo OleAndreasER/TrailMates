@@ -1,6 +1,6 @@
 import { getTripById } from "../access";
 import { Trip } from "../trip";
-import { deleteFavorite, addFavorite, getFavorites } from "./favorites";
+import { deleteFavorite, addFavorite, getFavorites } from "./access";
 
 type setStateFunction = React.Dispatch<React.SetStateAction<Trip[]>>;
 

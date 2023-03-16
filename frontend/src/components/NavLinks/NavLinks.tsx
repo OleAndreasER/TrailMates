@@ -26,7 +26,7 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
       <NavLink className={activeStyle} end to="/mytrips" onClick={onClick}>
         Mine Reiser
       </NavLink>
-      <NavLink className={activeStyle} end to="/favourites" onClick={onClick}>
+      <NavLink className={activeStyle} end to="/favorites" onClick={onClick}>
         Favoritter
       </NavLink>
     </div>
