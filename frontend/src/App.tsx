@@ -30,7 +30,7 @@ export const App = () => {
               <Route path="/createtrip/" element={<TripForm />} />
               <Route path="/search" element={<Searchresults />} />
               <Route path="/mytrips" element={<MyTrips />} />
-              <Route path="/favourites" element={<Favorites />} />
+              <Route path="/favorites" element={<Favorites />} />
             </Routes>
             <Footer />
           </main>
