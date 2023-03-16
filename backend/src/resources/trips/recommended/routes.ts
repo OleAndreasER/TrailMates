@@ -7,7 +7,6 @@ export const startRecommendedRoutes = (app: Express) => {
     "/trips/recommended/:userUid",
     async (req: Request, res: Response) => {
       const { amount = 20 } = parseTripQuery(req.query);
-
       try {
         const userUid = req.params.userUid;
         const recommendedTrips = await getRecommendedTrips(userUid, amount);

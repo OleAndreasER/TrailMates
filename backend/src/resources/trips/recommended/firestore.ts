@@ -24,7 +24,6 @@ export const getRecommendedTrips = async (
   const userTrips = await getUserTrips(userUid);
   const allTrips = await getTripsOfOtherUsers(userUid);
   const basis = getRecommendationBasis(favorites, userTrips);
-  console.log(basis);
   const withScore = allTrips.map((trip) => ({
     trip: trip,
     score: recommendationScore(config, basis, trip),

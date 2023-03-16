@@ -1,7 +1,5 @@
 import { Trip } from "../trip";
 
-// Calculating the recommendation basis at the start gets rid of redundant work.
-
 export interface RecommendationBasis {
   favoritesPriceMean: number;
   userTripsPriceMean: number;
@@ -13,6 +11,7 @@ export interface RecommendationBasis {
 
 const sum = (xs: number[]): number => xs.reduce((x1, x2) => x1 + x2, 0);
 
+// Calculating the recommendation basis at the start gets rid of redundant work.
 export const getRecommendationBasis = (
   favorites: Trip[],
   userTrips: Trip[],

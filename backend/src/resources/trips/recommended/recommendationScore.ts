@@ -8,11 +8,9 @@ export default (
   basis: RecommendationBasis,
   trip: Trip,
 ): number => {
-  console.log(trip.destinationCity);
   let score: number = 0;
   for (const consider of config.considerations) {
     score += consider(basis, trip);
-    console.log(score);
   }
   return score;
 };
