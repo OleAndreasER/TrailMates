@@ -56,7 +56,11 @@ export const TripAuthor = ({
       {trip && currentUser?.userUid === authorUID ? (
         <>
           <div className="flex-column trippage-profile-buttons">
-            <img src={Edit} alt="" />
+            <img
+              src={Edit}
+              onClick={() => navigate("/edittrip/" + trip.tripId)}
+              alt=""
+            />
             <img src={Remove} onClick={handleOpenPopup} alt="" />
           </div>
           <DeleteTripPopup

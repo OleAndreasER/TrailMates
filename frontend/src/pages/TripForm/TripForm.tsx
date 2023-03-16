@@ -1,13 +1,13 @@
-import { FormEvent, useContext, useState, useEffect } from "react";
-import ImageUpload from "../../components/ImageUpload/ImageUpload";
-import "./TripForm.css";
-import { UserContext } from "../../authentication/UserProvider";
-import { getImgUrl, uploadFile } from "../../storage/util/methods";
-import { getTripById, postTrip } from "../../trips/access";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../../authentication/UserProvider";
 import { Button } from "../../components/Button/Button";
+import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
+import { uploadFile } from "../../storage/util/methods";
+import { getTripById, postTrip, putTrip } from "../../trips/access";
 import { Trip, TripSubmission } from "../../trips/trip";
+import "./TripForm.css";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;
@@ -80,17 +80,22 @@ export const TripForm = () => {
     };
 
     setIsLoading(true);
-    const { tripId } = await postTrip(tripSubmission);
-    await uploadFiles(tripId);
-    navigate("/reiserute/" + tripId);
+    if (trip) {
+      await putTrip(trip.tripId, tripSubmission);
+      await uploadFiles(trip.tripId);
+      navigate("/reiserute/" + trip.tripId);
+      s;
+    } else {
+      const { tripId } = await postTrip(tripSubmission);
+      await uploadFiles(tripId);
+      navigate("/reiserute/" + tripId);
+    }
     setIsLoading(false);
   };
 
-  /*
   if (!currentUser) {
     return <Navigate to="/" />;
   }
-  */
 
   return (
     <form className="form" onSubmit={onSubmit}>
