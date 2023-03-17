@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./TripPage.css";
 import { Button } from "../../components/Button/Button";
 import { TripDetailsItem } from "../../components/TripDetailsItem/TripDetailsItem";
@@ -10,6 +10,13 @@ import { getTripById } from "../../trips/access";
 import { getUserData, UserData } from "../../authentication/firestore";
 import { getImgUrl } from "../../storage/util/methods";
 import { Trip } from "../../trips/trip";
+import { UserContext } from "../../authentication/UserProvider";
+import {
+  appendFavorite,
+  isFavorite,
+  removeFavorite,
+} from "../../trips/favorites/utils";
+import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
@@ -19,11 +26,16 @@ const maybe = (string: string | undefined): string =>
 
 export const TripPage = () => {
   const { tripId } = useParams();
+  const [liked, setLiked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [trip, setTrip] = useState<Trip | undefined>();
   const [user, setUser] = useState<UserData | undefined>();
   const [profilePictureUrl, setProfilePicUrl] =
     useState<string>(defaultProfilePicUrl);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const { currentUser } = useContext(UserContext);
+  const { currentUserFavorites, setCurrentUserFavorites } =
+    useContext(FavoritesContext);
 
   const scrolldown = () => {
     window.scrollTo({
@@ -40,6 +52,11 @@ export const TripPage = () => {
     if (!tripId) return;
     getTripById(tripId).then(setTrip);
   }, [tripId]);
+
+  useEffect(() => {
+    if (!currentUserFavorites || !tripId) return;
+    setLiked(isFavorite(currentUserFavorites, tripId));
+  }, [currentUserFavorites, tripId, trip]);
 
   useEffect(() => {
     const updateImageUrls = async () => {
@@ -75,6 +92,37 @@ export const TripPage = () => {
 
   const scrollHandlerReviews = () => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleOnFavoriteClick = () => {
+    if (!currentUser || !trip) return;
+    const toggle = async () => {
+      const uid = currentUser.userUid;
+      const tripId = trip.tripId;
+
+      if (isLoading || !uid || !tripId) return;
+      setIsLoading(true);
+
+      if (liked) {
+        setLiked(false);
+        await removeFavorite(uid, tripId, setCurrentUserFavorites).catch(
+          (err) => {
+            console.warn(err);
+            setLiked(true);
+          },
+        );
+      } else {
+        setLiked(true);
+        await appendFavorite(uid, tripId, setCurrentUserFavorites).catch(
+          (err) => {
+            console.warn(err);
+            setLiked(false);
+          },
+        );
+      }
+      setIsLoading(false);
+    };
+    toggle();
   };
 
   return (
@@ -120,8 +168,9 @@ export const TripPage = () => {
               styling={"accent-fill"}
               width={"28%"}
               height={"2.5vh"}
-              icon={"heart"}
+              icon={liked ? "filledHeart" : "heart"}
               fontSize={"1vw"}
+              onClick={handleOnFavoriteClick}
             ></Button>
           </div>
         </div>

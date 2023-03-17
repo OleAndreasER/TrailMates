@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="ft-main-item flex-column footer-links">
           <Link to="/">Utforsk</Link>
           <Link to="/trips">Mine Reiser</Link>
-          <Link to="/favourites">Favoritter</Link>
+          <Link to="/favorites">Favoritter</Link>
           <Link to="/profile">Profil</Link>
         </div>
       </section>

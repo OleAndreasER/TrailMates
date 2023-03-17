@@ -23,3 +23,12 @@ export const post = async (path: string, data: {}): Promise<any> => {
 
   return response.json();
 };
+
+export const del = async (path: string): Promise<any> => {
+  const response = await fetch(baseUserURI + path, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  return response.json();
+};
