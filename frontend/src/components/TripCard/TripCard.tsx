@@ -1,10 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ReactComponent as FilledHeart } from "../../resources/media/heart-filled-icon.svg";
 import { ReactComponent as Arrow } from "../../components/assets/card-arrow.svg";
 import "./TripCard.css";
 import { useNavigate } from "react-router-dom";
 import { getImgUrl } from "../../storage/util/methods";
 import { Trip } from "../../trips/trip";
+import { UserContext } from "../../authentication/UserProvider";
+import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
+import {
+  appendFavorite,
+  isFavorite,
+  removeFavorite,
+} from "../../trips/favorites/utils";
 
 interface Props {
   trip: Trip;
@@ -12,10 +19,13 @@ interface Props {
 }
 
 export const TripCard = ({ trip, color }: Props) => {
-  // TODO: Check if the logged in user has liked this trip already.
   const [liked, setLiked] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { currentUser } = useContext(UserContext);
+  const { currentUserFavorites, setCurrentUserFavorites } =
+    useContext(FavoritesContext);
 
   useEffect(() => {
     if (!trip.imageIds) return;
@@ -23,9 +33,39 @@ export const TripCard = ({ trip, color }: Props) => {
     getImgUrl(`trips/${trip.tripId}/${trip.imageIds[0]}`).then(setImageUrl);
   }, [trip]);
 
+  useEffect(() => {
+    if (!currentUserFavorites || !trip.tripId) return;
+    setLiked(isFavorite(currentUserFavorites, trip.tripId));
+  }, [currentUserFavorites]);
+
   const handleClick = () => {
-    // TODO: link a backend call to save the liked status.
-    setLiked(!liked);
+    const toggle = async () => {
+      const uid = currentUser?.userUid;
+      const tripId = trip.tripId;
+
+      if (isLoading || !uid || !tripId) return;
+      setIsLoading(true);
+
+      if (liked) {
+        setLiked(false);
+        await removeFavorite(uid, tripId, setCurrentUserFavorites).catch(
+          (err) => {
+            console.warn(err);
+            setLiked(true);
+          },
+        );
+      } else {
+        setLiked(true);
+        await appendFavorite(uid, tripId, setCurrentUserFavorites).catch(
+          (err) => {
+            console.warn(err);
+            setLiked(false);
+          },
+        );
+      }
+      setIsLoading(false);
+    };
+    toggle();
   };
 
   const handleTripLinkClicked = () => {

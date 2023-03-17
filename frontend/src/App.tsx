@@ -12,6 +12,8 @@ import { TripPage } from "./pages/TripPage/TripPage";
 import { TripForm } from "./pages/TripForm/TripForm";
 import Searchresults from "./pages/Searchresults/Searchresults";
 import { MyTrips } from "./pages/MyTrips/MyTrips";
+import { Favorites } from "./pages/Favorites/Favorites";
+import { FavoritesProvider } from "./trips/favorites/FavoritesProvider";
 
 export const App = () => {
   return (

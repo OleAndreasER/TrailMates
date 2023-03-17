@@ -4,6 +4,7 @@ import { ReactComponent as ImagesIcon } from "../../resources/media/images-icon.
 import { ReactComponent as CommentIcon } from "../../resources/media/comment-icon.svg";
 import { ReactComponent as PlusOrangeIcon } from "../../components/assets/plusOrange.svg";
 import { ReactComponent as PlusBlueIcon } from "../../components/assets/plusBlue.svg";
+import { ReactComponent as FilledHeartIcon } from "../../resources/media/heart-filled-icon.svg";
 
 interface ButtonProps {
   width?: string;
@@ -16,14 +17,21 @@ interface ButtonProps {
     | "accent-outline"
     | "accent-fill"
     | "secondary-fill";
-  icon?: "heart" | "comment" | "images" | "plusBlue" | "plusOrange";
+  icon?:
+    | "heart"
+    | "comment"
+    | "images"
+    | "plusBlue"
+    | "plusOrange"
+    | "filledHeart";
   className?: string;
   style?: React.CSSProperties;
   textColor?: string;
 }
 
 const iconComponents = {
-  heart: <HeartIcon />,
+  filledHeart: <FilledHeartIcon className="trip-heart-icon" />,
+  heart: <HeartIcon className="trip-heart-icon" />,
   images: <ImagesIcon />,
   comment: <CommentIcon />,
   plusOrange: <PlusOrangeIcon className="plus" />,

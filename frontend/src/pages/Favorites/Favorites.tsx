@@ -1,26 +1,25 @@
 import { useContext, useState, useEffect } from "react";
-import "./MyTrips.css";
+import "./Favorites.css";
 import { UserContext } from "../../authentication/UserProvider";
 import { Navigate } from "react-router-dom";
 import { TripCollection } from "../../components/TripCollection/TripCollection";
 import { Trip } from "../../trips/trip";
-import { getUserTrips } from "../../trips/access";
+import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
 
-export const MyTrips = () => {
+export const Favorites = () => {
   const { currentUser } = useContext(UserContext);
-  const [userTrips, setUserTrips] = useState<Trip[]>([]);
+  const [trips, setTrips] = useState<Trip[]>([]);
+  const { currentUserFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
-    if (currentUser) {
-      getUserTrips(currentUser.userUid).then(setUserTrips);
-    }
-  }, [currentUser]);
+    setTrips(currentUserFavorites);
+  }, [currentUser, currentUserFavorites]);
 
   if (!currentUser) return <Navigate to="/" />;
 
   return (
-    <div className="my-trips">
-      <TripCollection trips={userTrips} />
+    <div className="favorite">
+      <TripCollection trips={trips} />
     </div>
   );
 };

@@ -1,21 +1,35 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Header } from "../../components/Header/Header";
 import { SplitSection } from "../../components/SplitSection/SplitSection";
 import { TripSection } from "../../components/TripSection/TripSection";
-import { getLatestTrips, getTopRatedTrips, getTrips } from "../../trips/access";
+import {
+  getLatestTrips,
+  getRecommendedTrips,
+  getTopRatedTrips,
+  getTrips,
+} from "../../trips/access";
 import "./Frontpage.css";
 import { Trip } from "../../trips/trip";
+import { UserContext } from "../../authentication/UserProvider";
 
 export const Frontpage = () => {
   const [recommendedTrips, setRecommendedTrips] = useState<Trip[]>([]);
   const [topRatedTrips, setTopRatedTrips] = useState<Trip[]>([]);
   const [latestTrips, setLatestTrips] = useState<Trip[]>([]);
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
-    getTrips().then(setRecommendedTrips);
     getTopRatedTrips().then(setTopRatedTrips);
     getLatestTrips().then(setLatestTrips);
   }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      getRecommendedTrips(currentUser.userUid).then(setRecommendedTrips);
+    } else {
+      getTrips().then(setRecommendedTrips);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     document.title = "Trailmates - Hjem";
