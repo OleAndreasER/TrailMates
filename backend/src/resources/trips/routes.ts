@@ -10,10 +10,13 @@ import {
   getLatestTrips,
 } from "./firestore";
 import { parseTripQuery } from "./queryParsing";
+import { startCommentsRoutes } from "./comments/routes";
 
 export const startTripRoutes = (app: Express) => {
   //"trips/favorites/"
   startFavoritesRoutes(app);
+  //"trips/:tripId/comments"
+  startCommentsRoutes(app);
 
   app.get("/trips/highestRated", async (req: Request, res: Response) => {
     const { amount = 20 } = parseTripQuery(req.query);

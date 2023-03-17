@@ -1,8 +1,12 @@
 import { Express, Request, Response } from "express";
+import { startCommentsRoutes } from "./comments/routes";
 import { getUserData, getUserTrips, putUserData } from "./firestore";
 import { isValidUserType } from "./user";
 
 export const startUserRoutes = (app: Express) => {
+  //"users/:userUid/comments"
+  startCommentsRoutes(app);
+
   app.get("/users/:userUid/", async (req: Request, res: Response) => {
     try {
       const userUid = req.params.userUid;
