@@ -10,9 +10,13 @@ import {
   where,
 } from "firebase/firestore";
 import firestore from "../../../firestore/firestore";
+import { getTripById } from "../firestore";
 import { Comment, CommentSubmission, toComment } from "./comment";
 
 export const getComments = async (tripId: string): Promise<Comment[]> => {
+  // You shouldn't receive comments on a removed trip.
+  if (!(await getTripById(tripId))) return [];
+
   const commentDocuments = await getDocs(
     query(collection(firestore, "comment"), where("tripId", "==", tripId)),
   );
