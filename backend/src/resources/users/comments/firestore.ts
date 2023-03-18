@@ -12,10 +12,17 @@ export const getComments = async (userUid: string): Promise<Comment[]> => {
     (commentDocument) => commentDocument.data() as Comment,
   );
 
-  // Don't return comments on deleted trips.
-  return Promise.all(
-    userComments.filter(
-      async (comment) => (await getTripById(comment.tripId)) !== null,
+  // Collects comments that are on an existing trip.
+  const commentsOnExistingTrips: Comment[] = [];
+  await Promise.all(
+    userComments.map((comment) =>
+      getTripById(comment.tripId).then((trip) => {
+        if (trip !== null) {
+          commentsOnExistingTrips.push(comment);
+        }
+      }),
     ),
   );
+
+  return commentsOnExistingTrips;
 };

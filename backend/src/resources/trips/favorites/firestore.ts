@@ -25,7 +25,10 @@ export const getFavorites = async (userUid: string): Promise<Trip[]> => {
   const tripIds: string[] = favoritesDocuments.docs.map(
     (favoritesDocument) => favoritesDocument.data().tripId,
   );
-  return await Promise.all(tripIds.map(getTripById));
+  const maybeFavorites: (Trip | null)[] = await Promise.all(
+    tripIds.map(getTripById),
+  );
+  return maybeFavorites.filter((trip) => trip !== null) as Trip[];
 };
 
 export const setFavorite = async (userUid: string, tripId: string) => {

@@ -4,7 +4,6 @@ import logo from "../assets/logo.svg";
 import NavLinks from "../NavLinks/NavLinks";
 import Searchbar from "../Searchbar/Searchbar";
 import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "../Button/Button";
 import { UserContext } from "../../authentication/UserProvider";
@@ -12,6 +11,7 @@ import { logOut } from "../../authentication/authentication";
 import { ReactComponent as Hamburger } from "../assets/hamburger.svg";
 import { ReactComponent as Close } from "../assets/navbar_close.svg";
 import { LoginPopup } from "../LoginPopup/LoginPopup";
+import useNavigate from "../../hooks/useNavigate";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
