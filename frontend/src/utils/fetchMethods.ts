@@ -5,20 +5,20 @@ export const get = async (path: string): Promise<any> => {
   return response.json();
 };
 
-export const put = async (path: string, data: {}): Promise<any> => {
+export const put = async (path: string, body: {}): Promise<any> => {
   const response = await fetch(baseUserURI + path, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(body),
   });
   return response.json();
 };
 
-export const post = async (path: string, data: {}): Promise<any> => {
+export const post = async (path: string, body: {}): Promise<any> => {
   const response = await fetch(baseUserURI + path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(body),
   });
 
   return response.json();

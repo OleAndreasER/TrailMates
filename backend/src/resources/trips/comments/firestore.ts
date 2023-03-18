@@ -36,9 +36,9 @@ export const getComment = async (
   const commentDocuments = await getDocs(commentQuery(tripId, userUid));
 
   if (commentDocuments.empty) {
-    console.log("No comment found.");
     return null;
   }
+
   return commentDocuments.docs.map(
     (commentDocument) => commentDocument.data() as Comment,
   )[0];
@@ -50,11 +50,15 @@ export const putComment = async (
   commentSubmission: CommentSubmission,
 ): Promise<Comment> => {
   const commentDocuments = await getDocs(commentQuery(tripId, userUid));
+
+  // New comment
   if (commentDocuments.empty) {
     const comment = toComment(tripId, userUid, commentSubmission);
     await addDoc(collection(firestore, "comment"), comment);
     return comment;
   }
+
+  // Overriding existing comment
   const commentDocument = commentDocuments.docs[0];
   const commentId = commentDocument.id;
   await setDoc(doc(firestore, "comment", commentId), commentSubmission, {

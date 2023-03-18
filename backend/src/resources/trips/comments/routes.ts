@@ -24,7 +24,11 @@ export const startCommentsRoutes = (app: Express) => {
         const tripId = req.params.tripId;
         const userUid = req.params.userUid;
         const comment = await getComment(tripId, userUid);
-        res.json(comment);
+        if (comment) {
+          res.json(comment);
+        } else {
+          res.status(404).send("Comment not found.");
+        }
       } catch (error) {
         res.status(404).send(error);
       }
@@ -37,14 +41,15 @@ export const startCommentsRoutes = (app: Express) => {
       try {
         const tripId = req.params.tripId;
         const userUid = req.params.userUid;
-        const tripSubmission = req.body;
-        const comment = await putComment(tripId, userUid, tripSubmission);
+        const commentSubmission = req.body;
+        const comment = await putComment(tripId, userUid, commentSubmission);
         res.json(comment);
       } catch (error) {
         res.status(404).send(error);
       }
     },
   );
+
   app.delete(
     "/trips/:tripId/comments/:userUid",
     async (req: Request, res: Response) => {
