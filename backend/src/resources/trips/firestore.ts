@@ -13,10 +13,10 @@ import {
 import firestore from "../../firestore/firestore";
 import { toTrip, toTripData, Trip, TripData, TripSubmission } from "./trip";
 
-export const getTripById = async (tripId: string) => {
+export const getTripById = async (tripId: string): Promise<Trip | null> => {
   const tripDocument = await getDoc(doc(firestore, "trip", tripId));
   if (!tripDocument.exists()) {
-    console.log("No such document exists!");
+    return null;
   }
   return toTrip(tripDocument.id, tripDocument.data() as TripData);
 };
@@ -29,9 +29,6 @@ export const getTrips = async (
       ? await getDocs(collection(firestore, "trip"))
       : await getDocs(query(collection(firestore, "trip"), limit(amount)));
 
-  if (tripDocuments.empty) {
-    console.log("No trips found!");
-  }
   return tripDocuments.docs.map((tripDocument) =>
     toTrip(tripDocument.id, tripDocument.data() as TripData),
   );

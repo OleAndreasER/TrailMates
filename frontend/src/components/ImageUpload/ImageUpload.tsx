@@ -11,11 +11,6 @@ interface Props {
   tripId: string;
 }
 
-interface ImageData {
-  id: string;
-  file: File;
-}
-
 const ImageUpload = ({
   setImageIds,
   setFiles,
@@ -36,19 +31,17 @@ const ImageUpload = ({
   const handleFilesChanged = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.currentTarget.files;
     setFiles(selectedFiles);
-    setImageIds([]);
 
     const newImageUrls: string[] = [];
+    const newImageIds: string[] = [];
 
     for (let i = 0; i < (selectedFiles?.length || 0); i++) {
       const id = crypto.randomUUID();
-      setImageIds((prev) => [...prev, id]);
-
-      const file = selectedFiles![i];
-      const url = URL.createObjectURL(file);
-
+      newImageIds.push(id);
+      const url = URL.createObjectURL(selectedFiles![i]);
       newImageUrls.push(url);
     }
+    setImageIds(newImageIds);
     setImageUrls(newImageUrls);
   };
 

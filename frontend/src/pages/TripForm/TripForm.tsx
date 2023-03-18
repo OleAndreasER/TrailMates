@@ -1,9 +1,10 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { UserContext } from "../../authentication/UserProvider";
 import { Button } from "../../components/Button/Button";
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
+import useNavigate from "../../hooks/useNavigate";
 import { uploadFile } from "../../storage/util/methods";
 import { getTripById, postTrip, putTrip } from "../../trips/access";
 import { Trip, TripSubmission } from "../../trips/trip";
@@ -36,7 +37,12 @@ export const TripForm = () => {
 
   useEffect(() => {
     if (tripId) {
-      getTripById(tripId).then(setTrip);
+      getTripById(tripId)
+        .then((trip) => {
+          setImageIds(trip.imageIds);
+          return trip;
+        })
+        .then(setTrip);
     }
   }, [tripId]);
 
@@ -84,7 +90,6 @@ export const TripForm = () => {
       await putTrip(trip.tripId, tripSubmission);
       await uploadFiles(trip.tripId);
       navigate("/reiserute/" + trip.tripId);
-      s;
     } else {
       const { tripId } = await postTrip(tripSubmission);
       await uploadFiles(tripId);

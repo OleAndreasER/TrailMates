@@ -43,7 +43,7 @@ export const startTripRoutes = (app: Express) => {
   app.get("/trips/:tripId/", async (req: Request, res: Response) => {
     try {
       const tripId = req.params.tripId;
-      const trip: Trip = await getTripById(tripId);
+      const trip = await getTripById(tripId);
       res.json(trip);
     } catch (error) {
       res.status(404).send(error);

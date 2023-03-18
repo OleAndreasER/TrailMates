@@ -3,10 +3,11 @@ import { ProfileItem } from "../../components/ProfileItem/ProfileItem";
 import { Button } from "../../components/Button/Button";
 import { useEffect, useContext, ChangeEvent, useRef, useState } from "react";
 import { UserContext } from "../../authentication/UserProvider";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { logOut } from "../../authentication/authentication";
 import { uploadFile, getImgUrl } from "../../storage/util/methods";
 import { ToggleSwitch } from "../../components/ToggleSwitch/ToggleSwitch";
+import useNavigate from "../../hooks/useNavigate";
 
 export const PrivateProfile = () => {
   const { currentUser } = useContext(UserContext);

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import useNavigate from "../../hooks/useNavigate";
 import { deleteTrip } from "../../trips/access";
 import { Button } from "../Button/Button";
 import "./DeleteTripPopup.css";

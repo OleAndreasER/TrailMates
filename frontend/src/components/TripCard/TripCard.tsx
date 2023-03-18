@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { ReactComponent as FilledHeart } from "../../resources/media/heart-filled-icon.svg";
 import { ReactComponent as Arrow } from "../../components/assets/card-arrow.svg";
 import "./TripCard.css";
-import { useNavigate } from "react-router-dom";
 import { getImgUrl } from "../../storage/util/methods";
 import { Trip } from "../../trips/trip";
 import { UserContext } from "../../authentication/UserProvider";
@@ -12,6 +11,7 @@ import {
   isFavorite,
   removeFavorite,
 } from "../../trips/favorites/utils";
+import useNavigate from "../../hooks/useNavigate";
 
 interface Props {
   trip: Trip;

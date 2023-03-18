@@ -2,11 +2,11 @@ import { Button } from "../Button/Button";
 import Edit from "../assets/Edit.svg";
 import Remove from "../assets/Trashcan.svg";
 import "./TripAuthor.css";
-import { useNavigate } from "react-router-dom";
 import { Trip } from "../../trips/trip";
 import { useContext, useState } from "react";
 import { DeleteTripPopup } from "../DeleteTripPopup/DeleteTripPopup";
 import { UserContext } from "../../authentication/UserProvider";
+import useNavigate from "../../hooks/useNavigate";
 
 interface Props {
   author: string;
