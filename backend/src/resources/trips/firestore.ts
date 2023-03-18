@@ -17,7 +17,7 @@ export const getTripById = async (tripId: string) => {
   if (!tripDocument.exists()) {
     console.log("No such document exists!");
   }
-  return toTrip(tripDocument.id, tripDocument.data() as TripData);
+  return await toTrip(tripDocument.id, tripDocument.data() as TripData);
 };
 
 export const getTrips = async (
@@ -31,8 +31,10 @@ export const getTrips = async (
   if (tripDocuments.empty) {
     console.log("No trips found!");
   }
-  return tripDocuments.docs.map((tripDocument) =>
-    toTrip(tripDocument.id, tripDocument.data() as TripData),
+  return await Promise.all(
+    tripDocuments.docs.map((tripDocument) =>
+      toTrip(tripDocument.id, tripDocument.data() as TripData),
+    ),
   );
 };
 
@@ -51,7 +53,7 @@ export const postTrip = async (
     collection(firestore, "trip"),
     tripData,
   );
-  return toTrip(collectionReference.id, tripData);
+  return await toTrip(collectionReference.id, tripData);
 };
 
 export const getTopRatedTrips = async (amount: number) => {
@@ -69,7 +71,9 @@ export const getLatestTrips = async (amount: number) => {
       limit(amount),
     ),
   );
-  return tripDocuments.docs.map((tripDocument) =>
-    toTrip(tripDocument.id, tripDocument.data() as TripData),
+  return await Promise.all(
+    tripDocuments.docs.map((tripDocument) =>
+      toTrip(tripDocument.id, tripDocument.data() as TripData),
+    ),
   );
 };

@@ -1,3 +1,5 @@
+import { getAverageRating } from "./comments/firestore";
+
 export interface TripSubmission {
   startCity: string;
   destinationCity: string;
@@ -27,10 +29,14 @@ export const toTripData = (tripSubmission: TripSubmission): TripData => ({
   ...tripSubmission,
 });
 
-export const toTrip = (tripId: string, tripData: TripData): Trip => ({
-  tripId: tripId,
-  averageRating: randomIntUpTo(5), //TODO: Calculate average rating
-  ...tripData,
-});
-
-const randomIntUpTo = (max: number) => Math.floor(Math.random() * (max + 1));
+export const toTrip = async (
+  tripId: string,
+  tripData: TripData,
+): Promise<Trip> => {
+  const averageRating = await getAverageRating(tripId);
+  return {
+    tripId: tripId,
+    averageRating: averageRating,
+    ...tripData,
+  };
+};

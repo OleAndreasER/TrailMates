@@ -10,12 +10,12 @@ import {
   where,
 } from "firebase/firestore";
 import firestore from "../../../firestore/firestore";
-import { getTripById } from "../firestore";
 import { Comment, CommentSubmission, toComment } from "./comment";
 
 export const getComments = async (tripId: string): Promise<Comment[]> => {
-  // You shouldn't receive comments on a removed trip.
-  if (!(await getTripById(tripId))) return [];
+  // You shouldn't receive comments on non-existent trip.
+  const tripDocument = await getDoc(doc(firestore, "trip", tripId));
+  if (!tripDocument.exists()) return [];
 
   const commentDocuments = await getDocs(
     query(collection(firestore, "comment"), where("tripId", "==", tripId)),
@@ -77,4 +77,13 @@ export const putComment = async (
 export const deleteComment = async (tripId: string, userUid: string) => {
   const commentDocuments = await getDocs(commentQuery(tripId, userUid));
   commentDocuments.forEach((commentDocument) => deleteDoc(commentDocument.ref));
+};
+
+export const getAverageRating = async (tripId: string): Promise<number> => {
+  const comments = await getComments(tripId);
+  if (comments.length === 0) return 0;
+  const totalRating = comments
+    .map((comment) => comment.rating)
+    .reduce((a, b) => a + b);
+  return totalRating / comments.length;
 };

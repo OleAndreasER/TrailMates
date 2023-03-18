@@ -11,8 +11,10 @@ const getTripsOfOtherUsers = async (userUid: string): Promise<Trip[]> => {
   const tripDocuments = await getDocs(
     query(collection(firestore, "trip"), where("posterUid", "!=", userUid)),
   );
-  return tripDocuments.docs.map((tripDocument) =>
-    toTrip(tripDocument.id, tripDocument.data() as TripData),
+  return await Promise.all(
+    tripDocuments.docs.map((tripDocument) =>
+      toTrip(tripDocument.id, tripDocument.data() as TripData),
+    ),
   );
 };
 
