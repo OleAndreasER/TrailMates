@@ -1,0 +1,65 @@
+.comment-form {
+  width: 55vw;
+  height: 60vh;
+  background-color: #ddd37c;
+  border-radius: 30px;
+  padding: 5% 7%;
+  margin: auto;
+}
+
+.comment-form-user-info {
+}
+
+.comment-form-user-info-container {
+  width: 90%;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.comment-form-user-info-profile {
+  align-items: center;
+  font-weight: 300;
+}
+
+.comment-form-user-info-profile h3 {
+  align-items: center;
+  font-weight: 300;
+  font-size: 1.2vw;
+  margin-top: 2%;
+}
+
+.comment-form-user-info-profile p {
+  margin: 2% 0;
+}
+
+.comment-form-profile-pic {
+  height: 10vh;
+  width: 10vh;
+  border-radius: 100px;
+}
+
+.comment-form-user-info-rating {
+  align-items: center;
+}
+
+.comment-form-comment {
+  background-color: #efefef;
+  border-radius: 20px;
+  height: 15vw;
+  padding: 1.5% 5%;
+  margin-top: 3%;
+}
+
+.comment-form-actions {
+  width: 100%;
+  justify-content: space-between;
+  margin: 3% 0;
+  align-items: center;
+  padding-bottom: 10%;
+}
+
+.comment-form-actions a {
+  color: var(--secondary);
+  font-size: 1.5vw;
+  font-weight: 600;
+}
