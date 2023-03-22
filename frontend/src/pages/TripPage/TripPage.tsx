@@ -354,7 +354,7 @@ export const TripPage = () => {
           styling={"secondary-outline"}
           width="25%"
           height="5vh"
-          onClick={handleOpenCommentPopup}<
+          onClick={handleOpenCommentPopup}
         />
       </div>
     </>
