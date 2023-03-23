@@ -19,14 +19,24 @@ import {
 import { Comment } from "../../comments/comment";
 import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
 import { LoginContext } from "../../components/LoginPopup/LoginPopup";
-import { CommentForm } from "../../components/CommentForm/CommentForm";
-import { getCommentsOnTrip } from "../../comments/access";
+import {
+  CommentForm,
+  EditInfo,
+} from "../../components/CommentForm/CommentForm";
+import { deleteComment, getCommentsOnTrip } from "../../comments/access";
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
+const initialEditInfo = {
+  title: "",
+  comment: "",
+  rating: "",
+};
+
 const maybe = (string: string | undefined): string =>
   string !== undefined ? string : "N/A";
+
 export const TripPage = () => {
   const { tripId } = useParams();
   const [liked, setLiked] = useState(false);
@@ -42,6 +52,7 @@ export const TripPage = () => {
   const [authorTripCount, setAuthorTripCount] = useState<number>(0);
   const [comments, setComments] = useState<Comment[]>([]);
   const { showLoginModal } = useContext(LoginContext);
+  const [editInfo, setEditInfo] = useState<EditInfo>(initialEditInfo);
 
   const scrolldown = () => {
     window.scrollTo({
@@ -105,6 +116,45 @@ export const TripPage = () => {
 
   const handleCloseCommentPopup = () => {
     setIsCommentPopupOpen(false);
+    setEditInfo(initialEditInfo);
+  };
+
+  const handleEditCommentSuccessful = (editInfo: EditInfo) => {
+    const userUid = currentUser?.userUid;
+    const tripId = trip?.tripId;
+    if (!tripId || !userUid) return;
+
+    const commentIndex = comments.findIndex(
+      (comment) => comment.userUid === userUid && comment.tripId === tripId,
+    );
+
+    if (commentIndex == -1) {
+      const newComment: Comment = {
+        comment: editInfo.comment,
+        rating: parseInt(editInfo.rating),
+        title: editInfo.title,
+        tripId: tripId,
+        userUid: userUid,
+        postDate: new Date().toISOString(),
+      };
+      setComments((prev) => [...prev, newComment]);
+
+      return;
+    }
+
+    const comment = comments[commentIndex];
+
+    comment.rating = parseInt(editInfo.rating);
+    comment.title = editInfo.title;
+    comment.comment = editInfo.comment;
+
+    setComments((prev) => {
+      return [
+        ...prev.slice(0, commentIndex),
+        comment,
+        ...prev.slice(commentIndex + 1),
+      ];
+    });
   };
 
   const scrollHandlerReviews = () => {
@@ -343,17 +393,33 @@ export const TripPage = () => {
             <ReviewBox
               title={item.title}
               content={item.comment}
-              rating={item.rating.toString()}
+              rating={item.rating?.toString() || ""}
               authorUid={item.userUid}
+              onEditClick={() => {
+                setEditInfo({
+                  comment: item.comment,
+                  rating: item.rating?.toString() || "",
+                  title: item.title,
+                });
+                setIsCommentPopupOpen(true);
+              }}
+              onDeleteClick={() => {
+                deleteComment(tripId!, item.userUid).then(() => {
+                  setComments(comments.filter((comment) => comment !== item));
+                });
+              }}
             />
           </div>
         ))}
       </div>
-      <CommentForm
-        isOpen={isCommentPopupOpen}
-        onClose={handleCloseCommentPopup}
-        tripId={trip?.tripId || ""}
-      ></CommentForm>
+      {isCommentPopupOpen && (
+        <CommentForm
+          onClose={handleCloseCommentPopup}
+          tripId={trip?.tripId || ""}
+          editInfo={editInfo}
+          handleEditComment={handleEditCommentSuccessful}
+        ></CommentForm>
+      )}
       <div className="trippage-write-review flex-column">
         <h2>Har du vært på denne reisen?</h2>
         <Button

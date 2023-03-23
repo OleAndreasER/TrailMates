@@ -48,6 +48,7 @@
   min-height: 18vh;
   min-width: 60vw;
   padding: 1% 3%;
+  position: relative;
 }
 
 .dark-mode .reviewe-contain-container {
@@ -73,4 +74,34 @@
 
 .review-rating {
   justify-content: space-between;
+  position: relative;
+}
+
+.comment-buttons {
+  position: absolute;
+  left: -7.5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 7.5vw;
+  min-height: 2.2em;
+}
+
+.comment-buttons > svg {
+  cursor: pointer;
+  height: 1.75em;
+  width: 1.75em;
+}
+
+.comment-buttons > svg:hover {
+  transform: scale(1.1);
+}
+
+.comment-buttons > svg > path {
+  fill: var(--accent);
+}
+
+.comment-buttons > svg:active > path {
+  fill: var(--secondary);
 }

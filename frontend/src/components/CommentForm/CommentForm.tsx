@@ -10,20 +10,32 @@ import { getUserTripsCount } from "../../trips/access";
 import { putComment } from "../../comments/access";
 
 interface Props {
-  isOpen: boolean;
   onClose: () => void;
   tripId: string;
+  editInfo: EditInfo;
+  handleEditComment: (editInfo: EditInfo) => void;
+}
+
+export interface EditInfo {
+  title: string;
+  comment: string;
+  rating: string;
 }
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
-export const CommentForm: React.FC<Props> = ({ isOpen, onClose, tripId }) => {
+export const CommentForm: React.FC<Props> = ({
+  onClose,
+  tripId,
+  editInfo,
+  handleEditComment,
+}) => {
   const { currentUser } = useContext(UserContext);
-  const [rating, setRating] = useState("");
   const [tripCount, setTripCount] = useState(0);
-  const [title, setTitle] = useState("");
-  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(editInfo.rating);
+  const [title, setTitle] = useState(editInfo.title);
+  const [comment, setComment] = useState(editInfo.comment);
   const [profilePictureUrl, setProfilePicUrl] =
     useState<string>(defaultProfilePicUrl);
 
@@ -34,14 +46,19 @@ export const CommentForm: React.FC<Props> = ({ isOpen, onClose, tripId }) => {
   }, []);
 
   const handleCloseClick = () => {
+    setTitle("");
+    setComment("");
+    setRating("");
     onClose();
   };
-  if (!isOpen) {
-    return null;
-  }
-  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value;
-    setRating(input);
+
+  const ratingHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const ratingString = event.target.value;
+
+    const re = /^[0-5]?$/;
+    if (ratingString === "" || re.test(ratingString)) {
+      setRating(ratingString);
+    }
   };
 
   const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,12 +89,9 @@ export const CommentForm: React.FC<Props> = ({ isOpen, onClose, tripId }) => {
             <div className="comment-form-user-info-rating-value flex-row">
               <input
                 placeholder="0"
-                type="number"
                 name="rating"
                 className="comment-form-field"
-                step="1"
-                maxLength={1}
-                onChange={inputHandler}
+                onChange={ratingHandler}
                 value={rating}
               />
               <p>/ 5</p>
@@ -95,12 +109,14 @@ export const CommentForm: React.FC<Props> = ({ isOpen, onClose, tripId }) => {
             placeholder="Overskrift"
             onChange={titleHandler}
             className="comment-form-input comment-form-field"
+            value={title}
           />
           <textarea
             placeholder="Aa"
             onChange={commentHandler}
             name="comment"
             className="comment-form-field comment-form-textarea"
+            value={comment}
           />
         </div>
         <div className="comment-form-actions flex-row">
@@ -120,8 +136,8 @@ export const CommentForm: React.FC<Props> = ({ isOpen, onClose, tripId }) => {
                   comment,
                   rating: parseInt(rating),
                   title,
-                });
-              window.location.reload();
+                }).then(() => handleEditComment({ title, comment, rating }));
+              handleCloseClick();
             }}
           />
         </div>
