@@ -16,5 +16,6 @@ export interface TripSubmission {
 export interface Trip extends TripSubmission {
   tripId: string;
   averageRating: number;
+  ratings: number;
   postDate: string;
 }

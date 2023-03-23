@@ -103,7 +103,10 @@ export const TripCard = ({ trip, color }: Props) => {
       <div className={color}>
         <h3>{trip.destinationCity}</h3>
         <h4>{"Fra: " + trip.startCity}</h4>
-        <h5>Vurdering: {trip.averageRating}/5</h5>
+        <h5>
+          Vurdering:{" "}
+          {trip.ratings === 0 ? "ingen" : trip.averageRating.toFixed(1) + "/5"}
+        </h5>
         <h5>Pris: {trip.price}kr</h5>
       </div>
     </div>

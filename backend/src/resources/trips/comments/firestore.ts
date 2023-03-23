@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getCountFromServer,
   getDoc,
   getDocs,
   query,
@@ -86,4 +87,11 @@ export const getAverageRating = async (tripId: string): Promise<number> => {
     .map((comment) => comment.rating)
     .reduce((a, b) => a + b);
   return totalRating / comments.length;
+};
+
+export const getRatingCount = async (tripId: string): Promise<number> => {
+  const ratingCountDocument = await getCountFromServer(
+    query(collection(firestore, "comment"), where("tripId", "==", tripId)),
+  );
+  return ratingCountDocument.data().count;
 };

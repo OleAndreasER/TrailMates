@@ -87,7 +87,8 @@
   fill: var(--secondary);
 }
 
-::placeholder {
+.nav input::placeholder,
+.header input::placeholder {
   color: rgba(255, 255, 255, 0.8);
 }
 

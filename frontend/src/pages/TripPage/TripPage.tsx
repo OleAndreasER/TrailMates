@@ -18,6 +18,7 @@ import {
 } from "../../trips/favorites/utils";
 import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
 import { LoginContext } from "../../components/LoginPopup/LoginPopup";
+import { CommentForm } from "../../components/CommentForm/CommentForm";
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
@@ -84,6 +85,7 @@ export const TripPage = () => {
   }, [user, trip]);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const handleOpenPopup = () => {
@@ -92,6 +94,14 @@ export const TripPage = () => {
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
+  };
+
+  const handleOpenCommentPopup = () => {
+    setIsCommentPopupOpen(true);
+  };
+
+  const handleCloseCommentPopup = () => {
+    setIsCommentPopupOpen(false);
   };
 
   const scrollHandlerReviews = () => {
@@ -210,7 +220,11 @@ export const TripPage = () => {
             />
             <TripDetailsItem
               title={"Vurdering"}
-              content={maybe(trip?.averageRating.toString())}
+              content={maybe(
+                trip?.ratings === 0
+                  ? "ingen"
+                  : trip?.averageRating.toFixed(1) + "/5",
+              )}
             />
           </div>
         </div>
@@ -341,6 +355,10 @@ export const TripPage = () => {
           profilePic={defaultProfilePicUrl}
         />
       </div>
+      <CommentForm
+        isOpen={isCommentPopupOpen}
+        onClose={handleCloseCommentPopup}
+      ></CommentForm>
       <div className="trippage-write-review flex-column">
         <h2>Har du vært på denne reisen?</h2>
         <Button
@@ -348,6 +366,7 @@ export const TripPage = () => {
           styling={"secondary-outline"}
           width="25%"
           height="5vh"
+          onClick={handleOpenCommentPopup}
         />
       </div>
     </>

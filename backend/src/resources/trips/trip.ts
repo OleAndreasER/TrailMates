@@ -1,4 +1,4 @@
-import { getAverageRating } from "./comments/firestore";
+import { getAverageRating, getRatingCount } from "./comments/firestore";
 
 export interface TripSubmission {
   startCity: string;
@@ -22,6 +22,7 @@ export interface TripData extends TripSubmission {
 export interface Trip extends TripData {
   tripId: string;
   averageRating: number;
+  ratings: number;
 }
 
 export const toTripData = (tripSubmission: TripSubmission): TripData => ({
@@ -34,9 +35,11 @@ export const toTrip = async (
   tripData: TripData,
 ): Promise<Trip> => {
   const averageRating = await getAverageRating(tripId);
+  const ratings = await getRatingCount(tripId);
   return {
     tripId: tripId,
     averageRating: averageRating,
+    ratings: ratings,
     ...tripData,
   };
 };
