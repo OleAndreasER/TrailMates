@@ -10,7 +10,7 @@ import { UserContext } from "../../authentication/UserProvider";
 import { logOut } from "../../authentication/authentication";
 import { ReactComponent as Hamburger } from "../assets/hamburger.svg";
 import { ReactComponent as Close } from "../assets/navbar_close.svg";
-import { LoginPopup } from "../LoginPopup/LoginPopup";
+import { LoginPopup, LoginContext } from "../LoginPopup/LoginPopup";
 import useNavigate from "../../hooks/useNavigate";
 
 export const Navbar = () => {
@@ -23,7 +23,8 @@ export const Navbar = () => {
   const { currentUser } = useContext(UserContext);
   const isSmallScreen = useMediaQuery({ maxWidth: 768 });
   const [isOpen, setIsOpen] = useState(false);
-  const [isShowingPopup, setIsShowingPopup] = useState(false);
+  const { showLoginModal } = useContext(LoginContext);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -50,15 +51,9 @@ export const Navbar = () => {
     };
   }, [prevScrollPos, visible]);
 
-  useEffect(() => {
-    document.body.style.overflow = isShowingPopup ? "hidden" : "unset";
-  }, [isShowingPopup]);
-
-  const handleClick = () => {
-    if (currentUser) {
-      logOut();
-    } else {
-      setIsShowingPopup(true);
+  const handleLoginButtonClick = () => {
+    if (!currentUser) {
+      showLoginModal();
     }
   };
 
@@ -69,10 +64,6 @@ export const Navbar = () => {
   if (isSmallScreen) {
     return (
       <>
-        <LoginPopup
-          visible={isShowingPopup}
-          setIsVisible={(val: boolean) => setIsShowingPopup(val)}
-        />
         <nav
           className={`navbar ${
             isScrolled || location.pathname !== "/" ? "scrolled" : ""
@@ -105,10 +96,6 @@ export const Navbar = () => {
   } else {
     return (
       <>
-        <LoginPopup
-          visible={isShowingPopup}
-          setIsVisible={(val: boolean) => setIsShowingPopup(val)}
-        />
         <nav
           className={`navbar ${
             isScrolled ||
@@ -139,7 +126,7 @@ export const Navbar = () => {
             }
             width="12%"
             height="20%"
-            onClick={handleClick}
+            onClick={handleLoginButtonClick}
           />
           <div
             className={currentUser ? "navbar-buttons-right flex-row" : "hide"}

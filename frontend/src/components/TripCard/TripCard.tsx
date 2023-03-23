@@ -12,6 +12,7 @@ import {
   removeFavorite,
 } from "../../trips/favorites/utils";
 import useNavigate from "../../hooks/useNavigate";
+import { LoginContext } from "../LoginPopup/LoginPopup";
 
 interface Props {
   trip: Trip;
@@ -26,6 +27,7 @@ export const TripCard = ({ trip, color }: Props) => {
   const { currentUser } = useContext(UserContext);
   const { currentUserFavorites, setCurrentUserFavorites } =
     useContext(FavoritesContext);
+  const { showLoginModal } = useContext(LoginContext);
 
   useEffect(() => {
     if (!trip.imageIds) return;
@@ -39,6 +41,11 @@ export const TripCard = ({ trip, color }: Props) => {
   }, [currentUserFavorites]);
 
   const handleClick = () => {
+    if (!currentUser) {
+      showLoginModal();
+      return;
+    }
+
     const toggle = async () => {
       const uid = currentUser?.userUid;
       const tripId = trip.tripId;

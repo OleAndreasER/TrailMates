@@ -21,7 +21,11 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
   const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
-    if (currentUser === null) return;
+    if (currentUser === null) {
+      setCurrentUserFavorites([]);
+      return;
+    }
+
     retrieveFavorites(currentUser.userUid, setCurrentUserFavorites);
   }, [currentUser]);
 

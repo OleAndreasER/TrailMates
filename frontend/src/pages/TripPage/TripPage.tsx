@@ -17,6 +17,7 @@ import {
   removeFavorite,
 } from "../../trips/favorites/utils";
 import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
+import { LoginContext } from "../../components/LoginPopup/LoginPopup";
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
@@ -37,6 +38,7 @@ export const TripPage = () => {
   const { currentUserFavorites, setCurrentUserFavorites } =
     useContext(FavoritesContext);
   const [authorTripCount, setAuthorTripCount] = useState<number>(0);
+  const { showLoginModal } = useContext(LoginContext);
 
   const scrolldown = () => {
     window.scrollTo({
@@ -97,7 +99,11 @@ export const TripPage = () => {
   };
 
   const handleOnFavoriteClick = () => {
-    if (!currentUser || !trip) return;
+    if (!currentUser) {
+      showLoginModal();
+      return;
+    }
+    if (!trip) return;
     const toggle = async () => {
       const uid = currentUser.userUid;
       const tripId = trip.tripId;
