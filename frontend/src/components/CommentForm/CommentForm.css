@@ -139,3 +139,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.dark-mode .comment-form-user-info-rating-value > p {
+  color: var(--dark-primary);
+}
